@@ -2,6 +2,17 @@
     pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
+
+<%
+System.out.println("UP FRONT");
+	CSNTLPipeline p = (CSNTLPipeline) session.getAttribute("CSNTLP");
+	if(p == null){
+		p = new CSNTLPipeline();
+		session.setAttribute("CSNTLP", p);
+	}
+	out.println(p.getErrors());
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,9 +44,7 @@
 	Departure Time
 	<select name="hour">
 		<% for(int i=1; i <= 12; i++){ %>
-		
-		<option value=<%=i%>><%=i%></option>
-		
+			<option value=<%=i%>><%=i%></option>
 		<% } %>
 	</select>:
 	<select name="minute">
@@ -53,82 +62,40 @@
 	<select name="trainID">
 	<option selected value="-1">--Select Train--</option>
 	<% 
-	ApplicationDB db = new ApplicationDB();	
-	Connection con = db.getConnection();
-    Class.forName("com.mysql.jdbc.Driver");
 	
-	Statement stTr = con.createStatement();
-    ResultSet rsTr = stTr.executeQuery("select * from Train");
+	ArrayList<Train> TrainList = TrainProject.Trains.getAsList();
 	
-    
-	while(rsTr.next()){ %>
-		<option value=<%=rsTr.getInt(1)%>><%="Train "+rsTr.getInt(1)%></option>
+	for(int i=0; i<TrainList.size(); i++){ %>
+		<option value=<%=TrainList.get(i).trainID%>><%=TrainList.get(i)%></option>
 	<% } %>
 	</select>
 	<br></br>
 	
 	<%
-
-    Class.forName("com.mysql.jdbc.Driver");
-    
-    Statement stTL = con.createStatement();
-    ResultSet rsTL = stTL.executeQuery("select * from TransitLine");
-    Statement stTS = con.createStatement();
-    ResultSet rsTS = stTS.executeQuery("select * from TransitStop");
-    Statement stStation = con.createStatement();
-    ResultSet rsStation = stStation.executeQuery("select * from station");
-    
-   	HashMap<Integer, String> StationQuery = new HashMap<Integer, String>();
-   	while(rsStation.next()){
-   		StationQuery.put(rsStation.getInt(1), rsStation.getString(2));
-   	}
-    
-    HashMap<String, HashMap<Integer, String>> TransitStopQuery = new HashMap<String, HashMap<Integer, String>>();
-    while(rsTS.next()){
-    	String tln = rsTS.getString(5);
-    	if(TransitStopQuery.get(tln) == null){
-    		TransitStopQuery.put(tln, new HashMap<Integer, String>());
-    	}
-    	//out.println(rsTS.getString(4));
-    	TransitStopQuery.get(tln).put(rsTS.getInt(3), StationQuery.get(rsTS.getInt(4)));
-    }
-    
-    ArrayList<String> TransitLineNames = new ArrayList<String>(TransitStopQuery.keySet());
-    Collections.sort(TransitLineNames);
-    
-    HashMap<String, Integer> TransitLineSizes = new HashMap<String, Integer>();
-    while(rsTL.next()){
-    	TransitLineSizes.put(rsTL.getString(1), rsTL.getInt(3));
-    }
-   	
+    ArrayList<TransitLine> transitLines = TrainProject.TransitLines.getAsList();
+  
     ArrayList<String> Values = new ArrayList<String>();
     ArrayList<String> Options = new ArrayList<String>();
-    
-    for(int i=0; i<TransitLineNames.size() * 2; i++){
+   
+    /*
+    for(int i=0; i<transitLines.size() * 2; i++){
     	int j = i/2;
-    	String tln = TransitLineNames.get(j);
-    	int size = TransitLineSizes.get(tln);
-    	String dest = TransitStopQuery.get(tln).get(size-1);
+    	
+    	TransitLine TL = transitLines.get(j);
+		TransitStop origin = TL.getStop(0);
+		TransitStop destination = TL.getStop(TL.numberOfStops-1);
+		
+		
     	if(i % 2 == 0){
-    		Options.add("F"+TransitLineNames.get(j));
-    		Values.add(TransitLineNames.get(j) + ": "+TransitStopQuery.get(tln).get(0) +  " -> " + dest);
+    		Options.add("F"+TL);
+    		Values.add(TL + ": "+origin+" -> " + destination);
     	} else {
-    		Options.add("R"+TransitLineNames.get(j));
-    		Values.add(TransitLineNames.get(j) + ": "+ dest +  " -> " + TransitStopQuery.get(tln).get(0));
+    		Options.add("R"+TL);
+    		Values.add(TL + ": "+ destination +  " -> " + origin);
     	}
-    }
-    
-    //ArrayList<TransitLine> TransitLines = new ArrayList<TransitLine>();
-    //ArrayList<String> TransitStops = new ArrayList<String>();
+    } */
     
 
-    
-    //while(rs.next()){
-    //	TransitLine tl = new TransitLine(rs.getString(1));
-    //	Statement st = con.createStatement();
-    //    ResultSet rs = st.executeQuery("select * from TransitLine");
-    //}
-    
 	%>
 	
 	Transit Line
@@ -136,8 +103,8 @@
 		<option value="NO_SELECTION">-------------------------</option>
 		<option value="CREATE">CREATE NEW TRANSIT LINE</option>
 		<option value="NO_SELECTION">-------------------------</option>
-		<% for(int i=0; i<TransitLineNames.size() * 2; i++){ %>
-		<option value=<%=Options.get(i)%>><%=Values.get(i)%></option>
+		<% for(int i=0; i<transitLines.size(); i++){ %>
+			<option value=<%=""+i+""%>><%=transitLines.get(i).toString()%></option>
 		<% } %>
 	</select>
 	<br></br>

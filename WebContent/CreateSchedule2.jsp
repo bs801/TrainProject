@@ -4,11 +4,16 @@
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 
 <%
-
+	boolean am = true;
 	int h = Integer.parseInt(request.getParameter("hour"));
+	h = (h == 12 ? 0 : h);
 	int min = Integer.parseInt(request.getParameter("minute"));
 	String xm = request.getParameter("xm");
-	
+	LocalTime XMTime = LocalTime.of(h, min);
+	if(xm.equals("pm")){
+		am = false;
+		h += 12;
+	}
 	Calendar cal = Calendar.getInstance();
 	cal.setLenient(false);
 	cal.set(Calendar.YEAR, 2000);
@@ -16,9 +21,6 @@
 	cal.set(Calendar.HOUR_OF_DAY, h);
 	cal.set(Calendar.MINUTE, min);
 	cal.set(Calendar.SECOND, 0);
-	if(xm.equals("pm")){
-		h += 12;
-	}
 
 	ArrayList<String> errors = new ArrayList<String>();
 	int m = Integer.parseInt(request.getParameter("month"))-1;
@@ -62,147 +64,71 @@
     }
     
     String TLOption = request.getParameter("TLOption"); 
-	//int TLOption = Integer.parseInt(request.getParameter("TLOption"));
 	if(TLOption.equals("NO_SELECTION")){
 		errors.add("Must select a Train Line option");
 	}
 
+	
+	
+	CSNTLPipeline p = (CSNTLPipeline) session.getAttribute("CSNTLP");
+	
+	System.out.println("ERRORS ARE "+errors.size());
 	if(errors.size() > 0){
-		session.setAttribute("CS2", errors);
+		p.errors = errors;
 		response.sendRedirect("CreateSchedule.jsp");
+		return;
 	}
 	
-	
-	
-	
-	// FINISHED INITIAL ERROR CHECKING 
-	
-	ApplicationDB db = new ApplicationDB();	
-	Connection con = db.getConnection();
-    Class.forName("com.mysql.jdbc.Driver");
 	    
   	
 	if(!TLOption.equals("CREATE")){
 		
 		//USE EXISTING TRANSIT LINE
 	    
-	    Statement stTL = con.createStatement();
-	    ResultSet rsTL = stTL.executeQuery("select * from TransitLine");
-	    HashMap<String, Time> TransitLineDurations = new HashMap<String, Time>();
-	    while(rsTL.next()){
-	    	TransitLineDurations.put(rsTL.getString(1), rsTL.getTime(4));
-	    }
+		int selectedIndex = Integer.parseInt(TLOption);
+		TransitLine TL = TrainProject.TransitLines.getAsList().get( selectedIndex ); 
 		
-		char direction = TLOption.charAt(0);
-		boolean reverseLine = false;
-		if(direction == 'R'){
-			reverseLine = true;
-		}
+		LocalTime duration = TL.duration.toLocalTime();
+	
+		LocalDateTime t1 = (new Timestamp(cal.getTimeInMillis())).toLocalDateTime(); // January 1st 2020 at 1 PM 
+		LocalDateTime t2 = t1.plusHours(duration.getHour()).plusMinutes(duration.getMinute()); // Jan 1 2020 3:25
 		
-		String tln = TLOption.substring(1);
-		LocalTime tlnDuration = TransitLineDurations.get(tln).toLocalTime();
-		
-		Timestamp t1 = new Timestamp(cal.getTimeInMillis()); // January 1st 2020 at 1 PM 
-		Timestamp t2 = Timestamp.valueOf(t1.toLocalDateTime().plusHours(tlnDuration.getHour()).plusMinutes(tlnDuration.getMinute())); // Jan 1 2020 3:25
-		
-		LocalDateTime lt1 = t1.toLocalDateTime();
-		LocalDateTime lt2 = t2.toLocalDateTime();
-		
-		Statement stS = con.createStatement();
-	    ResultSet rsS = stS.executeQuery("select * from Schedule");
-	   
 	    		
-	    ArrayList<Schedule> Schedules = new ArrayList<Schedule>();
-		while(rsS.next()){
-			Schedules.add(new Schedule(rsS.getString(1), rsS.getBoolean(2), rsS.getTimestamp(3), rsS.getInt(4)));
-		}
+	    ArrayList<Schedule> Schedules = TrainProject.Schedules.getAsList();
+	
 		
 		for(Schedule sc : Schedules){
 			if(sc.trainID == trainID){
-				LocalTime scDelta = TransitLineDurations.get(sc.transitLineName).toLocalTime();
-				Timestamp s1 = sc.scheduleDepartureTime;
-				Timestamp s2 = Timestamp.valueOf(s1.toLocalDateTime().plusHours(scDelta.getHour()).plusMinutes(scDelta.getMinute()));
+				LocalTime scDuration = sc.getTransitLine().duration.toLocalTime();
+				LocalDateTime s1 = sc.scheduleDepartureTime.toLocalDateTime();
+				LocalDateTime s2 = s1.plusHours(scDuration.getHour()).plusMinutes(scDuration.getMinute());
 				
-				LocalDateTime ls1 = s1.toLocalDateTime();
-				LocalDateTime ls2 = s2.toLocalDateTime();
+			//	System.out.println("ComparingA "+t1+" -> "+t2);
+			//	System.out.println("ComparingB "+s1+" -> "+s2);
 				
-				if((ls1.isAfter(lt1) && ls2.isBefore(lt1)) || (ls1.isAfter(lt2) && ls2.isBefore(lt2))){
-					errors.add("Train "+trainID+" is used by a schedule departing "+ls1+" running "+sc.transitLineName);
-					session.setAttribute("CS2", errors);
+				if((t1.isAfter(s1) && t1.isBefore(s2)) || (t2.isAfter(s1) && t2.isBefore(s2))){
+					errors.add("Train "+trainID+" is used by a schedule departing "+s1+" running "+sc.transitLineName);
+					p.errors = errors;
 					response.sendRedirect("CreateSchedule.jsp");
-
+					return;
 				}
 			}
 		}
+		Schedule newSchedule = new Schedule(TL.transitLineName, TL.reverseLine, new Timestamp(cal.getTimeInMillis()), trainID);
+		TrainProject.Schedules.insert(newSchedule);
 		
-		String sql = "INSERT INTO Schedule VALUES(?, ?, ?, ?)";
-		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, tln);
-		ps.setBoolean(2, reverseLine);
-		ps.setTimestamp(3, t1);
-		ps.setInt(4, trainID);
-		ps.executeUpdate();
-		
-		out.println("Added schedule");
+		System.out.println("Added schedule");
 		return;
 	}
 	
 	// CREATE NEW TRANSIT LINE
 	
-	session.setAttribute("CS2_trainID",trainID);
-	session.setAttribute("CS2_SDTCAL",cal);
-	session.setAttribute("CS2_STDSTR", (h+":"+m+" "+xm));
-	/*
-	Statement st = con.createStatement();
-	ResultSet rs = st.executeQuery("select * from station");
-	
-	ArrayList<Station> stations = new ArrayList<Station>();
-	while(rs.next()){
-		stations.add(new Station((int) rs.getFloat(1), rs.getString(2), null, null));
-	}
-	Collections.sort(stations,
-	                 new Comparator<Station>() {
-	                     public int compare(Station s1, Station s2)
-	                     {
-	                         return s1.toString().compareTo(s2.toString());
-	                     }
-	                 }
-	);
-	session.setAttribute("NTL1", stations);
-	
-	
-	/*
-	ApplicationDB db = new ApplicationDB();	
-	Connection con = db.getConnection();
-    Class.forName("com.mysql.jdbc.Driver");
-    
-    Statement stTL = con.createStatement();
-    ResultSet rsTL = stTL.executeQuery("select * from TransitLine");
-    HashMap<String, Time> TransitLineDurations = new HashMap<String, Time>();
-    while(rsTL.next()){
-    	TransitLineDurations.put(rsTL.getString(1), rsTL.getTime(4));
-    }
-    
-    Statement stS = con.createStatement();
-    ResultSet rsS = stS.executeQuery("select * from Schedule");
-   
-    		
-    ArrayList<Schedule> Schedules = new ArrayList<Schedule>();
-	while(rsS.next()){
-		Schedules.add(new Schedule(rsS.getString(1), rsS.getBoolean(2), rsS.getTimestamp(3), rsS.getInt(4)));
-	}
-	
-	Timestamp timestamp = new Timestamp(cal.getTimeInMillis());
-	for(Schedule sc : Schedules){
-		if(sc.trainID == trainID){
-			if(sc.scheduleStartTime.before(timestamp) 
-			Timestamp tD = sc.scheduleStartTime;
-			Timestamp tA ;
-		}
-	}
-    */
-    
-    
+	p.xmIsAM = am;
+	p.XMTime = XMTime;
+	p.incompleteSchedule = new Schedule(null, 0, new Timestamp(cal.getTimeInMillis()), trainID);
+	p.originDepartureTime =  (h+":"+m+" "+xm);
+	response.sendRedirect("NewTransitLine.jsp");
+
 	
 %>
 

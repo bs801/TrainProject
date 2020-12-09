@@ -10,12 +10,7 @@
 //response
 //sesssion
 
-	out.println(session.getAttribute("keyABC"));
-	out.println(request.getParameter("Key123"));
-	if(((String) request.getParameter("Key123")).equals("asdf")){
-		response.sendRedirect("X.jsp");
-	}
-	out.println(request.getParameter("Key234"));
+	LocalTime D = LocalTime.of(
 %>    
 <!DOCTYPE html>
 <html>

@@ -1,0 +1,162 @@
+package com.cs336.pkg;
+
+import java.util.*;
+import java.time.*;
+import java.sql.*;
+
+
+public class TrainProject {
+	
+	static ApplicationDB db;	
+	static Connection con;
+	public static void loadApplicationDB() {
+		if(db == null) {
+			db = new ApplicationDB();
+			con = db.getConnection();
+		}
+	}
+	public static class Trains {
+		static HashMap<Integer, Train> TrainTable;
+		
+		public static Train get(int trainID) throws SQLException {
+			return getAll().get(trainID);
+		}
+		public static ArrayList<Train> getAsList()  throws SQLException {
+			ArrayList<Train> trls = new ArrayList<Train>(getAll().values());
+			Collections.sort(trls);
+			return trls;
+		}
+		
+		
+		static HashMap<Integer, Train> getAll() throws SQLException {
+			loadApplicationDB();
+			if(TrainTable == null) {
+				TrainTable = new HashMap<Integer, Train>();
+				Statement st = con.createStatement();
+				ResultSet rs = st.executeQuery("select * from Train");
+				while(rs.next()){
+					TrainTable.put(rs.getInt(1), new Train(rs));
+				}
+			}
+			return TrainTable;
+		}
+	}
+	
+	public static class Stations {
+		static HashMap<Integer, Station> StationTable;
+		
+		public static Station get(int stationID) throws SQLException {
+			return getAll().get(stationID);
+		}
+		public static ArrayList<Station> getAsList() throws SQLException {
+			ArrayList<Station> sls = new ArrayList<Station>(getAll().values());
+			Collections.sort(sls);
+			return sls;
+		}
+		public static HashMap<Integer, Station> getAll() throws SQLException {
+			loadApplicationDB();
+			if(StationTable == null) {
+				StationTable = new HashMap<Integer, Station>();
+				Statement st = con.createStatement();
+				ResultSet rs = st.executeQuery("select * from Station");
+				while(rs.next()){
+					StationTable.put(rs.getInt(1), new Station(rs));
+				}
+			}
+			return StationTable;
+		}
+	}
+	
+	public static class TransitLines {
+		static HashMap<String, TransitLine[]> TransitLineTable;
+		
+		public static TransitLine get(String transitLineName, int reverseLine) throws SQLException {
+			return getAll().get(transitLineName)[reverseLine];
+		}
+		public static ArrayList<TransitLine> getAsList()  throws SQLException {
+			ArrayList<TransitLine[]> tlsr = new ArrayList<TransitLine[]>(getAll().values());
+			ArrayList<TransitLine> tls = new ArrayList<TransitLine>();
+			for(TransitLine[] x : tlsr) {
+				tls.add(x[0]);
+				tls.add(x[1]);
+			}
+			Collections.sort(tls);
+			return tls;
+		}
+		
+		public static HashMap<String, TransitLine[]> getAll() throws SQLException {
+			loadApplicationDB();
+			if(TransitLineTable == null) {
+				TransitLineTable = new HashMap<String, TransitLine[]>();
+				Statement st = con.createStatement();
+				ResultSet rs = st.executeQuery("select * from TransitLine");
+				while(rs.next()){
+					if(TransitLineTable.get(rs.getString(1)) == null) {
+						TransitLineTable.put(rs.getString(1), new TransitLine[2]);
+					}
+					TransitLineTable.get(rs.getString(1))[rs.getInt("reverseLine")] = new TransitLine(rs);
+				}
+			}
+			return TransitLineTable;
+		}
+		
+	}
+	
+	public static class TransitStops {
+		static HashMap<String, HashMap<Integer, TransitStop>> TransitStopTable;
+		
+		public static TransitStop get(String transitLineName, int reverseLine, int stopID) throws SQLException {
+			return getAll().get(transitLineName).get(stopID);
+		}
+		
+		static HashMap<String, HashMap<Integer, TransitStop>> getAll() throws SQLException {
+			loadApplicationDB();
+			if(TransitStopTable == null) {
+				TransitStopTable = new HashMap<String, HashMap<Integer, TransitStop>>();
+				Statement st = con.createStatement();
+				ResultSet rs = st.executeQuery("select * from TransitStop");
+				while(rs.next()){
+					if(TransitStopTable.get(rs.getString(1)) == null) {
+						TransitStopTable.put(rs.getString(1), new HashMap<Integer, TransitStop>());
+					}
+					TransitStopTable.get(rs.getString(1)).put(rs.getInt(2), new TransitStop(rs));
+				}
+			}
+			return TransitStopTable;
+		}
+	}
+	
+	public static class Schedules {
+		static HashMap<String, HashMap<Timestamp, Schedule[]>> ScheduleTable;
+		
+		public static Schedule get(String transitLineName, boolean reverseLine, Timestamp scheduleDepartureTime) throws SQLException {
+			return getAll().get(transitLineName).get(scheduleDepartureTime)[(reverseLine ? 0 : 1)];
+		}
+		
+		
+		public static HashMap<String, HashMap<Timestamp, Schedule[]>> getAll() throws SQLException {
+			loadApplicationDB();
+			if(ScheduleTable == null) {
+				ScheduleTable = new HashMap<String, HashMap<Timestamp, Schedule[]>>();
+				Statement st = con.createStatement();
+				ResultSet rs = st.executeQuery("select * from Schedule");
+				while(rs.next()){
+					String TLN = rs.getString(1);
+					if(ScheduleTable.get(TLN) == null) {
+						ScheduleTable.put(TLN, new HashMap<Timestamp, Schedule[]>());
+					}
+					if(ScheduleTable.get(TLN).get(rs.getTimestamp(3)) == null) {
+						ScheduleTable.get(TLN).put(rs.getTimestamp(3), new Schedule[2]);
+					}
+					ScheduleTable.get(TLN).get(rs.getTimestamp(3))[rs.getInt(2)] = new Schedule(rs);
+				}
+			}
+			return ScheduleTable;
+		}
+	}
+	
+	
+	
+	
+	
+}

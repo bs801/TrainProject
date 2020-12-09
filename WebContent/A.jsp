@@ -4,11 +4,40 @@
 <%@ page import="javax.servlet.http.*,javax.servlet.*,java.time.*"%>
     
 <%
+LocalTime j = LocalTime.now();
+LocalTime k = LocalTime.of(j.getHour(), j.getMinute());
+
+Time asdf = TrainProject.TransitLines.get("ASDF").duration;
+HashMap<Timestamp, Schedule[]> stuff = TrainProject.Schedules.getAll().get("ASDF");
+
+ArrayList<Schedule[]> stuffAL = new ArrayList<Schedule[]>();
+for (Map.Entry<Timestamp, Schedule[]> entry : stuff.entrySet()) {
+	stuffAL.add(entry.getValue());
+}
+Schedule ptr = stuffAL.get(0)[1];
+Timestamp dep = ptr.scheduleDepartureTime;
+LocalDateTime depLDT = dep.toLocalDateTime();
+depLDT = depLDT.plusHours(asdf.getHours()).plusMinutes(asdf.getMinutes());
+
+
+LocalTime J = LocalTime.of(3, 4);
+LocalTime K = J.minusHours(10);
+
+out.println(K+"   aaa     ");
+//LocalTime ii = LocalTime.of(j.getHour(), j.getMinute());
+//out.println(ii);
+
+if(1 == 1){
+	return;
+}
+
 ApplicationDB db = new ApplicationDB();	
 Connection con = db.getConnection();
 Class.forName("com.mysql.jdbc.Driver");
 Statement stmt = con.createStatement();
 String sql = "UPDATE TransitLine SET duration = (?) WHERE transitLineName = 'ASDF'";
+
+
 PreparedStatement ps = con.prepareStatement(sql);
 LocalTime t = LocalTime.of(2, 25);
 ps.setTime(1, Time.valueOf(t));
@@ -19,9 +48,8 @@ Timestamp t2 = Timestamp.valueOf(t1.toLocalDateTime().plusHours(t.getHour()).plu
 
 System.out.println(t2);
 
-if(1 == 1){
-	return;
-}
+
+
 %> 
 
 

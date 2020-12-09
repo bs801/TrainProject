@@ -1,15 +1,18 @@
 package com.cs336.pkg;
 
-public class Station {
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class Station implements Comparable<Station>{
 	public final int stationID;
 	public String name;
 	public String city;
 	public String state;
 	public Station(int stationID, String name, String city, String state) {
-		//if(name == null) {
-		//	throw new RuntimeException("Name must be used in Station");
-		//}
 		this.stationID = stationID; this.name = name; this.city = city; this.state = state;
+	}
+	public Station(ResultSet rs) throws SQLException {
+		this(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
 	}
 	@Override
 	public String toString() {
@@ -29,5 +32,9 @@ public class Station {
         	return true;
         }
         return false;
-    } 
+    }
+	@Override
+	public int compareTo(Station st) {
+		return this.name.compareTo(st.name);
+	} 
 }

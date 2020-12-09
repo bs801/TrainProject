@@ -2,7 +2,8 @@
     pageEncoding="ISO-8859-1"%>
     
 <%
-	session.setAttribute("keyABC","asdfABC This should be from page X");
+	//session.setAttribute("keyABC","asdfABC This should be from page X");
+
 %>    
     
 <!DOCTYPE html>
@@ -13,7 +14,7 @@
 </head>
 <body>
 
-<form action="Y.jsp">
+<form action="C.jsp">
 <input type="text" name="Key123" />
 <input type="text" name="Key234" />
 
