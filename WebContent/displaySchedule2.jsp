@@ -34,12 +34,12 @@ ArrayList<Integer> stopIds = new ArrayList<Integer>();
 ArrayList<TransitStop> stops = TrainProject.TransitLines.get("ASDF", 0).getTransitStops();
 int i = 0;
 
-for(TransitStop s : stops){
+for(TransitStop s : stops){ // check to see how many stops the line has, used to loop to find the stops selected
 	stopIds.add(i);
 	i++;
 }
 
-for(int j = 0; j<stopIds.size(); j++){
+for(int j = 0; j<stopIds.size(); j++){ // loop through stops selected and get their ids
 	temp = TrainProject.TransitStops.get("ASDF", 0, j).toString();
 	if(origin.equals(temp.replaceAll("\\s", ""))){
 		originStopId = j;
@@ -52,7 +52,7 @@ for(int j = 0; j<stopIds.size(); j++){
 System.out.println(originStopId);
 System.out.println(destinationStopId);
 
-if(originStopId > destinationStopId){
+if(originStopId > destinationStopId){ // check if the stops selected are a reverse line.
 	reverseCheck = 1;
 }
 
