@@ -38,9 +38,9 @@ System.out.println("UP FRONT");
 	ArrayList<TransitStop> origins = TrainProject.TransitLines.get("ASDF", 0).getTransitStops();
 	ArrayList<TransitStop> destinations = TrainProject.TransitLines.get("ASDF", 0).getTransitStops();
 	String test = TrainProject.TransitStops.get("ASDF", 0, 0).toString();
-	for(TransitStop s : origins){
+	/*for(TransitStop s : origins){
 		out.println(s.toString());
-	}
+	}*/
 	/*out.println(test);
 	for(TransitStop s : destinations){
 		if(s.toString() == test){
@@ -69,6 +69,9 @@ System.out.println("UP FRONT");
 			<option value=<%=""+temp.replaceAll("\\s", "")+""%>><%=s%></option>
 		<% } %>
 	</select>
+	<br></br>
+	Date
+	<input type="date" name="date">
 	<br></br>
 	<input type="submit" value="Continue"/> 
 </form>

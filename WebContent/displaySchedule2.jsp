@@ -23,23 +23,33 @@
 
 String origin = request.getParameter("origin");   
 String destination = request.getParameter("destination");
+String date = request.getParameter("date");
+
 
 String temp;
 			
-int originStopId = 0;
+int originStopId = 0; 
 int destinationStopId = 0;
 int reverseCheck = 0;
 			
 ArrayList<Integer> stopIds = new ArrayList<Integer>();
 ArrayList<TransitStop> stops = TrainProject.TransitLines.get("ASDF", 0).getTransitStops();
+ArrayList<Schedule> schedule = TrainProject.Schedules.getAsList();
 int i = 0;
+Float transitLineFare = 0f;
+int numberOfStops = TrainProject.TransitLines.get("ASDF", reverseCheck).numberOfStops;
 
-for(TransitStop s : stops){ // check to see how many stops the line has, used to loop to find the stops selected
+
+/*for(Schedule x : schedule){
+	out.println(x.toString());
+}*/
+
+/*for(TransitStop s : stops){ // check to see how many stops the line has, used to loop to find the stops selected
 	stopIds.add(i);
 	i++;
-}
+}*/
 
-for(int j = 0; j<stopIds.size(); j++){ // loop through stops selected and get their ids
+for(int j = 0; j<numberOfStops; j++){ // loop through stops selected and get their ids
 	temp = TrainProject.TransitStops.get("ASDF", 0, j).toString();
 	if(origin.equals(temp.replaceAll("\\s", ""))){
 		originStopId = j;
@@ -71,8 +81,23 @@ else if(reverseCheck == 1){
 		out.println("List of Stops: ");
 		out.println(temp);
 	}
-	
 }
+
+transitLineFare = TrainProject.TransitLines.get("ASDF", reverseCheck).fare;
+
+
+
+
+
+/*
+
+Thinking of using the inputed date to traverse through an array list of dates to see which ones match
+and then display the times that coorespond with the date inputed.
+
+
+*/
+
+
 
 // test, nb, nw, penn
 // 3,     2,  1,   0
