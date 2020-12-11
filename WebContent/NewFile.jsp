@@ -4,14 +4,11 @@
 <%@ page import="javax.servlet.http.*,javax.servlet.*, java.time.*, java.time.format.DateTimeFormatter"%>
     
 <%
-	ArrayList<Schedule> Schedules = TrainProject.Schedules.getAsList();
-	for(Schedule s : Schedules){
-		out.println(s);
-	}
+
 	
-	Schedule ns = new Schedule("ASDF", 0, Timestamp.valueOf(LocalDateTime.now()), 333);
-	TrainProject.Schedules.insert(ns);
+	ArrayList<TransitStop> ts = TrainProject.TransitLines.get("ASDF",0).getTransitStops();
 	
+	out.println(ts);
 
 
 %>

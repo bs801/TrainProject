@@ -7,7 +7,7 @@
 <%
 	CSNTLPipeline csntlPipeline = (CSNTLPipeline) session.getAttribute("CSNTLP");
 	out.println(csntlPipeline.getErrors());
-	
+			
 	String transitLineName;
 	Station origin = TrainProject.Stations.getAsList().get(  Integer.parseInt(request.getParameter("ORIG")) );
 	Station destination = TrainProject.Stations.getAsList().get(  Integer.parseInt(request.getParameter("DEST")) );
@@ -30,6 +30,9 @@
 	transitLineName = request.getParameter("TLN");
 	if(transitLineName.equals("") || transitLineName == null){
 		errors.add("Must enter in a transit line name");
+	}
+	if(TrainProject.TransitLines.get(transitLineName, 0) != null){
+		errors.add("The transit line name "+transitLineName+" is already taken");
 	}
 	
 	if(errors.size() > 0){
@@ -63,6 +66,7 @@
 			Stop <%=j%>:<select id=<%=j%> name=<%=j%>>
 			<% for(int i=0; i<TrainProject.Stations.getAsList().size(); i++){ %>
 		  	    <option value=<%=i%> /><%=TrainProject.Stations.getAsList().get(i).toString()%></option>
+		  	    
 	    	<% } %>	
 			</select>
 			<br></br>

@@ -74,26 +74,7 @@ System.out.println("UP FRONT");
 	<%
     ArrayList<TransitLine> transitLines = TrainProject.TransitLines.getAsList();
   
-    ArrayList<String> Values = new ArrayList<String>();
-    ArrayList<String> Options = new ArrayList<String>();
    
-    /*
-    for(int i=0; i<transitLines.size() * 2; i++){
-    	int j = i/2;
-    	
-    	TransitLine TL = transitLines.get(j);
-		TransitStop origin = TL.getStop(0);
-		TransitStop destination = TL.getStop(TL.numberOfStops-1);
-		
-		
-    	if(i % 2 == 0){
-    		Options.add("F"+TL);
-    		Values.add(TL + ": "+origin+" -> " + destination);
-    	} else {
-    		Options.add("R"+TL);
-    		Values.add(TL + ": "+ destination +  " -> " + origin);
-    	}
-    } */
     
 
 	%>

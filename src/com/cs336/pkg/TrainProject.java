@@ -7,14 +7,15 @@ import java.sql.*;
 
 public class TrainProject {
 	
-	static ApplicationDB db;	
-	static Connection con;
+	public static ApplicationDB db;	
+	public static Connection con;
 	public static void loadApplicationDB() {
 		if(db == null) {
 			db = new ApplicationDB();
 			con = db.getConnection();
 		}
 	}
+	
 	public static class Trains {
 		static HashMap<Integer, Train> TrainTable;
 		
@@ -71,6 +72,9 @@ public class TrainProject {
 		static HashMap<String, TransitLine[]> TransitLineTable;
 		
 		public static TransitLine get(String transitLineName, int reverseLine) throws SQLException {
+			if(getAll().get(transitLineName) == null) {
+				return null;
+			}
 			return getAll().get(transitLineName)[reverseLine];
 		}
 		public static ArrayList<TransitLine> getAsList()  throws SQLException {
@@ -106,6 +110,7 @@ public class TrainProject {
 		static HashMap<TransitLine, HashMap<Integer, TransitStop>> TransitStopTable;
 		
 		public static TransitStop get(TransitLine TL_key, int stopID) throws SQLException {
+			System.out.println("TL KEY "+TL_key.transitLineName);
 			HashMap<Integer, TransitStop> xx = getAll().get(TL_key);
 			TransitStop ts = xx.get(stopID);
 			return ts;

@@ -114,7 +114,7 @@
 	    		
 	    ArrayList<Schedule> Schedules = new ArrayList<Schedule>();
 		while(rsS.next()){
-			Schedules.add(new Schedule(rsS.getString(1), rsS.getBoolean(2), rsS.getTimestamp(3), rsS.getInt(4)));
+			Schedules.add(new Schedule(rsS.getString(1), rsS.getInt(2), rsS.getTimestamp(3), rsS.getInt(4)));
 		}
 		
 		for(Schedule sc : Schedules){

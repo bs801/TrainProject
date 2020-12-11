@@ -5,29 +5,34 @@
 
 <%
 	CSNTLPipeline p = (CSNTLPipeline) session.getAttribute("CSNTLP");
-	out.println(p.getErrors());
-	
 
-	ArrayList<String> errors = new ArrayList<String>();
-	
-	ArrayList<Station> selectedStationList = new ArrayList<Station>();
-	
-	for(int j=1; j< p.numberOfStops+1 ; j++) { 
+	if(p.errors.size() == 0){
 		
-		String v = request.getParameter(""+j+"");
-		int s = Integer.parseInt(v);
-		Station newStation = TrainProject.Stations.get(s);
-		if(selectedStationList.contains(newStation) || newStation.equals(p.origin) || newStation.equals(p.destination)){
+		ArrayList<String> errors = new ArrayList<String>();
+		ArrayList<Station> selectedStationList = new ArrayList<Station>();
+		
+		for(int j=1; j< p.numberOfStops+1 ; j++) { 
 			
-			errors.add("Station "+newStation+" was added more than once");
-			p.errors = errors;
-			response.sendRedirect("NewTransitLine2.jsp");
-			return;
+			String v = request.getParameter(""+j+"");
+			int s = Integer.parseInt(v);
+			Station newStation = TrainProject.Stations.getAsList().get(s);
+			
+			System.out.println("WE GOT "+s+" which corresponds to "+newStation);
+			
+			if(selectedStationList.contains(newStation) || newStation.equals(p.origin) || newStation.equals(p.destination)){
+				
+				errors.add("Station "+newStation+" was added more than once");
+				p.errors = errors;
+				response.sendRedirect("NewTransitLine2.jsp");
+				return;
+			}
+			selectedStationList.add(newStation);
 		}
-		selectedStationList.add(newStation);
+		
+		p.selectedStationList = selectedStationList;
 	}
-
-	p.selectedStationList = selectedStationList;
+	out.println(p.getErrors());
+	System.out.println("ORIG DEP TIME "+p.originDepartureTime);
 %>
 
 <html>
@@ -43,14 +48,14 @@
 	STATION NAME_____________________________: _ [ARRIVAL TIME] _ [DEPARTURE TIME] <br></br> 	<br></br>
 	
 	<% String extraO = ""; for(int s=p.origin.toString().length(); s<50; s++){ extraO += "_"; } %>
-	<%=""+p.origin+extraO+""%>: ORIGIN <%=session.getAttribute("CS2_STDSTR") %> <br></br>
+	<%=""+p.origin+extraO+""%>: ORIGIN <%=p.originDepartureTime %> <br></br>
 	
 	<form action="NewTransitLine4.jsp" method="POST">
 	
-		<%	for(int j=0; j<selectedStationList.size(); j++) {
-				String extra = ""; for(int s=selectedStationList.get(j).toString().length(); s<50; s++){ extra += "_"; }	%>
+		<%	for(int j=0; j<p.selectedStationList.size(); j++) {
+				String extra = ""; for(int s=p.selectedStationList.get(j).toString().length(); s<50; s++){ extra += "_"; }	%>
 			
-			<%=selectedStationList.get(j)+extra%>:
+			<%=p.selectedStationList.get(j)+extra%>:
 			<input type="text" name=<%="A"+j%> placeholder="i.e. 5:04" />
 			<input type="text" name=<%="D"+j%> placeholder="i.e. 5:07" />
 			<br></br>

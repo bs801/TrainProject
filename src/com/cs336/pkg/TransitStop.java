@@ -3,12 +3,12 @@ import java.time.*;
 import java.sql.*;
 
 public class TransitStop implements Comparable<TransitStop> {
-	String transitLineName;
-	int reverseLine;
-	int stopID;
-	int stationID;
-	Time arrivalTime;
-	Time departureTime;
+	public String transitLineName;
+	public int reverseLine;
+	public int stopID;
+	public int stationID;
+	public Time arrivalTime;
+	public Time departureTime;
 	
 	public TransitStop(String transitLineName, int reverseLine, int stopID, int stationID, Time arrivalTime, Time departureTime) {
 		this.transitLineName = transitLineName; this.reverseLine = reverseLine; this.stopID = stopID; this.stationID = stationID; this.arrivalTime = arrivalTime; this.departureTime = departureTime;

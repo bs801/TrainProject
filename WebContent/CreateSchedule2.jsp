@@ -9,6 +9,7 @@
 	h = (h == 12 ? 0 : h);
 	int min = Integer.parseInt(request.getParameter("minute"));
 	String xm = request.getParameter("xm");
+	System.out.println("MIN IS "+min);
 	LocalTime XMTime = LocalTime.of(h, min);
 	if(xm.equals("pm")){
 		am = false;
@@ -80,13 +81,14 @@
 	}
 	
 	    
-  	
+  	Schedule tns = null;
+  	TransitLine TL = null;
 	if(!TLOption.equals("CREATE")){
 		
 		//USE EXISTING TRANSIT LINE
 	    
 		int selectedIndex = Integer.parseInt(TLOption);
-		TransitLine TL = TrainProject.TransitLines.getAsList().get( selectedIndex ); 
+		TL = TrainProject.TransitLines.getAsList().get( selectedIndex ); 
 		
 		LocalTime duration = TL.duration.toLocalTime();
 	
@@ -103,6 +105,7 @@
 				LocalDateTime s1 = sc.scheduleDepartureTime.toLocalDateTime();
 				LocalDateTime s2 = s1.plusHours(scDuration.getHour()).plusMinutes(scDuration.getMinute());
 				
+				
 			//	System.out.println("ComparingA "+t1+" -> "+t2);
 			//	System.out.println("ComparingB "+s1+" -> "+s2);
 				
@@ -118,17 +121,19 @@
 		TrainProject.Schedules.insert(newSchedule);
 		
 		System.out.println("Added schedule");
-		return;
-	}
+		out.println("CREATED SCHEDULE "+ newSchedule.transitLineName+" at "+newSchedule.scheduleDepartureTime.toString()  );
+		tns = newSchedule;
+	} else {
 	
 	// CREATE NEW TRANSIT LINE
 	
-	p.xmIsAM = am;
-	p.XMTime = XMTime;
-	p.incompleteSchedule = new Schedule(null, 0, new Timestamp(cal.getTimeInMillis()), trainID);
-	p.originDepartureTime =  (h+":"+m+" "+xm);
-	response.sendRedirect("NewTransitLine.jsp");
-
+		p.xmIsAM = am;
+		p.XMTime = XMTime;
+		p.incompleteSchedule = new Schedule(null, 0, new Timestamp(cal.getTimeInMillis()), trainID);
+		p.originDepartureTime =  (h+":"+(min < 10 ? "0" : "")+min+" "+xm);
+		response.sendRedirect("NewTransitLine.jsp");
+		return;
+	}
 	
 %>
 
@@ -140,6 +145,24 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<form>
+<input type = "Submit" value="Exit">
+</form>
 </body>
 </html>
+
+
+<%
+out.println("NEW SCHEDULE "+ tns.transitLineName+" at "+tns.scheduleDepartureTime.toString() + "<br></br> " );
+for(int i=0; i<TL.getTransitStops().size(); i++){
+	LocalTime AT = TL.getTransitStops().get(i).arrivalTime.toLocalTime();
+	LocalDateTime ADT = tns.scheduleDepartureTime.toLocalDateTime().plusHours(AT.getHour()).plusMinutes(AT.getMinute());
+	String arrString = ( i==0 ? "ORIGIN" : ADT.toString());
+	
+	LocalTime DT =  TL.getTransitStops().get(i).departureTime.toLocalTime();
+	LocalDateTime DDT = tns.scheduleDepartureTime.toLocalDateTime().plusHours(DT.getHour()).plusMinutes(DT.getMinute());
+	String desString = ( i==TL.getTransitStops().size()-1 ? "DESTINATION" : ADT.toString());
+	
+	out.println( "Stop "+i+": " + TL.getTransitStops().get(i).toString() +": "+ arrString + " - " + desString + "<br></br> " );	
+}
+%>

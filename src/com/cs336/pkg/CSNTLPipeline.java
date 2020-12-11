@@ -22,6 +22,8 @@ public class CSNTLPipeline {
 		return returnErrors;
 	}
 	
+	//public ArrayList<Train> availableTrainList;
+	
 	public LocalTime XMTime;
 	public boolean xmIsAM;
 	public Schedule incompleteSchedule;
@@ -34,7 +36,7 @@ public class CSNTLPipeline {
 	public Station destination;
 	public Float fare;
 	
-	
+	HashMap<Integer, Station> stationSelection;
 	public ArrayList<Station> selectedStationList; 
 	
 	

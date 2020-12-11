@@ -6,9 +6,9 @@
 <%
 	CSNTLPipeline csntlp = (CSNTLPipeline) session.getAttribute("CSNTLP");
 
-	csntlp = new CSNTLPipeline(); // DELETE THIS AFTER CS1
+//	csntlp = new CSNTLPipeline(); // DELETE THIS AFTER CS1
 	out.println(csntlp.getErrors());
-	session.setAttribute("CSNTLP", csntlp);
+//	session.setAttribute("CSNTLP", csntlp);
 
 	ArrayList<Station> Stations = TrainProject.Stations.getAsList();
 %>    
@@ -33,7 +33,7 @@
 	<p1>Select Origin</p1>
 	<select id="ORIG" name="ORIG">
 		<% for(int i=0; i<Stations.size(); i++){ %>
-	  	    <option value=<%=i%> /> <%=Stations.get(i).name%></option>
+	  	    <option value=<%=i%> /> <%=Stations.get(i).toString()%></option>
 	    <% } %>
 	    
 	</select>
@@ -41,7 +41,7 @@
 	<p1>Select Destination</p1>
 	<select id="DEST" name="DEST">
 		<% for(int i=0; i<Stations.size(); i++){ %>
-	  	    <option value=<%=i%> /> <%=Stations.get(i).name%></option>
+	  	    <option value=<%=i%> /> <%=Stations.get(i).toString()%></option>
     	<% } %>
 	</select>
 	
