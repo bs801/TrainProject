@@ -297,7 +297,7 @@ public class TrainProject {
 		}
 		
 		public static void insert(Question q) throws SQLException {
-			String sql = "INSERT INTO Schedule (questionText, username, descriptionText) VALUES(?, ?, ?, ?)";
+			String sql = "INSERT INTO Question (questionText, username, descriptionText) VALUES(?, ?, ?)";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, q.questionText);
 			ps.setString(2, q.username);
@@ -340,7 +340,7 @@ public class TrainProject {
 		}
 		
 		public static void insert(Answer a) throws SQLException {
-			String sql = "INSERT INTO Answer (answerText, questionID, username) VALUES(?, ?, ?, ?)";
+			String sql = "INSERT INTO Answer (answerText, questionID, username) VALUES(?, ?, ?)";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, a.answerText);
 			ps.setInt(2, a.questionID);
