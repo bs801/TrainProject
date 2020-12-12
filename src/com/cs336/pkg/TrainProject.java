@@ -263,40 +263,21 @@ public class TrainProject {
 			return RepresentativeTable;
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	public static class Question {
+    
+	public static class Questions {
 		
 		static HashMap<Integer, Question> QuestionTable;
 		
-		public static User get(String username) throws SQLException {
-			return getAll().get(username);
+		public static Question get(int questionID) throws SQLException {
+			return getAll().get(questionID);
 		}
 		
-		public static ArrayList<User> getAsList() throws SQLException{
-			return new ArrayList<User>(getAll().values());
+		public static ArrayList<Question> getAsList() throws SQLException{
+			ArrayList<Question> qs = new ArrayList<Question>(getAll().values());
+			Collections.sort(qs);
+			return qs;
 		}
-		static HashMap<String, User> getAll() throws SQLException {
+		static HashMap<Integer, Question> getAll() throws SQLException {
 			
 			loadApplicationDB();
 			if(QuestionTable == null) {
@@ -307,12 +288,12 @@ public class TrainProject {
 								
 				while(rs.next()){
 					
-					User newUser = new User(rs);
-					QuestionTable.put(newUser.username, newUser);
+					Question newUser = new Question(rs);
+					QuestionTable.put(newUser.questionID, newUser);
 				}	
 			}	
 			
-			return UserTable;
+			return QuestionTable;
 		}
 	}
 }

@@ -16,7 +16,7 @@ import java.sql.SQLException;
  */
 
 
-public class Question {
+public class Question implements Comparable<Question> {
 	int questionID;
 	String questionText;
 	
@@ -33,4 +33,13 @@ public class Question {
 	public String toString() {
 		return questionText;
 	}
+	@Override
+	public int compareTo(Question o) {
+		if(this.questionID > o.questionID) {
+			return -1;
+		} else {
+			return 1;
+		}
+	}
+	
 }
