@@ -203,6 +203,39 @@ public class TrainProject {
 	
 	
 	
+	public static class Users {
+		
+		static HashMap<String, User> UserTable;
+		
+		public static User get(String username) throws SQLException {
+			return getAll().get(username);
+		}
+		
+		public static ArrayList<User> getAsList() throws SQLException{
+			return new ArrayList<User>(getAll().values());
+		}
+		static HashMap<String, User> getAll() throws SQLException {
+			
+			loadApplicationDB();
+			if(UserTable == null) {
+				UserTable = new HashMap<String, User>();
+				
+				Statement st = con.createStatement();
+				ResultSet rs = st.executeQuery("select * from User");
+								
+				while(rs.next()){
+					
+					User newUser = new User(rs);
+					UserTable.put(newUser.username, newUser);
+				}	
+			}	
+			
+			return UserTable;
+		}
+	}
+	
+	
+	
 	
 	
 	

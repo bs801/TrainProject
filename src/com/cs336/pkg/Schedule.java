@@ -32,7 +32,11 @@ public class Schedule {
 			return "ERROR NULL";
 		}
 	}
-	
+	/*
+	LocalDateTime dateTimeOfArrival(TransitStop t) {
+		
+	}*/
+	/*
 	LocalDateTime datetimeOfArrival(ArrayList<TransitStop> transitStops, int stopIndex){
 		if(0 == reverseLine) {
 			LocalTime relativeAT = transitStops.get(stopIndex).arrivalTime.toLocalTime();
@@ -53,7 +57,7 @@ public class Schedule {
 			return (scheduleDepartureTime.toLocalDateTime().plusHours(lastStopArrival.getHour()).plusMinutes(lastStopArrival.getMinute())).minusHours(relativeAT.getHour()).minusMinutes(relativeAT.getMinute());
 		}
 	}
-	
+	*/
 	
 	//public static boolean conflict(LocalDateTime A1, LocalDateTime A2, LocalDateTime B1, LocalDateTime B2) {
 		
