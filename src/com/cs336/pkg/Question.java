@@ -1,5 +1,8 @@
 package com.cs336.pkg;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /*
  * 	questionID int primary key auto_increment,
     questionText tinytext,
@@ -18,12 +21,16 @@ public class Question {
 	String questionText;
 	
 	String username;
-	String descriptionTest;
+	String descriptionText;
 	
 	public Question(int questionID, String questionText, String username, String descriptionTest) {
-		//this.questionID = questionID, this.questionText = questionText, this.username = username, this.descriptionTest = descriptionTest;
+		this.questionID = questionID; this.questionText = questionText; this.username = username; this.descriptionText = descriptionText;
 	}
-	public Question() {
-		
+	public Question(ResultSet rs) throws SQLException {
+		this(rs.getInt("questionID"), rs.getString("questionText"), rs.getString("username"), rs.getString("descriptionText"));
+	}
+	
+	public String toString() {
+		return questionText;
 	}
 }

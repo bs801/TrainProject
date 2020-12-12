@@ -239,4 +239,50 @@ public class TrainProject {
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public static class Question {
+		
+		static HashMap<Integer, Question> QuestionTable;
+		
+		public static User get(String username) throws SQLException {
+			return getAll().get(username);
+		}
+		
+		public static ArrayList<User> getAsList() throws SQLException{
+			return new ArrayList<User>(getAll().values());
+		}
+		static HashMap<String, User> getAll() throws SQLException {
+			
+			loadApplicationDB();
+			if(QuestionTable == null) {
+				QuestionTable = new HashMap<Integer, Question>();
+				
+				Statement st = con.createStatement();
+				ResultSet rs = st.executeQuery("select * from Question");
+								
+				while(rs.next()){
+					
+					User newUser = new User(rs);
+					QuestionTable.put(newUser.username, newUser);
+				}	
+			}	
+			
+			return UserTable;
+		}
+	}
 }
