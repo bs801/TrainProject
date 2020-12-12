@@ -295,6 +295,16 @@ public class TrainProject {
 			
 			return QuestionTable;
 		}
+		
+		public static void insert(Question q) throws SQLException {
+			String sql = "INSERT INTO Schedule (questionText, username, descriptionText) VALUES(?, ?, ?, ?)";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, q.questionText);
+			ps.setString(2, q.username);
+			ps.setString(3, q.descriptionText);
+			ps.executeUpdate();
+			QuestionTable = null;
+		}
 	}
 	
 	public static class Answers {
@@ -317,7 +327,7 @@ public class TrainProject {
 				AnswerTable = new HashMap<Integer, Answer>();
 				
 				Statement st = con.createStatement();
-				ResultSet rs = st.executeQuery("select * from Question");
+				ResultSet rs = st.executeQuery("select * from Answer");
 								
 				while(rs.next()){
 					
@@ -327,6 +337,16 @@ public class TrainProject {
 			}	
 			
 			return AnswerTable;
+		}
+		
+		public static void insert(Answer a) throws SQLException {
+			String sql = "INSERT INTO Answer (answerText, questionID, username) VALUES(?, ?, ?, ?)";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, a.answerText);
+			ps.setInt(2, a.questionID);
+			ps.setString(3, a.username);
+			ps.executeUpdate();
+			AnswerTable = null;
 		}
 	}
 	
