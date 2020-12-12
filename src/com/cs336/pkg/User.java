@@ -30,5 +30,7 @@ public class User {
 		this(rs.getString("username"), rs.getString("password"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"));		
 	}
 	
-	
+	public String toString() {
+		return firstName + " " + lastName; 
+	}
 }
