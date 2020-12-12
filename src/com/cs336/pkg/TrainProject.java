@@ -233,6 +233,36 @@ public class TrainProject {
 			return UserTable;
 		}
 	}
+    public static class Representatives {
+		
+		static HashMap<String, Representative> RepresentativeTable;
+		
+		public static Representative get(String username) throws SQLException {
+			return getAll().get(username);
+		}
+		
+		public static ArrayList<Representative> getAsList() throws SQLException{
+			return new ArrayList<Representative>(getAll().values());
+		}
+		static HashMap<String, Representative> getAll() throws SQLException {
+			
+			loadApplicationDB();
+			if(RepresentativeTable == null) {
+				RepresentativeTable = new HashMap<String, Representative>();
+				
+				Statement st = con.createStatement();
+				ResultSet rs = st.executeQuery("select * from Representative");
+								
+				while(rs.next()){
+					
+					Representative newUser = new Representative(rs);
+					RepresentativeTable.put(newUser.username, newUser);
+				}	
+			}	
+			
+			return RepresentativeTable;
+		}
+	}
 	
 	
 	
