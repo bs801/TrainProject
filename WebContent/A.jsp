@@ -4,10 +4,12 @@
 <%@ page import="javax.servlet.http.*,javax.servlet.*,java.time.*"%>
     
 <%
+/*
 LocalTime j = LocalTime.now();
 LocalTime k = LocalTime.of(j.getHour(), j.getMinute());
 
 Time asdf = TrainProject.TransitLines.get("ASDF").duration;
+
 HashMap<Timestamp, Schedule[]> stuff = TrainProject.Schedules.getAll().get("ASDF");
 
 ArrayList<Schedule[]> stuffAL = new ArrayList<Schedule[]>();
@@ -48,7 +50,7 @@ Timestamp t2 = Timestamp.valueOf(t1.toLocalDateTime().plusHours(t.getHour()).plu
 
 System.out.println(t2);
 
-
+*/
 
 %> 
 
@@ -70,9 +72,9 @@ System.out.println(t2);
 <h1> Drop down box or select element</h1>
     <form action="B.jsp" method="POST">
     <%  
-   // ApplicationDB db = new ApplicationDB();	
-	//Connection con = db.getConnection();
-    //Class.forName("com.mysql.jdbc.Driver");
+    ApplicationDB db = new ApplicationDB();	
+	Connection con = db.getConnection();
+    Class.forName("com.mysql.jdbc.Driver");
     
     Statement st = con.createStatement();
     ResultSet rs = st.executeQuery("select * from users");

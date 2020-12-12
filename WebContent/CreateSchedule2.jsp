@@ -22,6 +22,7 @@
 	cal.set(Calendar.HOUR_OF_DAY, h);
 	cal.set(Calendar.MINUTE, min);
 	cal.set(Calendar.SECOND, 0);
+	cal.set(Calendar.MILLISECOND, 0);
 
 	ArrayList<String> errors = new ArrayList<String>();
 	int m = Integer.parseInt(request.getParameter("month"))-1;

@@ -15,6 +15,7 @@
     	}
     	*/
     	// comment jsp
+    	/*
     	CSNTLPipeline ntlp = new CSNTLPipeline();
     	ntlp.val = 20;
     	
@@ -22,7 +23,12 @@
     	ntlp.val = 30;
     	CSNTLPipeline ntlp2 = (CSNTLPipeline) session.getAttribute("key");
     	out.println(ntlp2.val);
-    //	out.println(request.getParameter("command"));
+    	*/
+    	//out.println(request.getParameter("command"));
+    	
+    	String varname = (String) request.getParameter("command");
+    	int v = Integer.parseInt("command");
+    	TrainProject.Questions.get(v);
     %>
 <!DOCTYPE html>
 <html>
