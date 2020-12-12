@@ -1,5 +1,7 @@
 package com.cs336.pkg;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /*
  * 
@@ -15,12 +17,30 @@ package com.cs336.pkg;
  * 
  */
 
-public class Answer {
+public class Answer implements Comparable<Answer>{
 	int answerID;
 	String answerText;
 	int questionID;
 	String username;
 
 	
+	public Answer(int answerID, String answerText, int questionID, String username) {
+		this.questionID = questionID; this.answerText = answerText; this.username = username;
+	}
+	public Answer(ResultSet rs) throws SQLException {
+		this(rs.getInt("answerID"), rs.getString("answerText"), rs.getInt("questionID"), rs.getString("username"));
+	}
+	
+	public String toString() {
+		return answerText;
+	}
+	@Override
+	public int compareTo(Answer o) {
+		if(this.answerID > o.answerID) {
+			return -1;
+		} else {
+			return 1;
+		}
+	}
 	
 }
