@@ -42,5 +42,8 @@ public class Answer implements Comparable<Answer>{
 			return 1;
 		}
 	}
+	public int getQuestionID() {
+		return questionID;
+	}
 	
 }
