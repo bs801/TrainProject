@@ -18,10 +18,10 @@ import java.sql.SQLException;
  */
 
 public class Answer implements Comparable<Answer>{
-	int answerID;
-	String answerText;
-	int questionID;
-	String username;
+	public int answerID;
+	public String answerText;
+	public int questionID;
+	public String username;
 
 	
 	public Answer(int answerID, String answerText, int questionID, String username) {
