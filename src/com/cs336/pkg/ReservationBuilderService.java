@@ -16,7 +16,7 @@ public class ReservationBuilderService {
 			}
 			return sameDateSchedules;
 		}
-		public static ArrayList<ReservationBuilder> getPotentialReservations(LocalDate departureDate, Station A, Station B) throws SQLException{
+		public static ArrayList<ReservationBuilder> getReservationOptions(LocalDate departureDate, Station A, Station B) throws SQLException{
 			return getReservationOptions(filterSchedulesByDate(departureDate), A, B);
 		}
 		private static ArrayList<ReservationBuilder> getReservationOptions(ArrayList<Schedule> sameDateSchedules, Station A, Station B) throws SQLException{
