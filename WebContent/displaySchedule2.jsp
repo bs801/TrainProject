@@ -63,10 +63,12 @@ for(ReservationBuilder rb : validReservations){
 		out.println(st); // A then H then J then B
 		out.println(", ");
 	}
-	//out.println(orig.departureTime);
-	//out.println(dest.arrivalTime);
-	out.println("Fare: ");
-	out.println(rb.fare);
+	out.println("<br></br>");
+	out.println("Leaving at: " + orig.arrivalTime);
+	out.println("<br></br>");
+	out.println("Arriving at: " + dest.arrivalTime);
+	out.println("<br></br>");
+	out.println("Fare: " + rb.fare);
 	
 }
 
