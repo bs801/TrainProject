@@ -51,6 +51,7 @@ System.out.println("UP FRONT");
 		}
 	}*/
 	
+	
 	ArrayList<Station> stations = TrainProject.Stations.getAsList();
 	
 	ArrayList<String> cities = new ArrayList<String>();
@@ -67,17 +68,19 @@ System.out.println("UP FRONT");
 	
 	Origin
 	<select name="origin">
-		<% for(String c : cities){ 
+		
+		<% for(int i=0; i<cities.size(); i++){ 
 		%>
-			<option value=<%=c%>><%=c%></option>
+			<option value=<%=i%>><%=cities.get(i)%></option>
 		<% } %>
 	</select>
 	<br></br>
 	Destination
 	<select name="destination">
-		<% for(String c : cities){ 
+	
+		<% for(int i=0; i<cities.size(); i++){ 
 		%>
-			<option value=<%=c%>><%=c%></option>
+			<option value=<%=i%>><%=cities.get(i)%></option>
 		<% } %>
 	</select>
 	<br></br>
