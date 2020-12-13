@@ -25,4 +25,7 @@ public class ScheduleStop {
 			return null;
 		}
 	}
+	public Station getStation() throws SQLException {
+		return TrainProject.Stations.get(this.stationID);
+	}
 }

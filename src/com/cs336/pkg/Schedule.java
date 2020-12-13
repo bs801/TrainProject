@@ -76,7 +76,7 @@ public class Schedule {
 		return scheduleStopForStation(s).departureTime;
 	}
 	
-	
+	/*
 	
 	// Say you have a schedule that does F -> D -> A -> H -> J -> B -> K -> L 
 	// This method will return arraylist { A H J B } or NULL
@@ -159,7 +159,7 @@ public class Schedule {
 		return validRoutes;
 	}
 	
-	
+	*/
 	
 	/*
 	LocalDateTime dateTimeOfArrival(TransitStop t) {

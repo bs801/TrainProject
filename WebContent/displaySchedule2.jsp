@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
-<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="java.io.*,java.util.*,java.sql.*, java.time.LocalDate"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 <%@ page import="java.text.SimpleDateFormat"%>
 <!DOCTYPE html>
@@ -30,15 +30,44 @@ ArrayList<String> cities = (ArrayList<String>) session.getAttribute("cities");
 String cityA = cities.get(origin);
 String cityB = cities.get(destination);
 
-ArrayList<ScheduleBuilder> validSchedules = Schedule.getCoveringSchedule(cityA, cityB);
-
-validSchedules.get(0).orig.departureTime
-
 String date = request.getParameter("date");
+LocalDate departureDate = LocalDate.parse(date);
+
+
+Timestamp t = Timestamp.valueOf(departureDate.atStartOfDay());
+t.toLocalDateTime().toLocalTime();
+
+//SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
+
+
+ArrayList<ReservationBuilder> validReservations = ReservationBuilderService.getReservationOptions(departureDate, cityA, cityB);
+
+validReservations.get(0).reservationStops.get(0);
+validReservations.get(0).reservationStops.get( validReservations.get(0).reservationStops.size()-1 );
+
+
+// Say you have a schedule that does F -> D -> A -> H -> J -> B -> K -> L 
+// This method will return arraylist { A H J B } or NULL
+		
+//  A -> H -> J -> B   Fare:  [Select this]
+		
+for(ReservationBuilder rb : validReservations){
+	ScheduleStop orig = rb.reservationStops.get(0); // { A H J B }
+	ScheduleStop dest = rb.reservationStops.get(	rb.reservationStops.size() - 1 );
+	out.println(orig + " -> "+dest);
+	
+	//orig.departureTime
+	//dest.arrivalTime
+	for(ScheduleStop st : rb.reservationStops){ 
+		out.println(st); // A then H then J then B
+
+	}
+}
+
+
 String scheduleDate = "";
 //out.println(date);
 
-SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
 
 ArrayList<Station> stations = TrainProject.Stations.getAsList();
 ArrayList<Station> originStations = new ArrayList<Station>();
