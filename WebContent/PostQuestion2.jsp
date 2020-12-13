@@ -24,12 +24,19 @@
 <title>More Question</title>
 <p>Succesful! Do you have more questions?</p>
 
-<button id="myButton" class="float-left submit-button" >Yes?</button>
+<button id="myButton" class="float-left submit-button" >Yes</button>
 <script type="text/javascript">
     document.getElementById("myButton").onclick = function () {
         location.href = "http://localhost:8080/TrainProject/PostQuestions.jsp";
     };
 </script>
+<button id="Button" class="float-left submit-button" >No</button>
+<script type="text/javascript">
+    document.getElementById("Button").onclick = function () {
+        location.href = "http://localhost:8080/TrainProject/forum.jsp";
+    };
+</script>
+
 
 </head>
 <body>

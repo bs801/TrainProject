@@ -25,9 +25,8 @@
 	    <div>Posted by: <%=Questions.get(i).username%> </div> <br></br><%
 	    if(Answers.size() == 0)
 	    {
-	    	%>
+	    	%> 
 	    		<input name = <%=Questions.get(i).questionID %> type = "Submit" value = "Answer this question" />
-	    		
 	    		
 	    	<%
 	    }%>
