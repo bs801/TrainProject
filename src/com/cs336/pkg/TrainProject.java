@@ -66,6 +66,8 @@ public class TrainProject {
 			}
 			return StationTable;
 		}
+		
+		
 	}
 	
 	public static class TransitLines {
@@ -196,7 +198,32 @@ public class TrainProject {
 			
 	}
 	
-	
+	public static class Reservations {
+		static HashMap<Integer, Reservation> ReservationTable;
+		
+		public static Reservation get(int reservationID) throws SQLException {
+			return getAll().get(reservationID);
+		}
+		public static ArrayList<Reservation> getAsList() throws SQLException {
+			ArrayList<Reservation> sls = new ArrayList<Reservation>(getAll().values());
+		
+			return sls;
+		}
+		public static HashMap<Integer, Reservation> getAll() throws SQLException {
+			loadApplicationDB();
+			if(ReservationTable == null) {
+				ReservationTable = new HashMap<Integer, Reservation>();
+				Statement st = con.createStatement();
+				ResultSet rs = st.executeQuery("select * from Reservation");
+				while(rs.next()){
+					Reservation r = new Reservation(rs);
+				
+					ReservationTable.put(r.reservationID, r);
+				}
+			}
+			return ReservationTable;
+		}
+	}
 	
 	
 

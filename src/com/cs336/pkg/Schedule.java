@@ -6,6 +6,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Schedule {
 	public String transitLineName;
@@ -19,12 +20,6 @@ public class Schedule {
 	public Schedule(ResultSet rs) throws SQLException {
 		this(rs.getString(1), rs.getInt("reverseLine"), rs.getTimestamp(3), rs.getInt(4));
 	}
-	
-	public TransitLine getTransitLine() throws SQLException {
-		return TrainProject.TransitLines.get(transitLineName, reverseLine);
-	}
-	
-	
 	public String toString() {
 		try {
 			return getTransitLine().toString() + " @ " + scheduleDepartureTime;
@@ -33,21 +28,38 @@ public class Schedule {
 		}
 	}
 	
+	public TransitLine getTransitLine() throws SQLException {
+		return TrainProject.TransitLines.get(transitLineName, reverseLine);
+	}
 	
+	ArrayList<ScheduleStop> ScheduleStopTable;
 	public ArrayList<ScheduleStop> getScheduleStops() throws SQLException{
+		if(ScheduleStopTable != null) {
+			return ScheduleStopTable;
+		}
 		ArrayList<TransitStop> transitStops = getTransitLine().getTransitStops();
 		ArrayList<ScheduleStop> scheduleStops = new ArrayList<ScheduleStop>();
 		for(TransitStop t : transitStops) {
-			scheduleStops.add(new ScheduleStop(this, t));
+			scheduleStops.add(new ScheduleStop(this, t, t.stopID, t.stationID));
 		}
 		return scheduleStops;
 	}
 	
 	public ScheduleStop getScheduleStop(TransitStop t) throws SQLException {
-		if(getTransitLine().getTransitStops().contains(t)) {
-			return new ScheduleStop(this, t);
+		for(ScheduleStop st : getScheduleStops()) {
+			if(t.stationID == st.stationID) {
+				return st;
+			}
 		}
-		return null; //returns null if invalid schedule stop
+		return null;
+	}
+	public ScheduleStop scheduleStopForStation(Station s) throws SQLException {
+		for(ScheduleStop st : getScheduleStops()) {
+			if(s.stationID == s.stationID) {
+				return st;
+			}
+		}
+		return null;
 	}
 	
 	public LocalDateTime dateTimeOfArrival(TransitStop t) throws SQLException {
@@ -57,9 +69,54 @@ public class Schedule {
 		return getScheduleStop(t).departureTime;
 	}
 	
-	public ArrayList<Station> StationTransitList(Station A, Station B){
-	return null;	
+	
+	public ArrayList<Station> getCoverage(Station A, Station B) throws SQLException{
+		ScheduleStop s1 = scheduleStopForStation(A);
+		ScheduleStop s2 = scheduleStopForStation(B);
+		if(s1 == null || s2 == null) {
+			return null;
+		}
+		if(!(s1.stopID < s2.stopID)) {
+			return null;
+		}
+		ArrayList<ScheduleStop> scheduleStop = getScheduleStops();
+		ArrayList<Station> stations = new ArrayList<Station>();
+		int i;
+		for(i=0; i<scheduleStop.size(); i++) {
+			if(scheduleStop.get(i).stationID == s1.stationID) {
+				break;
+			}
+		}
+		for(i=i; i<scheduleStop.size(); i++) {
+			stations.add(TrainProject.Stations.get(scheduleStop.get(i).stationID));
+			if(scheduleStop.get(i).stationID == s2.stationID) {
+				break;
+			}
+		}
+		return stations;
 	}
+
+	public static ArrayList<Schedule> getCoveringSchedules(Station A, Station B) throws SQLException {
+		HashMap<String, Schedule[]> transitLineTypes = new HashMap<String, Schedule[]>();
+		ArrayList<Schedule> schedules = TrainProject.Schedules.getAsList();
+		ArrayList<Schedule> covering = new ArrayList<Schedule>();
+		for(Schedule s : schedules) {
+			if(transitLineTypes.get(s.transitLineName) != null) {
+				if(transitLineTypes.get(s.transitLineName)[s.reverseLine] != null) {
+					schedules.add(s);
+				}	
+				continue;
+			}
+			if(s.getCoverage(A, B) != null) {
+				transitLineTypes.put(s.transitLineName, new Schedule[2]);
+				transitLineTypes.get(s.transitLineName)[s.reverseLine] = s;
+				schedules.add(s);
+			}
+		}
+		return covering;
+	}
+	
+	
 	
 	/*
 	LocalDateTime dateTimeOfArrival(TransitStop t) {
