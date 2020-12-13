@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
+<%@ page import="java.text.SimpleDateFormat"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,6 +25,10 @@
 String origin = request.getParameter("origin");   
 String destination = request.getParameter("destination");
 String date = request.getParameter("date");
+String scheduleDate = "";
+//out.println(date);
+
+SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
 
 ArrayList<Station> stations = TrainProject.Stations.getAsList();
 ArrayList<Station> originStations = new ArrayList<Station>();
@@ -44,7 +49,12 @@ for(Station oStation: originStations){
 	for(Station dStation: destinationStations){
 		System.out.println("Checking schedules for " + oStation + dStation);
 		for(Schedule s : schedule){
-			System.out.println("Schedules " +Schedule.getCoveringSchedules(oStation, dStation) );
+			scheduleDate = sdfDate.format(s.scheduleDepartureTime);
+			out.println("Line: " + s.getCoverage(oStation, dStation));
+			out.println("<br></br>");
+			if(date.equals(scheduleDate)){
+				out.println("Schedules: " + s.getCoveringSchedules(oStation, dStation));
+			}
 			/*coverage = s.getCoverage(oStation, dStation);
 			if(coverage != null){
 				System.out.println("Coverage not null");
