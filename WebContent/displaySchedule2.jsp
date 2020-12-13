@@ -22,8 +22,14 @@
 	of stop ids found and the check for if the line is reversed or not.
 */
 
-String origin = request.getParameter("origin");   
-String destination = request.getParameter("destination");
+int origin = Integer.parseInt(request.getParameter("origin"));  
+int destination = Integer.parseInt(request.getParameter("destination"));
+			
+ArrayList<String> cities = (ArrayList<String>) session.getAttribute("cities");
+
+String cityA = cities.get(origin);
+String cityB = cities.get(destination);
+
 String date = request.getParameter("date");
 String scheduleDate = "";
 //out.println(date);
@@ -36,6 +42,7 @@ ArrayList<Station> destinationStations = new ArrayList<Station>();
 ArrayList<Station> coverage = new ArrayList<Station>();
 ArrayList<Schedule> schedule =  TrainProject.Schedules.getAsList();
 
+/*
 for(Station s : stations){
 	if(origin.equals(s.city.replaceAll("\\s", ""))){
 		originStations.add(s);
@@ -43,7 +50,9 @@ for(Station s : stations){
 	if(destination.equals(s.city.replaceAll("\\s", ""))){
 		destinationStations.add(s);
 	}
-}
+} */
+
+
 
 for(Station oStation: originStations){
 	for(Station dStation: destinationStations){

@@ -134,6 +134,31 @@ public class Schedule {
 		return covering;
 	}
 	
+	public static ArrayList<ScheduleBuilder> getCoveringSchedule(String cityA, String cityB) throws SQLException{
+		ArrayList<Station> origins = new ArrayList<Station>();
+		ArrayList<Station> destinations = new ArrayList<Station>();
+		for(Station s : TrainProject.Stations.getAsList()){
+			if(cityA.equals(cityA)){
+				origins.add(s);
+			}
+			if(cityB.equals(cityB)){
+				destinations.add(s);
+			}
+		}
+		// [A B] [C] 
+		ArrayList<ScheduleBuilder> validRoutes = new ArrayList<ScheduleBuilder>();
+		for(Station oStation: origins){
+			for(Station dStation: destinations){
+				ArrayList<Schedule> AB_schedules = Schedule.getCoveringSchedules(oStation, dStation);
+				
+				for(Schedule sc : AB_schedules) {
+					validRoutes.add(new ScheduleBuilder(sc.scheduleStopForStation(oStation), sc.scheduleStopForStation(dStation), sc));
+				}
+			}
+		}
+		return validRoutes;
+	}
+	
 	
 	
 	/*
