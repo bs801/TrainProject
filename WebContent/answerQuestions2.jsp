@@ -3,11 +3,16 @@
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
  
- <%  session.setAttribute("username","user2"); //we need to delete this part after
-     String user = (String)session.getAttribute("username");
-     String s = request.getParameter("description");
-     String qid = request.getParameter("questionID");
-  
+ <%  
+ 	
+ 
+ 	session.setAttribute("username","user2"); //we need to delete this part after
+     String user = (String) session.getAttribute("username");
+     String s = request.getParameter("answerText");
+     String qid = (String) session.getAttribute("AQ1_qID");
+     System.out.println(qid);
+  	int intqid = Integer.parseInt(qid);
+     
      System.out.println(s);
      if(s.length()>255){
     	response.sendRedirect("answerQuestions.jsp");
@@ -15,7 +20,10 @@
     	return;
      }
      
-     Answer p = new Answer(-1,s,Integer.parseInt(qid),user);
+     Answer p = new Answer(-1,s,intqid,user);
+     
+ 	 
+     
      TrainProject.Answers.insert(p);
  %>
 

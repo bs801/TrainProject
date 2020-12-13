@@ -73,7 +73,15 @@
 			t.Stations.add(b, stations.get(i)); //new Station(pk, rsS.getString(2), null, null) );
 		}
 	}
+	/*
+	A -> B -> C -> D  Fare: $80 [Book this]
 	
+	A -> B -> C -> D
+	
+	A -> B -> C -> D
+	
+	A -> B -> C -> D
+	*/
 	//out.println("The current route is: "+t.Stations.get(0));
 	//for(int i=1; i<t.Stations.size(); i++){	
 	//	out.println("=> "+t.Stations.get(i));

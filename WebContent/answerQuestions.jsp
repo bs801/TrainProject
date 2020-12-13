@@ -6,6 +6,7 @@
 	ArrayList<Question> Questions = TrainProject.Questions.getAsList();
 	ArrayList<Answer> Answers = TrainProject.Answers.getAsList();
 	
+	
 	int i = 0 ;
 	for( i = 0; i< Questions.size(); i++)
 	{
@@ -15,6 +16,7 @@
 			break;
 		}
 	}
+	session.setAttribute("AQ1_qID", Questions.get(i).questionID+"");
 	
 	 // Display the question and display the discription and a text area inside a form
 	// And form action should link to answerQuestion2.jsp.
@@ -33,7 +35,7 @@
 	
 	<p>Type your answers below!</p>
 	<form action="answerQuestions2.jsp" method="POST">
-	<textarea rows="5" type="text" name="description"> </textarea>
+	<textarea rows="5" type="text" name="answerText"> </textarea>
 	<input name = <%=Questions.get(i).questionID%> type="Submit" value="Post answers">
 	</form>
 
