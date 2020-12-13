@@ -78,7 +78,8 @@ public class Schedule {
 	
 	
 	
-	
+	// Say you have a schedule that does F -> D -> A -> H -> J -> B -> K -> L 
+	// This method will return arraylist { A H J B } or NULL
 	public ArrayList<Station> getCoverage(Station A, Station B) throws SQLException{ 
 		ScheduleStop s1 = scheduleStopForStation(A);
 		ScheduleStop s2 = scheduleStopForStation(B);
@@ -105,6 +106,7 @@ public class Schedule {
 		return stations;
 	}
 
+	// Returns all the schedules that can take you from A to B. 
 	public static ArrayList<Schedule> getCoveringSchedules(Station A, Station B) throws SQLException {
 		HashMap<String, Schedule[]> transitLineTypes = new HashMap<String, Schedule[]>();
 		ArrayList<Schedule> schedules = TrainProject.Schedules.getAsList();
