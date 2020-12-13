@@ -10,6 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<form action="" method="POST">
 <%
 /*
 	The origin and the destination will be sent here.
@@ -42,8 +43,8 @@ t.toLocalDateTime().toLocalTime();
 
 ArrayList<ReservationBuilder> validReservations = ReservationBuilderService.getReservationOptions(departureDate, cityA, cityB);
 
-validReservations.get(0).reservationStops.get(0);
-validReservations.get(0).reservationStops.get( validReservations.get(0).reservationStops.size()-1 );
+//validReservations.get(0).reservationStops.get(0);
+//validReservations.get(0).reservationStops.get( validReservations.get(0).reservationStops.size()-1 );
 
 
 // Say you have a schedule that does F -> D -> A -> H -> J -> B -> K -> L 
@@ -54,14 +55,19 @@ validReservations.get(0).reservationStops.get( validReservations.get(0).reservat
 for(ReservationBuilder rb : validReservations){
 	ScheduleStop orig = rb.reservationStops.get(0); // { A H J B }
 	ScheduleStop dest = rb.reservationStops.get(	rb.reservationStops.size() - 1 );
-	out.println(orig + " -> "+dest);
+	out.println(orig + " -> "+ dest);
+	out.println("<br></br>");
 	
-	//orig.departureTime
-	//dest.arrivalTime
+	out.println("Stops: ");
 	for(ScheduleStop st : rb.reservationStops){ 
 		out.println(st); // A then H then J then B
-
+		out.println(", ");
 	}
+	//out.println(orig.departureTime);
+	//out.println(dest.arrivalTime);
+	out.println("Fare: ");
+	out.println(rb.fare);
+	
 }
 
 
@@ -73,7 +79,7 @@ ArrayList<Station> stations = TrainProject.Stations.getAsList();
 ArrayList<Station> originStations = new ArrayList<Station>();
 ArrayList<Station> destinationStations = new ArrayList<Station>();
 ArrayList<Station> coverage = new ArrayList<Station>();
-ArrayList<Schedule> schedule =  TrainProject.Schedules.getAsList();
+ArrayList<Schedule> schedule;
 
 /*
 for(Station s : stations){
@@ -87,30 +93,23 @@ for(Station s : stations){
 
 
 
-for(Station oStation: originStations){
+/*for(Station oStation: originStations){
 	for(Station dStation: destinationStations){
 		System.out.println("Checking schedules for " + oStation + dStation);
+		schedule = Schedule.getCoveringSchedules(oStation, dStation);
+				
 		for(Schedule s : schedule){
 			scheduleDate = sdfDate.format(s.scheduleDepartureTime);
+			out.println(scheduleDate);
+			out.println("<br></br>");
 			out.println("Line: " + s.getCoverage(oStation, dStation));
 			out.println("<br></br>");
 			if(date.equals(scheduleDate)){
 				out.println("Schedules: " + s.getCoveringSchedules(oStation, dStation));
 			}
-			/*coverage = s.getCoverage(oStation, dStation);
-			if(coverage != null){
-				System.out.println("Coverage not null");
-				for(Station x : coverage){
-					out.println(x.name);
-					out.println("->");
-				}
-			}
-			else{
-				System.out.println("Coverage is null");
-			}*/
 		}
 	}
-}
+}*/
 
 
 
@@ -196,6 +195,7 @@ and then display the times that coorespond with the date inputed.
 
 
 %>
-
+<input type="submit" value="Reserve"/> 
+</form>
 </body>
 </html>
