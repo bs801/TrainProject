@@ -5,11 +5,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Question implements Comparable<Question> {
-	int questionID;
-	String questionText;
+	public int questionID;
+	public String questionText;
 	
-	String username;
-	String descriptionText;
+	public String username;
+	public String descriptionText;
 	
 	public Question(int questionID, String questionText, String username, String descriptionText) {
 		this.questionID = questionID; this.questionText = questionText; this.username = username; this.descriptionText = descriptionText;
