@@ -17,13 +17,13 @@ import java.sql.SQLException;
 
 public class Representative {
 
-	String username;
-	String password;
+	public String username;
+	public String password;
 	
-	String SSN;
+	public String SSN;
 	
-	String firstName;
-	String lastName;
+	public String firstName;
+	public String lastName;
 	
 	public Representative(String username, String password, String firstName, String lastName, String SSN) {
 		this.username = username; this.password = password; this.firstName = firstName; this.lastName = lastName; this.SSN = SSN;

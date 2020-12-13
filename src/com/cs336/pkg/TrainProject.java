@@ -223,6 +223,7 @@ public class TrainProject {
 			}
 			return ReservationTable;
 		}
+	
 	}
 	
 	
@@ -293,13 +294,26 @@ public class TrainProject {
 				ResultSet rs = st.executeQuery("select * from Representative");
 								
 				while(rs.next()){
-					
+					System.out.println("REEE");
+					System.out.println(rs.getString("SSN"));
 					Representative newUser = new Representative(rs);
+					
 					RepresentativeTable.put(newUser.username, newUser);
 				}	
 			}	
 			
 			return RepresentativeTable;
+		}
+		public static void insert(Representative r) throws SQLException {
+			String sql = "INSERT INTO Representative(username, password, firstName, lastName, SSN) VALUES(?, ?, ?, ?, ?)";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, r.username);
+			ps.setString(2, r.password);
+			ps.setString(3, r.firstName);
+			ps.setString(4, r.lastName);
+			ps.setString(5, r.SSN);
+			ps.executeUpdate();
+			RepresentativeTable = null;
 		}
 	}
     

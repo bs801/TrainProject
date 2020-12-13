@@ -21,6 +21,10 @@
  	if(newPassword.length() < 8 || newPassword  == null || newPassword.length() > 20){
  		errors.add("Password must be between 8 to 20 characters");
  	}
+ 	if(email.length() > 20){
+ 		errors.add("Email must be less than 20 characters");
+ 	}
+ 	
  	
  	if(email == null || "".equals(email)){
  		errors.add("Please enter in an email");
@@ -63,7 +67,7 @@
  	}
  	if(errors.size() > 0 ){
  		session.setAttribute("NC2", errors);
- 		response.sendRedirect("NewCustomer2.jsp");
+ 		response.sendRedirect("NewCustomer.jsp");
  		return;
  	}
  	

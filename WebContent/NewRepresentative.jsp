@@ -27,7 +27,7 @@
 	First Name: <input type="text" name="firstname" placeholder="First Name"/> <br></br>
 	Last Name: <input type="text" name="lastname" placeholder="Last Name"/> <br></br>
 	
-	SSN: <input type="text" name="email" placeholder="123-45-6789"/> <br></br>
+	SSN: <input type="text" name="SSN" placeholder="123-45-6789"/> <br></br>
 	<input type="Submit" value="Sign up"/> <br></br>
 </form>
 <br></br>
