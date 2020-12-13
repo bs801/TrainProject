@@ -30,6 +30,20 @@ public class TransitStop implements Comparable<TransitStop> {
 			return null;
 		}
 	}
+	@Override
+	public boolean equals(Object o) {
+		if(o == this) {
+			return true;
+		}
+		if(!(o instanceof TransitStop)) {
+			return false;
+		}
+		TransitStop t = (TransitStop) o;
+		if(t.stopID == this.stopID && t.transitLineName.equals(this.transitLineName)) {
+			return true;
+		}
+		return false;
+	}
 	
 	@Override
 	public int compareTo(TransitStop t) {

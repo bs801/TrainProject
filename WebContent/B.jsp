@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
+    pageEncoding="ISO-8859-1" import="com.cs336.pkg.*, java.util.*"%>
     
 <%
     	/*  /// I am editing some stuff qwerty
@@ -26,9 +26,19 @@
     	*/
     	//out.println(request.getParameter("command"));
     	
-    	String varname = (String) request.getParameter("command");
-    	int v = Integer.parseInt("command");
-    	TrainProject.Questions.get(v);
+    	//String varname = (String) request.getParameter("command");
+    	//int v = Integer.parseInt("command");
+    	//TrainProject.Questions.get(v);
+    	
+    	Train t = new Train(3, "asdf");
+    	ArrayList<Train> tl = new ArrayList<Train>();
+    	tl.add(t);
+    	Train a = new Train(4, "bsdf");
+    	if(tl.contains(a)){
+    		out.println("REEEE");
+    	} else {
+    		out.println("NO REEEE");
+    	}
     %>
 <!DOCTYPE html>
 <html>

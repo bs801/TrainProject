@@ -29,6 +29,11 @@ public class Train implements Comparable<Train>{
 		return 0;
 	}
 	
+	@Override
+	public boolean equals(Object o) {
+		return false;
+	}
+	
 	
 	
 	public void write() {

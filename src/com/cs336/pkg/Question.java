@@ -4,19 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-/*
- * 	questionID int primary key auto_increment,
-    questionText tinytext,
-    username varchar(20),
-    
-    `descriptionText` tinytext,
-    
-    foreign key(username) references User(username)
- * 
- * 
- */
-
-
 public class Question implements Comparable<Question> {
 	int questionID;
 	String questionText;
@@ -42,8 +29,6 @@ public class Question implements Comparable<Question> {
 			return 1;
 		}
 	}
-	
-	
 	public ArrayList<Answer> getAnswers() throws SQLException{
 		ArrayList<Answer> questionAnswers = new ArrayList<Answer>();
 		for(Answer a :  TrainProject.Answers.getAsList()) {

@@ -27,11 +27,40 @@ public class Schedule {
 	
 	public String toString() {
 		try {
-			return getTransitLine().toString() + " at " + scheduleDepartureTime;
+			return getTransitLine().toString() + " @ " + scheduleDepartureTime;
 		} catch (SQLException e) {
 			return "ERROR NULL";
 		}
 	}
+	
+	
+	public ArrayList<ScheduleStop> getScheduleStops() throws SQLException{
+		ArrayList<TransitStop> transitStops = getTransitLine().getTransitStops();
+		ArrayList<ScheduleStop> scheduleStops = new ArrayList<ScheduleStop>();
+		for(TransitStop t : transitStops) {
+			scheduleStops.add(new ScheduleStop(this, t));
+		}
+		return scheduleStops;
+	}
+	
+	public ScheduleStop getScheduleStop(TransitStop t) throws SQLException {
+		if(getTransitLine().getTransitStops().contains(t)) {
+			return new ScheduleStop(this, t);
+		}
+		return null; //returns null if invalid schedule stop
+	}
+	
+	public LocalDateTime dateTimeOfArrival(TransitStop t) throws SQLException {
+		return getScheduleStop(t).arrivalTime;
+	}
+	public LocalDateTime dateTimeOfDeparture(TransitStop t) throws SQLException {
+		return getScheduleStop(t).departureTime;
+	}
+	
+	public ArrayList<Station> StationTransitList(Station A, Station B){
+	return null;	
+	}
+	
 	/*
 	LocalDateTime dateTimeOfArrival(TransitStop t) {
 		
