@@ -33,6 +33,7 @@ public class Schedule {
 	}
 	
 	ArrayList<ScheduleStop> ScheduleStopTable;
+	
 	public ArrayList<ScheduleStop> getScheduleStops() throws SQLException{
 		if(ScheduleStopTable != null) {
 			return ScheduleStopTable;
@@ -68,9 +69,17 @@ public class Schedule {
 	public LocalDateTime dateTimeOfDeparture(TransitStop t) throws SQLException {
 		return getScheduleStop(t).departureTime;
 	}
+	public LocalDateTime dateTimeOfArrival(Station s) throws SQLException {
+		return scheduleStopForStation(s).arrivalTime;
+	}
+	public LocalDateTime dateTimeOfDeparture(Station s) throws SQLException {
+		return scheduleStopForStation(s).departureTime;
+	}
 	
 	
-	public ArrayList<Station> getCoverage(Station A, Station B) throws SQLException{
+	
+	
+	public ArrayList<Station> getCoverage(Station A, Station B) throws SQLException{ 
 		ScheduleStop s1 = scheduleStopForStation(A);
 		ScheduleStop s2 = scheduleStopForStation(B);
 		if(s1 == null || s2 == null) {
