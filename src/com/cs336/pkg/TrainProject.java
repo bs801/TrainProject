@@ -259,6 +259,18 @@ public class TrainProject {
 			
 			return UserTable;
 		}
+		
+		public static void insert(User u) throws SQLException {
+			String sql = "INSERT INTO User(username, password, firstName, lastName, emailAddress) VALUES(?, ?, ?, ?, ?)";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, u.username);
+			ps.setString(2, u.password);
+			ps.setString(3,u.firstName);
+			ps.setString(4, u.lastName);
+			ps.setString(5, u.emailAddress);
+			ps.executeUpdate();
+			UserTable = null;
+		}
 	}
     public static class Representatives {
 		
