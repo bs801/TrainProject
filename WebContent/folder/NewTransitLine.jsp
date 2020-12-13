@@ -4,9 +4,9 @@
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 
 <%
-	//NewTLPipeline newTLPipeline = (Session) session.getAttribute("NewTLPipeline");
+	NewTLPipeline newTLPipeline = (Session) session.getAttribute("NewTLPipeline");
 	
-	/CSNTLPipeline NTLP = (Session) session.getAttribute("NTLP");
+	CSNTLPipeline NTLP = (Session) session.getAttribute("NTLP");
 	
 
 	if(session.getAttribute("NTL2") != null){

@@ -3,9 +3,11 @@ import java.time.*;
 import java.sql.*;
 
 public class TransitStop implements Comparable<TransitStop> {
+	
 	public String transitLineName;
 	public int reverseLine;
 	public int stopID;
+	
 	public int stationID;
 	public Time arrivalTime;
 	public Time departureTime;
