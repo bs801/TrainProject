@@ -30,6 +30,10 @@ ArrayList<String> cities = (ArrayList<String>) session.getAttribute("cities");
 String cityA = cities.get(origin);
 String cityB = cities.get(destination);
 
+ArrayList<ScheduleBuilder> validSchedules = Schedule.getCoveringSchedule(cityA, cityB);
+
+validSchedules.get(0).orig.departureTime
+
 String date = request.getParameter("date");
 String scheduleDate = "";
 //out.println(date);
@@ -78,6 +82,9 @@ for(Station oStation: originStations){
 		}
 	}
 }
+
+
+
 
 
 /*String temp;
