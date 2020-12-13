@@ -17,8 +17,7 @@
 <body>
 	<form name = "qID" action = "answerQuestions.jsp" method = "GET">
 	<%
-	for(int i = 0; i < Questions.size(); i ++ )
-	{%> 
+	for(int i = 0; i < Questions.size(); i ++ ){%> 
 	 	<h2> <%=Questions.get(i).toString()%> </h2>
 	    <p> <%=Questions.get(i).descriptionText%></p>
 	    
@@ -28,12 +27,13 @@
 	    	%> 
 	    		<input name = <%=Questions.get(i).questionID %> type = "Submit" value = "Answer this question" />
 	    	<%
-	    }%>
-	    
-	    <%
-		
-	}%>
-	</form>
+	    } else{
+	    	for(int j = 0; j <Questions.get(i).getAnswers().size(); j++) { %> 
+	    		<p><%=Questions.get(i).getAnswers().toString()%></p> <br></br> <%
+	    	}
+	    } 
+	} %>
+</form>
 	
 </body>
 </html>

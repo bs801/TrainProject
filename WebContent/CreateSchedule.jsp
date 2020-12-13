@@ -73,10 +73,6 @@ System.out.println("UP FRONT");
 	
 	<%
     ArrayList<TransitLine> transitLines = TrainProject.TransitLines.getAsList();
-  
-   
-    
-
 	%>
 	
 	Transit Line
