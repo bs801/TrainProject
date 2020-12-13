@@ -14,9 +14,10 @@
 	ArrayList<ReservationBuilder> rblist = ReservationBuilderService.getReservationOptions(dt, "Trenton", "Princeton");
 	for(ReservationBuilder rb : rblist){
 		System.out.println(rb.reservationStops);
-		System.out.println("we found a reservation");
+		System.out.println("we found a reservation "+rb.reservationStops.size());
 	}
-	
+	System.out.println(rblist.get(0).reservationStops.get(0).arrivalTime);
+	System.out.println(rblist.get(0).reservationStops.get(2).arrivalTime);
 	
 %>
 <!DOCTYPE html>
