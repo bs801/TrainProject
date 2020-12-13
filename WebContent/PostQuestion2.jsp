@@ -9,7 +9,7 @@
      String d = request.getParameter("description");
      System.out.println(d);
      if(d.length()>255|| q.length()>255){
-    	response.sendRedirect("PostQuestions.jsp");
+    	response.sendRedirect("PostQuestion.jsp");
     	session.setAttribute("255", new Object()); 
     	return;
      }
@@ -27,7 +27,7 @@
 <button id="myButton" class="float-left submit-button" >Yes</button>
 <script type="text/javascript">
     document.getElementById("myButton").onclick = function () {
-        location.href = "http://localhost:8080/TrainProject/PostQuestions.jsp";
+        location.href = "http://localhost:8080/TrainProject/PostQuestion.jsp";
     };
 </script>
 <button id="Button" class="float-left submit-button" >No</button>
