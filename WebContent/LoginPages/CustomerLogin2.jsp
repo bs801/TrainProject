@@ -8,24 +8,23 @@
 	String username = request.getParameter("username");   
 	String password = request.getParameter("password");
 	ArrayList<String> errors = new ArrayList<String>();
-	session.setAttribute("RL2", errors);
-	for(Representative u : TrainProject.Representatives.getAsList()){
+	session.setAttribute("CL2", errors);
+	for(User u : TrainProject.Users.getAsList()){
 		if(u.username.equalsIgnoreCase(username)){
 			if(u.password.equals(password)){
 				session.setAttribute("username", username);
-				session.setAttribute("representative",u);
-				response.sendRedirect("RepresentativeLanding.jsp");
+				response.sendRedirect("../CustomerLanding.jsp");
 				return;
 			} else {
 				
 				errors.add("Incorrect password for "+username);
-				response.sendRedirect("RepresentativeLogin.jsp");
+				response.sendRedirect("CustomerLogin.jsp");
 				return;
 			}
 		}
 	}
 	errors.add("No account with username "+username+" was found");
-	response.sendRedirect("RepresentativeLogin.jsp");
+	response.sendRedirect("CustomerLogin.jsp");
 
 %>
 <!DOCTYPE html>
