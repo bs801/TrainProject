@@ -35,9 +35,9 @@ System.out.println("UP FRONT");
 	*/
 	
     //ArrayList<TransitLine> transitLines = TrainProject.TransitLines.getAsList();
-	ArrayList<TransitStop> origins = TrainProject.TransitLines.get("ASDF", 0).getTransitStops();
-	ArrayList<TransitStop> destinations = TrainProject.TransitLines.get("ASDF", 0).getTransitStops();
-	String test = TrainProject.TransitStops.get("ASDF", 0, 0).toString();
+	//ArrayList<TransitStop> origins = TrainProject.TransitLines.get("ASDF", 0).getTransitStops();
+	//ArrayList<TransitStop> destinations = TrainProject.TransitLines.get("ASDF", 0).getTransitStops();
+	//String test = TrainProject.TransitStops.get("ASDF", 0, 0).toString();
 	/*for(TransitStop s : origins){
 		out.println(s.toString());
 	}*/
@@ -50,23 +50,27 @@ System.out.println("UP FRONT");
 			out.println("False");
 		}
 	}*/
+	
+	ArrayList<Station> origins = TrainProject.Stations.getAsList();
+	ArrayList<Station> destinations = TrainProject.Stations.getAsList();
+	//HashMap<Integer, Station> origins = TrainProject.Stations.getAll();
 	%>
 	
 	Origin
 	<select name="origin">
-		<% for(TransitStop s : origins){ 
-			temp = s.toString();
+		<% for(Station s : origins){ 
+			temp = s.city;
 		%>
-			<option value=<%=""+temp.replaceAll("\\s", "")+""%>><%=s%></option>
+			<option value=<%=""+temp.replaceAll("\\s", "")+""%>><%=s.city%></option>
 		<% } %>
 	</select>
 	<br></br>
 	Destination
 	<select name="destination">
-		<% for(TransitStop s : destinations){ 
-			temp = s.toString();
+		<% for(Station s : destinations){ 
+			temp = s.city;
 		%>
-			<option value=<%=""+temp.replaceAll("\\s", "")+""%>><%=s%></option>
+			<option value=<%=""+temp.replaceAll("\\s", "")+""%>><%=s.city%></option>
 		<% } %>
 	</select>
 	<br></br>
