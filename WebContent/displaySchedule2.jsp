@@ -34,7 +34,7 @@ ArrayList<Station> stations = TrainProject.Stations.getAsList();
 ArrayList<Station> originStations = new ArrayList<Station>();
 ArrayList<Station> destinationStations = new ArrayList<Station>();
 ArrayList<Station> coverage = new ArrayList<Station>();
-ArrayList<Schedule> schedule =  TrainProject.Schedules.getAsList();
+ArrayList<Schedule> schedule;
 
 for(Station s : stations){
 	if(origin.equals(s.city.replaceAll("\\s", ""))){
@@ -48,24 +48,17 @@ for(Station s : stations){
 for(Station oStation: originStations){
 	for(Station dStation: destinationStations){
 		System.out.println("Checking schedules for " + oStation + dStation);
+		schedule = Schedule.getCoveringSchedules(oStation, dStation);
+				
 		for(Schedule s : schedule){
 			scheduleDate = sdfDate.format(s.scheduleDepartureTime);
+			out.println(scheduleDate);
+			out.println("<br></br>");
 			out.println("Line: " + s.getCoverage(oStation, dStation));
 			out.println("<br></br>");
 			if(date.equals(scheduleDate)){
 				out.println("Schedules: " + s.getCoveringSchedules(oStation, dStation));
 			}
-			/*coverage = s.getCoverage(oStation, dStation);
-			if(coverage != null){
-				System.out.println("Coverage not null");
-				for(Station x : coverage){
-					out.println(x.name);
-					out.println("->");
-				}
-			}
-			else{
-				System.out.println("Coverage is null");
-			}*/
 		}
 	}
 }
