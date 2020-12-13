@@ -25,8 +25,43 @@ String origin = request.getParameter("origin");
 String destination = request.getParameter("destination");
 String date = request.getParameter("date");
 
+ArrayList<Station> stations = TrainProject.Stations.getAsList();
+ArrayList<Station> originStations = new ArrayList<Station>();
+ArrayList<Station> destinationStations = new ArrayList<Station>();
+ArrayList<Station> coverage = new ArrayList<Station>();
+ArrayList<Schedule> schedule =  TrainProject.Schedules.getAsList();
 
-String temp;
+for(Station s : stations){
+	if(origin.equals(s.city.replaceAll("\\s", ""))){
+		originStations.add(s);
+	}
+	if(destination.equals(s.city.replaceAll("\\s", ""))){
+		destinationStations.add(s);
+	}
+}
+
+for(Station oStation: originStations){
+	for(Station dStation: destinationStations){
+		System.out.println("Checking schedules for " + oStation + dStation);
+		for(Schedule s : schedule){
+			System.out.println("Schedules " + Schedule.getCoveringSchedules(oStation, dStation));
+			/*coverage = s.getCoverage(oStation, dStation);
+			if(coverage != null){
+				System.out.println("Coverage not null");
+				for(Station x : coverage){
+					out.println(x.name);
+					out.println("->");
+				}
+			}
+			else{
+				System.out.println("Coverage is null");
+			}*/
+		}
+	}
+}
+
+
+/*String temp;
 			
 int originStopId = 0; 
 int destinationStopId = 0;
@@ -34,20 +69,20 @@ int reverseCheck = 0;
 			
 ArrayList<Integer> stopIds = new ArrayList<Integer>();
 ArrayList<TransitStop> stops = TrainProject.TransitLines.get("ASDF", 0).getTransitStops();
-ArrayList<Schedule> schedule = TrainProject.Schedules.getAsList();
+//ArrayList<Schedule> schedule = TrainProject.Schedules.getAsList();
 int i = 0;
 Float transitLineFare = 0f;
 int numberOfStops = TrainProject.TransitLines.get("ASDF", reverseCheck).numberOfStops;
 
 
-/*for(Schedule x : schedule){
-	out.println(x.toString());
-}*/
+//for(Schedule x : schedule){
+//	out.println(x.toString());
+//}
 
-/*for(TransitStop s : stops){ // check to see how many stops the line has, used to loop to find the stops selected
-	stopIds.add(i);
-	i++;
-}*/
+//for(TransitStop s : stops){ // check to see how many stops the line has, used to loop to find the stops selected
+//	stopIds.add(i);
+//	i++;
+//}
 
 for(int j = 0; j<numberOfStops; j++){ // loop through stops selected and get their ids
 	temp = TrainProject.TransitStops.get("ASDF", 0, j).toString();
@@ -84,7 +119,7 @@ else if(reverseCheck == 1){
 }
 
 transitLineFare = TrainProject.TransitLines.get("ASDF", reverseCheck).fare;
-
+*/
 
 
 
