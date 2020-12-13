@@ -15,9 +15,11 @@
 	for(ReservationBuilder rb : rblist){
 		System.out.println(rb.reservationStops);
 		System.out.println("we found a reservation "+rb.reservationStops.size());
+		
+		System.out.println(rb.reservationStops.get(0).arrivalTime);
+		System.out.println(rb.reservationStops.get(2).arrivalTime);
 	}
-	System.out.println(rblist.get(0).reservationStops.get(0).arrivalTime);
-	System.out.println(rblist.get(0).reservationStops.get(2).arrivalTime);
+
 	
 %>
 <!DOCTYPE html>
