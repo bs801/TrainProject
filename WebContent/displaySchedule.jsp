@@ -51,26 +51,33 @@ System.out.println("UP FRONT");
 		}
 	}*/
 	
-	ArrayList<Station> origins = TrainProject.Stations.getAsList();
-	ArrayList<Station> destinations = TrainProject.Stations.getAsList();
+	ArrayList<Station> stations = TrainProject.Stations.getAsList();
+	
+	ArrayList<String> cities = new ArrayList<String>();
+	session.setAttribute("cities",cities);
+	for(Station s : stations){
+		if(cities.contains(s.city)){
+			continue;
+		}
+		cities.add(s.city);
+	}
+	
 	//HashMap<Integer, Station> origins = TrainProject.Stations.getAll();
 	%>
 	
 	Origin
 	<select name="origin">
-		<% for(Station s : origins){ 
-			temp = s.city;
+		<% for(String c : cities){ 
 		%>
-			<option value=<%=""+temp.replaceAll("\\s", "")+""%>><%=s.city%></option>
+			<option value=<%=c%>><%=c%></option>
 		<% } %>
 	</select>
 	<br></br>
 	Destination
 	<select name="destination">
-		<% for(Station s : destinations){ 
-			temp = s.city;
+		<% for(String c : cities){ 
 		%>
-			<option value=<%=""+temp.replaceAll("\\s", "")+""%>><%=s.city%></option>
+			<option value=<%=c%>><%=c%></option>
 		<% } %>
 	</select>
 	<br></br>
