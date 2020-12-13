@@ -11,6 +11,8 @@
 	System.out.println("GOIGN FROM "+A+" TO "+B);
 	out.println(s.getCoverage(A, B));
 	out.println("done");
+	
+	System.out.println(Schedule.getCoveringSchedules(A,B));
 %>
 <!DOCTYPE html>
 <html>

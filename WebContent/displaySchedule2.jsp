@@ -44,7 +44,7 @@ for(Station oStation: originStations){
 	for(Station dStation: destinationStations){
 		System.out.println("Checking schedules for " + oStation + dStation);
 		for(Schedule s : schedule){
-			System.out.println("Schedules " + Schedule.getCoveringSchedules(oStation, dStation));
+			System.out.println("Schedules " +Schedule.getCoveringSchedules(oStation, dStation) );
 			/*coverage = s.getCoverage(oStation, dStation);
 			if(coverage != null){
 				System.out.println("Coverage not null");

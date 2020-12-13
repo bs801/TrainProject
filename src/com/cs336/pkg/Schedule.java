@@ -114,19 +114,23 @@ public class Schedule {
 		HashMap<String, Schedule[]> transitLineTypes = new HashMap<String, Schedule[]>();
 		ArrayList<Schedule> schedules = TrainProject.Schedules.getAsList();
 		ArrayList<Schedule> covering = new ArrayList<Schedule>();
+		System.out.println("AAA");
 		for(Schedule s : schedules) {
+			System.out.println("A1");
 			if(transitLineTypes.get(s.transitLineName) != null) {
 				if(transitLineTypes.get(s.transitLineName)[s.reverseLine] != null) {
-					schedules.add(s);
+					covering.add(s);
 				}	
 				continue;
 			}
+			System.out.println("B2");
 			if(s.getCoverage(A, B) != null) {
 				transitLineTypes.put(s.transitLineName, new Schedule[2]);
 				transitLineTypes.get(s.transitLineName)[s.reverseLine] = s;
-				schedules.add(s);
+				covering.add(s);
 			}
 		}
+		System.out.println("BBB");
 		return covering;
 	}
 	
