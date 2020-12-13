@@ -56,7 +56,7 @@ public class Schedule {
 	}
 	public ScheduleStop scheduleStopForStation(Station s) throws SQLException {
 		for(ScheduleStop st : getScheduleStops()) {
-			if(s.stationID == s.stationID) {
+			if(st.stationID == s.stationID) {
 				return st;
 			}
 		}
@@ -83,6 +83,8 @@ public class Schedule {
 	public ArrayList<Station> getCoverage(Station A, Station B) throws SQLException{ 
 		ScheduleStop s1 = scheduleStopForStation(A);
 		ScheduleStop s2 = scheduleStopForStation(B);
+		System.out.println("s1: "+s1);
+		System.out.println("s2: "+s2);
 		if(s1 == null || s2 == null) {
 			return null;
 		}
@@ -103,6 +105,7 @@ public class Schedule {
 				break;
 			}
 		}
+		System.out.println("FOUND A SCHEDULE ");
 		return stations;
 	}
 
