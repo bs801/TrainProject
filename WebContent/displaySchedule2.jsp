@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="" method="POST">
+<form action="displaySchedule3.jsp" method="POST">
 <%
 /*
 	The origin and the destination will be sent here.
@@ -51,7 +51,16 @@ ArrayList<ReservationBuilder> validReservations = ReservationBuilderService.getR
 // This method will return arraylist { A H J B } or NULL
 		
 //  A -> H -> J -> B   Fare:  [Select this]
-		
+
+//ReservationBuilder test = validReservations.get(0);
+
+
+int iterator = 0;
+
+session.setAttribute("ds2", validReservations);
+
+
+
 for(ReservationBuilder rb : validReservations){
 	ScheduleStop orig = rb.reservationStops.get(0); // { A H J B }
 	ScheduleStop dest = rb.reservationStops.get(	rb.reservationStops.size() - 1 );
@@ -64,12 +73,23 @@ for(ReservationBuilder rb : validReservations){
 		out.println(", ");
 	}
 	out.println("<br></br>");
-	out.println("Leaving at: " + orig.arrivalTime);
+	out.println(orig.arrivalTime);
+	out.println(orig.departureTime);
 	out.println("<br></br>");
-	out.println("Arriving at: " + dest.arrivalTime);
+	out.println(dest.arrivalTime);
+	out.println(dest.departureTime);
 	out.println("<br></br>");
 	out.println("Fare: " + rb.fare);
 	
+	String index = Integer.toString(iterator);
+	
+	%>
+	
+	<input name=<%= validReservations.get(iterator) %> type="submit" value="Book this Schedule"/> 
+	
+	<%
+	out.println("<br></br>");
+	iterator++;
 }
 
 
@@ -197,7 +217,7 @@ and then display the times that coorespond with the date inputed.
 
 
 %>
-<input type="submit" value="Reserve"/> 
+
 </form>
 </body>
 </html>
