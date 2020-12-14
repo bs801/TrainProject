@@ -6,15 +6,18 @@
 
 <%
 	ReservationBuilder rbf = (ReservationBuilder) session.getAttribute("selectedBuilder");
-	
-	if(((String) session.getAttribute("rt")).equals("1")){
-		int i=0;
-		for(i=0; i<rbf.candidateReturnBuilders.size(); i++){
-			if(request.getParameter(""+i+"") != null){
-				break;
+	if(rbf.returnBuilder != null){
+		out.println(((ArrayList<String>) session.getAttribute("mr5errors")));
+	} else {
+		if(((String) session.getAttribute("rt")).equals("1")){
+			int i=0;
+			for(i=0; i<rbf.candidateReturnBuilders.size(); i++){
+				if(request.getParameter(""+i+"") != null){
+					break;
+				}
 			}
+			rbf.returnBuilder = rbf.candidateReturnBuilders.get(i);
 		}
-		rbf.returnBuilder = rbf.candidateReturnBuilders.get(i);
 	}
 		
 	float disc = Float.parseFloat((String) session.getAttribute("disc"));
@@ -22,33 +25,35 @@
 	if(rbf.returnBuilder != null){
 		total = total + (rbf.returnBuilder.fare * (1-disc));
 	}
-	
+	System.out.println("PRE RES");
 	Reservation newRes = new Reservation(
 			-1,
-
+			0,
 			rbf.schedule.transitLineName,
 			rbf.schedule.reverseLine,
 			rbf.schedule.scheduleDepartureTime,
 			rbf.schedule.trainID,
 			rbf.fare * (1-disc),
 
-			(rbf.returnBuilder == null ? 0 : 1),
+			(rbf.returnBuilder != null ? 1 : 0),
 			
-			(rbf.returnBuilder == null ? rbf.returnBuilder.schedule.transitLineName : null),
-			(rbf.returnBuilder == null ? rbf.returnBuilder.schedule.reverseLine : null),
-			(rbf.returnBuilder == null ? rbf.returnBuilder.schedule.scheduleDepartureTime : null),
-			(rbf.returnBuilder == null ? rbf.returnBuilder.schedule.trainID : -1),
-			(rbf.returnBuilder == null ? rbf.returnBuilder.fare : -1),
+			(rbf.returnBuilder != null ? rbf.returnBuilder.schedule.transitLineName : null),
+			(rbf.returnBuilder != null ? rbf.returnBuilder.schedule.reverseLine : -1),
+			(rbf.returnBuilder != null ? rbf.returnBuilder.schedule.scheduleDepartureTime : null),
+			(rbf.returnBuilder != null ? rbf.returnBuilder.schedule.trainID : -1),
+			(rbf.returnBuilder != null ? rbf.returnBuilder.fare : -1),
 			
 			rbf.getOrigin().getStation().stationID,
 			rbf.getDestination().getStation().stationID,
 			
 			Timestamp.valueOf(LocalDateTime.now()),
 			disc,
-			total
+			total,
+			
+			null, null, null
 		);
 	session.setAttribute("mr4",newRes);
-			
+	System.out.println("AFTER RES");
 %>
 <!DOCTYPE html>
 <html>
@@ -94,9 +99,13 @@
 	Total Fare: <%=total%> 
 
 <form action="MakeReservation5.jsp" method="POST">
-<input type="text" name="Title" placeholder="Mr."/>
-<input type="text" name="firstName" placeholder="John"/>
-<input type="text" name="lastName" placeholder="Smith"/>
+Enter in the passenger's name:
+	<input type="text" name="Title" placeholder="Mr."/>
+	<input type="text" name="firstName" placeholder="John"/>
+	<input type="text" name="lastName" placeholder="Smith"/>
+	<br></br>
+	
+Confirm this reservation:
 <input type="Submit" value="Confirm Reservation"/>
 </form>
 <br></br>
