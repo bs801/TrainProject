@@ -351,6 +351,12 @@ public class TrainProject {
 			ps.executeUpdate();
 			RepresentativeTable = null;
 		}
+		public static void delete(Representative r) throws SQLException {
+			System.out.println("Deleted");
+		}
+		public static void update(Representative r) throws SQLException {
+			System.out.println("Updated");
+		}
 	}
     
 	public static class Questions {
