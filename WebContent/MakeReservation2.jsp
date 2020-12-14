@@ -6,28 +6,36 @@
 
 
 <%
-	Float disc = 0f;//Float.parseFloat(request.getParameter("disc"));
+	//Float disc = 0f;//Float.parseFloat(request.getParameter("disc"));
+	float disc = Float.parseFloat(request.getParameter("disc"));
 	session.setAttribute("disc", disc+"");
 	
 	//System.out.println(request.getParameter("objectA")+"REEE");
-	int origin = 23; //Integer.parseInt(request.getParameter("objectA"));  
-	int destination = 17; //Integer.parseInt(request.getParameter("objectB"));
+	//int origin = 23; //Integer.parseInt(request.getParameter("objectA"));  
+	int orig = Integer.parseInt(request.getParameter("objectA"));
+	int dest = Integer.parseInt(request.getParameter("objectB"));
+	//int destination = 17; //Integer.parseInt(request.getParameter("objectB"));
 				
-	ArrayList<Object> options = Answer.getOps();//(ArrayList<Object>) session.getAttribute("options");
+	//ArrayList<Object> options = Answer.getOps();//
+	ArrayList<Object> options = (ArrayList<Object>) session.getAttribute("options");
 	
-	Object objectA = options.get(origin);
-	Object objectB = options.get(destination);
+	Object objectA = options.get(orig);
+	Object objectB = options.get(dest);
 	
 	System.out.println(objectA+" "+objectB);
 	
-	String date1 = "2020-06-06";//request.getParameter("date1");
+	//String date1 = "2020-06-06";//request.getParameter("date1");
+	String date1 = request.getParameter("date1");
 	LocalDate departureDate = LocalDate.parse(date1);
 	
 	
-	String date2 = "2020-06-06";//request.getParameter("date2");
-	LocalDate returnDate = LocalDate.parse(date2);
+	//String date2 = "2020-06-06";//request.getParameter("date2");
 	
-	String rt = "1";//request.getParameter("rt");
+	
+	//String rt = "1";//request.getParameter("rt");
+	String rt = request.getParameter("rt");
+	
+
 	
 	ArrayList<ReservationBuilder> validReservations = null;
 	if(rt.equals("0")){
@@ -35,6 +43,8 @@
 		validReservations = ReservationBuilderService.getReservationOptions(departureDate, objectA, objectB);
 	} else {
 		session.setAttribute("rt", "1");
+		String date2 = request.getParameter("date2");
+		LocalDate returnDate = LocalDate.parse(date2);
 		validReservations = ReservationBuilderService.getReservationOptions(departureDate, objectA, objectB, returnDate);
 		out.println("INFO: "+ReservationBuilderService.omitted+" results were omitted for not having valid round trips");
 	}

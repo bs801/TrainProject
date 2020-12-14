@@ -52,7 +52,7 @@
 </head>
 <body>
 <h3>Make a reservation</h3>
-<form action="MakeResrvation2.jsp" method="POST">
+<form action="MakeReservation2.jsp" method="POST">
 	
 	
 	

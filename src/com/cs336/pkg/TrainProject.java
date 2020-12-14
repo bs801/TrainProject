@@ -226,7 +226,7 @@ public class TrainProject {
 	
 		public static void insert(Reservation r) throws SQLException {
 			String sql = "INSERT INTO Reservation(cancelled, origin_stationID, destination_stationID,"
-					+ " forward_transitLineName, forward_scheduleDepartureTime, forward_reverseLine, forward_trainID, foward_fare,"
+					+ " forward_transitLineName, forward_scheduleDepartureTime, forward_reverseLine, forward_trainID, forward_fare,"
 					+ " roundTrip,"
 					+ " return_transitLineName, return_scheduleDepartureTime, return_reverseLine, return_trainID, return_fare, "
 					+ " dateOfCreation, discount, totalFare,"

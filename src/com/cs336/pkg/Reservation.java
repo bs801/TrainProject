@@ -100,7 +100,7 @@ public class Reservation {
 			rs.getInt("reservationID"),
 			rs.getInt("cancelled"),
 			
-			rs.getString("foward_transitLineName"),
+			rs.getString("forward_transitLineName"),
 			rs.getInt("forward_reverseLine"),
 			rs.getTimestamp("forward_scheduleDepartureTime"),
 			rs.getInt("forward_trainID"),

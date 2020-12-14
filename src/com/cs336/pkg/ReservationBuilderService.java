@@ -163,7 +163,7 @@ public class ReservationBuilderService {
 					ScheduleStop ssB = returnCandidate.schedule.scheduleStopForStation(sB);
 					if(ssB.departureTime.isAfter(rb.getDestination().arrivalTime) && ssB.departureTime.toLocalDate().isEqual(returnDate)) {
 						rb.candidateReturnBuilders.add(returnCandidate);
-						
+						System.out.println("FOUND A RETURN TRIP "+returnCandidate.schedule);
 					}
 				}
 				
