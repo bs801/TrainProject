@@ -29,7 +29,7 @@
 	    	<%
 	    } else{
 	    	for(int j = 0; j <Questions.get(i).getAnswers().size(); j++) { %> 
-	    		<p><%=Questions.get(i).getAnswers().toString()%></p> <br></br> <%
+	    		<p><%=Questions.get(i).getAnswers().get(0).toString()%></p> <br></br> <%
 	    	}
 	    } 
 	} %>
