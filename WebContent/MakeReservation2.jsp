@@ -27,7 +27,7 @@
 	String date2 = "2020-06-06";//request.getParameter("date2");
 	LocalDate returnDate = LocalDate.parse(date2);
 	
-	String rt = "0";//request.getParameter("rt");
+	String rt = "1";//request.getParameter("rt");
 	
 	ArrayList<ReservationBuilder> validReservations = null;
 	if(rt.equals("0")){

@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 public class Reservation {
 	
 	public int reservationID;
-
+	public int cancelled;
 
 	
 	
@@ -35,9 +35,14 @@ public class Reservation {
 	public float discount;
 	public float totalFare;
 	
+	public String title;
+	public String firstName;
+	public String lastName;
+	
 	public Reservation(
 			int reservationID,
-
+			int cancelled, 
+				
 			String forward_transitLineName,
 			int forward_reverseLine,
 			Timestamp forward_scheduleDepartureTime,
@@ -57,7 +62,11 @@ public class Reservation {
 			
 			Timestamp dateOfCreation,
 			float discount,
-			float totalFare
+			float totalFare,
+			
+			String title,
+			String firstName,
+			String lastName
 			) {
 		this.reservationID = reservationID;
 		
@@ -80,11 +89,16 @@ public class Reservation {
 		this.dateOfCreation = dateOfCreation;
 		this.discount = discount;
 		this.totalFare = totalFare;	
+		
+		this.title = title;
+		this.firstName = firstName;
+		this.lastName = lastName;
 	}
 	
 	public Reservation(ResultSet rs) throws SQLException {
 		this(
 			rs.getInt("reservationID"),
+			rs.getInt("cancelled"),
 			
 			rs.getString("foward_transitLineName"),
 			rs.getInt("forward_reverseLine"),
@@ -105,7 +119,11 @@ public class Reservation {
 			
 			rs.getTimestamp("dateOfCreation"),
 			rs.getFloat("discount"),
-			rs.getFloat("totalFare")
+			rs.getFloat("totalFare"),
+			
+			rs.getString("title"),
+			rs.getString("firstName"),
+			rs.getString("lastName")
 		);
 	}
 	public Schedule getForwardSchedule() throws SQLException {
