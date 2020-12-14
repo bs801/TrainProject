@@ -4,31 +4,29 @@
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 <%@ page import="java.text.SimpleDateFormat"%>
 <!DOCTYPE html>
+
+<%
+	Reservation newRes = (Reservation) session.getAttribute("mr4");
+		
+	TrainProject.loadApplicationDB();
+	Connection con = TrainProject.con;
+	
+	String title = request.getParameter("Title");
+	String fname = request.getParameter("firstName");
+	String lname = request.getParameter("lastName");
+	
+	if(title.length() == 0){
+		
+	}
+%>
+
+
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
 <body>
-<%
-
-
-//ReservationBuilder i = request.getParameter(rb);  
-// unsure of how to get the parameter
-
-ArrayList<ReservationBuilder> rbList = (ArrayList<ReservationBuilder>)session.getAttribute("ds2");
-int i = 0;
-for(i = 0; i < rbList.size(); i++){
-	if(request.getParameter(i+"") != null){
-		break;
-	}
-}
-
-ReservationBuilder selectedReservation = rbList.get(i);
-
-
-
-%>
 
 </body>
 </html>

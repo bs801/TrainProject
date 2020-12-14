@@ -4,27 +4,13 @@
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 
 <%
-	Schedule s = TrainProject.Schedules.getAsList().get(0);
 
-	Station A = TrainProject.Stations.get(16);
-	Station B = TrainProject.Stations.get(14);
-	
-	LocalDate dt = LocalDate.parse("2020-06-06");
-	
-	ArrayList<ReservationBuilder> rblist = ReservationBuilderService.getReservationOptions(dt, "Trenton", "Princeton");
-	for(ReservationBuilder rb : rblist){
-		System.out.println(rb.reservationStops);
-		System.out.println("we found a reservation "+rb.reservationStops.size());
-		
-		System.out.println(rb.reservationStops.get(0).arrivalTime);
-		System.out.println(rb.reservationStops.get(0).departureTime);
-
-		
-		System.out.println(rb.reservationStops.get(2).arrivalTime);
-		System.out.println(rb.reservationStops.get(2).departureTime);
-	}
-
-	
+System.out.println(MakeReservationPipline.getFare(0f));
+	System.out.println(MakeReservationPipline.getFare(3f));
+	System.out.println(MakeReservationPipline.getFare(100f));
+	System.out.println(MakeReservationPipline.getFare(100.001f));
+	System.out.println(MakeReservationPipline.getFare(100.775f));
+	System.out.println(MakeReservationPipline.getFare(1005.7f));
 %>
 <!DOCTYPE html>
 <html>

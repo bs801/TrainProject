@@ -223,7 +223,22 @@ public class TrainProject {
 			}
 			return ReservationTable;
 		}
-	
+	/*
+		public static void insert(Reservation r) {
+			String sql = "INSERT INTO Representative(origin_stationID, destination_stationID,"
+					+ " forward_transitLineName, forward_scheduleDepartureTime, forward_reverseLine, forward_trainID, foward_fare,"
+					+ " roundTrip,"
+					+ " return_transitLineName, return_scheduleDepartureTime, return_reverseLine, return_trainID, return_fare, "
+					+ " dateOfCreation, discount, totalFare) VALUES(?, ?, ?, ?, ?)";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, r.username);
+			ps.setString(2, r.password);
+			ps.setString(3, r.firstName);
+			ps.setString(4, r.lastName);
+			ps.setString(5, r.SSN);
+			ps.executeUpdate();
+			RepresentativeTable = null;
+		} */
 	}
 	
 	

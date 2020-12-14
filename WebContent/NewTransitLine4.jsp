@@ -265,7 +265,7 @@
 			}
 		}
 		if(trainTakenMessage != null){
-			out.println("ERROR, COULD NOT CREATE SCHEDULE "+p.transitLineName+" at "+p.incompleteSchedule.scheduleDepartureTime.toString() + "<br></br> " );
+			out.println("<h2>ERROR</h2>, COULD NOT CREATE SCHEDULE "+p.transitLineName+" at "+p.incompleteSchedule.scheduleDepartureTime.toString() + "<br></br> " );
 			out.println("CREATED TRANSIT LINE  (forward) "+ p.transitLineName+": "+transitStops.get(0)+" -> "+transitStops.get(transitStops.size()-1)  );
 			out.println("CREATED TRANSIT LINE  (reverse) "+ p.transitLineName+": "+revStops.get(0)+" -> "+revStops.get(revStops.size()-1) );
 		
