@@ -36,7 +36,7 @@
 	<p>Type your answers below!</p>
 	<form action="answerQuestions2.jsp" method="POST">
 	<textarea rows="5" type="text" name="answerText"> </textarea>
-	<input name = <%=Questions.get(i).questionID%> type="Submit" value="Post answers">
+	<input type="Submit" value="Post answers">
 	</form>
 
 </body>
