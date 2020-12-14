@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
-<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="java.io.*,java.util.*,java.sql.*, java.time.LocalDate"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 
 <%
@@ -8,11 +8,23 @@
 
 	Station A = TrainProject.Stations.get(16);
 	Station B = TrainProject.Stations.get(14);
-	System.out.println("GOIGN FROM "+A+" TO "+B);
-	out.println(s.getCoverage(A, B));
-	out.println("done");
 	
-	System.out.println(Schedule.getCoveringSchedules(A,B));
+	LocalDate dt = LocalDate.parse("2020-06-06");
+	
+	ArrayList<ReservationBuilder> rblist = ReservationBuilderService.getReservationOptions(dt, "Trenton", "Princeton");
+	for(ReservationBuilder rb : rblist){
+		System.out.println(rb.reservationStops);
+		System.out.println("we found a reservation "+rb.reservationStops.size());
+		
+		System.out.println(rb.reservationStops.get(0).arrivalTime);
+		System.out.println(rb.reservationStops.get(0).departureTime);
+
+		
+		System.out.println(rb.reservationStops.get(2).arrivalTime);
+		System.out.println(rb.reservationStops.get(2).departureTime);
+	}
+
+	
 %>
 <!DOCTYPE html>
 <html>

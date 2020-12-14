@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
-<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="java.io.*,java.util.*,java.sql.*, java.time.LocalDate"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
+<%@ page import="java.text.SimpleDateFormat"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<form action="" method="POST">
 <%
 /*
 	The origin and the destination will be sent here.
@@ -21,16 +23,67 @@
 	of stop ids found and the check for if the line is reversed or not.
 */
 
-String origin = request.getParameter("origin");   
-String destination = request.getParameter("destination");
+int origin = Integer.parseInt(request.getParameter("origin"));  
+int destination = Integer.parseInt(request.getParameter("destination"));
+			
+ArrayList<String> cities = (ArrayList<String>) session.getAttribute("cities");
+
+String cityA = cities.get(origin);
+String cityB = cities.get(destination);
+
 String date = request.getParameter("date");
+LocalDate departureDate = LocalDate.parse(date);
+
+
+Timestamp t = Timestamp.valueOf(departureDate.atStartOfDay());
+t.toLocalDateTime().toLocalTime();
+
+//SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
+
+
+ArrayList<ReservationBuilder> validReservations = ReservationBuilderService.getReservationOptions(departureDate, cityA, cityB);
+
+//validReservations.get(0).reservationStops.get(0);
+//validReservations.get(0).reservationStops.get( validReservations.get(0).reservationStops.size()-1 );
+
+
+// Say you have a schedule that does F -> D -> A -> H -> J -> B -> K -> L 
+// This method will return arraylist { A H J B } or NULL
+		
+//  A -> H -> J -> B   Fare:  [Select this]
+		
+for(ReservationBuilder rb : validReservations){
+	ScheduleStop orig = rb.reservationStops.get(0); // { A H J B }
+	ScheduleStop dest = rb.reservationStops.get(	rb.reservationStops.size() - 1 );
+	out.println(orig + " -> "+ dest);
+	out.println("<br></br>");
+	
+	out.println("Stops: ");
+	for(ScheduleStop st : rb.reservationStops){ 
+		out.println(st); // A then H then J then B
+		out.println(", ");
+	}
+	out.println("<br></br>");
+	out.println("Leaving at: " + orig.arrivalTime);
+	out.println("<br></br>");
+	out.println("Arriving at: " + dest.arrivalTime);
+	out.println("<br></br>");
+	out.println("Fare: " + rb.fare);
+	
+}
+
+
+String scheduleDate = "";
+//out.println(date);
+
 
 ArrayList<Station> stations = TrainProject.Stations.getAsList();
 ArrayList<Station> originStations = new ArrayList<Station>();
 ArrayList<Station> destinationStations = new ArrayList<Station>();
 ArrayList<Station> coverage = new ArrayList<Station>();
-ArrayList<Schedule> schedule =  TrainProject.Schedules.getAsList();
+ArrayList<Schedule> schedule;
 
+/*
 for(Station s : stations){
 	if(origin.equals(s.city.replaceAll("\\s", ""))){
 		originStations.add(s);
@@ -38,27 +91,30 @@ for(Station s : stations){
 	if(destination.equals(s.city.replaceAll("\\s", ""))){
 		destinationStations.add(s);
 	}
-}
+} */
 
-for(Station oStation: originStations){
+
+
+/*for(Station oStation: originStations){
 	for(Station dStation: destinationStations){
 		System.out.println("Checking schedules for " + oStation + dStation);
+		schedule = Schedule.getCoveringSchedules(oStation, dStation);
+				
 		for(Schedule s : schedule){
-			System.out.println("Schedules " +Schedule.getCoveringSchedules(oStation, dStation) );
-			/*coverage = s.getCoverage(oStation, dStation);
-			if(coverage != null){
-				System.out.println("Coverage not null");
-				for(Station x : coverage){
-					out.println(x.name);
-					out.println("->");
-				}
+			scheduleDate = sdfDate.format(s.scheduleDepartureTime);
+			out.println(scheduleDate);
+			out.println("<br></br>");
+			out.println("Line: " + s.getCoverage(oStation, dStation));
+			out.println("<br></br>");
+			if(date.equals(scheduleDate)){
+				out.println("Schedules: " + s.getCoveringSchedules(oStation, dStation));
 			}
-			else{
-				System.out.println("Coverage is null");
-			}*/
 		}
 	}
-}
+}*/
+
+
+
 
 
 /*String temp;
@@ -141,6 +197,7 @@ and then display the times that coorespond with the date inputed.
 
 
 %>
-
+<input type="submit" value="Reserve"/> 
+</form>
 </body>
 </html>

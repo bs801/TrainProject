@@ -9,7 +9,7 @@
 	
 	
 
-	String email = request.getParameter("email");
+	String SSN = request.getParameter("SSN");
 	
 	String firstname = request.getParameter("firstname");
 	String lastname = request.getParameter("lastname");
@@ -22,31 +22,10 @@
  		errors.add("Password must be between 8 to 20 characters");
  	}
  	
- 	if(email == null || "".equals(email)){
- 		errors.add("Please enter in an email");
+ 	if(!(SSN.length() < 12)){
+ 		errors.add("SSN must be 11 characters or less");
  	}
- 	int alpha = email.indexOf('@');
- 	if(alpha == -1){
- 		errors.add("Email should have a @ character");
- 	}
- 	int comma = -1; //email.indexOf('.');
- 	int alpha2 = -1;
- 	try{
- 		alpha2 = email.substring(alpha+1).indexOf('@');
- 		if(alpha2 != -1){
- 			errors.add("Email can only have one @ character");
- 		}
- 	}catch(Exception e){
- 		
- 	}
- 	try{
- 		comma = email.substring(alpha+2).indexOf('.');
- 		if(comma == -1){
- 			errors.add("Email should have a '.' character after the @ character");
- 		}
- 	}catch(Exception e){
- 		
- 	}
+
  	
  	if("".equals(firstname)){
  		errors.add("First name cannot be empty");
@@ -55,25 +34,28 @@
  		errors.add("Last name cannot be empty");
  	}
  	
- 	ArrayList<User> users = TrainProject.Users.getAsList();
- 	for(User u : users){
+ 	ArrayList<Representative> users = TrainProject.Representatives.getAsList();
+ 	for(Representative u : users){
  		if(u.username.equalsIgnoreCase(newUsername)){
  			errors.add("Username "+newUsername+" is already taken");
  		}
  	}
  	if(errors.size() > 0 ){
- 		session.setAttribute("NC2", errors);
- 		response.sendRedirect("NewCustomer2.jsp");
+ 		session.setAttribute("NR2", errors);
+ 		response.sendRedirect("NewRepresentative.jsp");
  		return;
  	}
  	
  	
- 	User newUser = new User(newUsername, newPassword,firstname, lastname, email);
-	TrainProject.Users.insert(newUser);
+ 	Representative newUser = new Representative(newUsername, newPassword,firstname, lastname, SSN);
+	TrainProject.Representatives.insert(newUser);
+
  	
-	session.setAttribute("username",newUser.username);
-   	response.sendRedirect("CustomerLanding.jsp");
-%>
+	session.setAttribute("username", newUser.username);
+	session.setAttribute("representative", newUser);
+   	response.sendRedirect("../RepresentativeLanding.jsp");
+%>    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,6 +63,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
+
 </body>
 </html>
