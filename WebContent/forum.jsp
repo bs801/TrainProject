@@ -22,15 +22,13 @@
 			return;
 		}
 	}
-	
-		
 %>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Q&A Forum</title>
+<title> Q&A Forum</title>
 </head>
 <body>
 	<div class="topnav">
@@ -44,38 +42,51 @@
 	<p>Want to post a new Question?</p>
 	<form action="PostQuestion.jsp" method = "POST">
 	<input type="submit" value="Post New Questions"/>
-	</form>
+	</form> 
+	
+	<p><font size = "6" face = "courier" color ="blue"><b>History of All The Questions</b></font></p>
 	<%
 	if(x!=null){ %>
 		<%
 		for(int i = 0; i < temp.size(); i ++ )
 		{%> 
+			<p><font size = "10" color ="blue">------------------------------------------------ </font> </p>
+	 		<h1><font size = "3" color = "red">Questions </font></h1>
+	 		<% out.print("No."+(i+1)+ ""); %>
 	 		<h2> <%=temp.get(i).toString()%> </h2>
-	    	<p> <%=temp.get(i).descriptionText%></p>
-	    	<div>Posted by: <%=temp.get(i).username%> </div> <br></br> <%
+	    	<p> <%=temp.get(i).descriptionText%> </p>
+	    	<div>Posted by: <%=temp.get(i).username%> </div> <br></br> 
+	    	
+	    	<%
 	    	
 	  		if(temp.get(i).getAnswers().size() != 0){
 	    		for(int j = 0; j <temp.get(i).getAnswers().size(); j++) { %> 
-	    			<p><%=temp.get(i).getAnswers().get(0).toString()%></p> <br></br> <%
+	    			<p><font size = "3" color = "red">Answers</font></p>
+	    			<p><%=temp.get(i).getAnswers().get(0).toString()%></p> <br></br> <% 
 	    		}
-	   		 } 
+	   		 }
+	    
 		} %> 
-	 <% }else{ %>
+	 <%}else{ %>
 		<%
-		for(int i = 0; i < Questions.size(); i ++ )
-		{%> 
-	 		<h2> <%=Questions.get(i).toString()%> </h2>
-	    	<p> <%=Questions.get(i).descriptionText%></p>
-	    	<div>Posted by: <%=Questions.get(i).username%> </div> <br></br> <%
+			for(int i = 0; i < Questions.size(); i ++ )
+			{%> 
+				<p><font size = "10" color ="blue">------------------------------------------------ </font></p>
+				<h1><font size = "3" color = "red">Questions </font></h1>
+				<% out.print("No."+(i+1)+ ""); %>
+	 			<h2> <%=Questions.get(i).toString()%> </h2>
+	    		<p> <%=Questions.get(i).descriptionText%></p>
+	    		<div>Posted by: <%=Questions.get(i).username%> </div> <br></br> 
+	    		<%
+	  			if(Questions.get(i).getAnswers().size() != 0){
+	    			for(int j = 0; j <Questions.get(i).getAnswers().size(); j++) { %> 
+	    				<p><font size = "3" color = "red">Answers</font></p>
+	    				<p><%=Questions.get(i).getAnswers().get(0).toString()%></p> <br></br> <% 
+	    			}
+	   		 	}
 	    	
-	  		if(Questions.get(i).getAnswers().size() != 0){
-	    		for(int j = 0; j <Questions.get(i).getAnswers().size(); j++) { %> 
-	    			<p><%=Questions.get(i).getAnswers().get(0).toString()%></p> <br></br> <%
-	    		}
-	   		 } 
-		} 
-	
-	} %>
+			} 
+		}%>
 	
 	
 </body>
