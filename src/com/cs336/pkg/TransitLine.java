@@ -40,6 +40,17 @@ public class TransitLine implements Comparable<TransitLine>{
 		 return TrainProject.TransitStops.get(this, stopID);
 	}
 	
+	public ArrayList<Schedule> getSchedules() throws SQLException{
+		ArrayList<Schedule> schedules = TrainProject.Schedules.getAsList();
+		ArrayList<Schedule> tls = new ArrayList<Schedule>();
+		for(Schedule sc : schedules) {
+			if(sc.transitLineName.equals(this.transitLineName) && sc.reverseLine == this.reverseLine) {
+				tls.add(sc);
+			}
+		}
+		return tls;
+	}
+	
 	@Override
 	public String toString() {
 	//	System.out.println("toString");

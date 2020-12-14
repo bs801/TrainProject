@@ -224,6 +224,42 @@ public class TrainProject {
 			return ReservationTable;
 		}
 	
+		public static void insert(Reservation r) throws SQLException {
+			String sql = "INSERT INTO Reservation(cancelled, origin_stationID, destination_stationID,"
+					+ " forward_transitLineName, forward_scheduleDepartureTime, forward_reverseLine, forward_trainID, forward_fare,"
+					+ " roundTrip,"
+					+ " return_transitLineName, return_scheduleDepartureTime, return_reverseLine, return_trainID, return_fare, "
+					+ " dateOfCreation, discount, totalFare,"
+					+ " title, firstName, lastName) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setBoolean(1, false);
+			ps.setInt(2, r.origin_stationID);
+			ps.setInt(3, r.destination_stationID);
+			
+			ps.setString(4, r.forward_transitLineName);
+			ps.setTimestamp(5, r.forward_scheduleDepartureTime);
+			ps.setBoolean(6, (r.forward_reverseLine == 0 ? false : true));
+			ps.setInt(7, r.forward_trainID);
+			ps.setFloat(8, r.forward_fare);
+			
+			ps.setBoolean(9, (r.roundTrip == 0 ? false : true));
+			
+			ps.setString(10, r.return_transitLineName);
+			ps.setTimestamp(11, r.return_scheduleDepartureTime);
+			ps.setBoolean(12, (r.return_reverseLine == 0 ? false : true));
+			ps.setInt(13, r.return_trainID);
+			ps.setFloat(14, r.return_fare);
+			
+			ps.setTimestamp(15, Timestamp.valueOf(LocalDateTime.now()));
+			ps.setFloat(16, r.discount);
+			ps.setFloat(17, r.totalFare);
+			ps.setString(18, r.title);
+			ps.setString(19, r.firstName);
+			ps.setString(20, r.lastName);
+			
+			ps.executeUpdate();
+			ReservationTable = null;
+		} 
 	}
 	
 	

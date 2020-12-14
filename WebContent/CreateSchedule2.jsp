@@ -131,7 +131,11 @@
 		p.xmIsAM = am;
 		p.XMTime = XMTime;
 		p.incompleteSchedule = new Schedule(null, 0, new Timestamp(cal.getTimeInMillis()), trainID);
-		p.originDepartureTime =  (h+":"+(min < 10 ? "0" : "")+min+" "+xm);
+		int hh = h;
+		if(hh > 12){
+			hh = hh-12;
+		}
+		p.originDepartureTime =  (hh+":"+(min < 10 ? "0" : "")+min+" "+xm);
 		response.sendRedirect("NewTransitLine.jsp");
 		return;
 	}

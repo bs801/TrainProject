@@ -12,23 +12,21 @@
 <body>
 <%
 
+ArrayList<Reservation> reservations = TrainProject.Reservations.getAsList();
+HashMap<String, Integer> topFive = new HashMap<String, Integer>();
 
-//ReservationBuilder i = request.getParameter(rb);  
-// unsure of how to get the parameter
-
-ArrayList<ReservationBuilder> rbList = (ArrayList<ReservationBuilder>)session.getAttribute("ds2");
-int i = 0;
-for(i = 0; i < rbList.size(); i++){
-	if(request.getParameter(i+"") != null){
-		break;
-	}
+for(Reservation r : reservations){
+	int j = topFive.get(r.forward_transitLineName);
+	
+	topFive.put(r.forward_transitLineName, j+1);
+	
 }
 
-ReservationBuilder selectedReservation = rbList.get(i);
+
+
 
 
 
 %>
-
 </body>
 </html>

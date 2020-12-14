@@ -3,6 +3,7 @@ package com.cs336.pkg;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ReservationBuilderService {
 
@@ -50,7 +51,7 @@ public class ReservationBuilderService {
 			}
 			return validRoutes;
 		}
-		static ArrayList<ReservationBuilder> getReservationOptions(ArrayList<Schedule> sameDateSchedule, String cityA, String cityB) throws SQLException{
+		static ArrayList<ReservationBuilder> getReservationOptions(ArrayList<Schedule> sameDateSchedules, String cityA, String cityB) throws SQLException{
 			ArrayList<Station> origins = new ArrayList<Station>();
 			ArrayList<Station> destinations = new ArrayList<Station>();
 			
@@ -67,7 +68,7 @@ public class ReservationBuilderService {
 			
 			for(Station oStation: origins){
 				for(Station dStation: destinations){
-					ArrayList<ReservationBuilder> validRoutesSASB = getReservationOptions(sameDateSchedule, oStation, dStation);
+					ArrayList<ReservationBuilder> validRoutesSASB = getReservationOptions(sameDateSchedules, oStation, dStation);
 					for(ReservationBuilder rb : validRoutesSASB) {
 						validRoutes.add(rb);
 					}
@@ -78,5 +79,121 @@ public class ReservationBuilderService {
 		public static ArrayList<ReservationBuilder> getReservationOptions(LocalDate departureDate, String cityA, String cityB) throws SQLException{
 			return getReservationOptions(filterSchedulesByDate(departureDate), cityA, cityB);
 		}
+		
+		static ArrayList<ReservationBuilder> getReservationOptions(LocalDate departureDate, Station A, String cityB) throws SQLException{
+			ArrayList<Schedule> sameDateSchedules = filterSchedulesByDate(departureDate);
+			ArrayList<Station> destinations = new ArrayList<Station>();
+			for(Station s : TrainProject.Stations.getAsList()){
+				if(s.city.equals(cityB)){
+					destinations.add(s);
+				}
+			}
+			
+			ArrayList<ReservationBuilder> validRoutes = new ArrayList<ReservationBuilder>();
+			
+				for(Station dStation: destinations){
+					ArrayList<ReservationBuilder> validRoutesSASB = getReservationOptions(sameDateSchedules, A, dStation);
+					for(ReservationBuilder rb : validRoutesSASB) {
+						validRoutes.add(rb);
+					}
+				}
+			return validRoutes;
+		}
+		
+		static ArrayList<ReservationBuilder> getReservationOptions(LocalDate departureDate, String cityA, Station B) throws SQLException{
+			ArrayList<Schedule> sameDateSchedules = filterSchedulesByDate(departureDate);
+			ArrayList<Station> origins = new ArrayList<Station>();
+			for(Station s : TrainProject.Stations.getAsList()){
+				if(s.city.equals(cityA)){
+					origins.add(s);
+				}
+			}
+			ArrayList<ReservationBuilder> validRoutes = new ArrayList<ReservationBuilder>();
+			
+				for(Station oStation: origins){
+					ArrayList<ReservationBuilder> validRoutesSASB = getReservationOptions(sameDateSchedules, oStation, B);
+					for(ReservationBuilder rb : validRoutesSASB) {
+						validRoutes.add(rb);
+					}
+				}
+			return validRoutes;
+		}
+		
+		public static ArrayList<ReservationBuilder> getReservationOptions(LocalDate departureDate, Object A, Object B) throws SQLException{
+			if(A instanceof String && B instanceof String) {
+				return getReservationOptions(departureDate, (String) A, (String) B);
+			}
+			if(A instanceof String && B instanceof Station) {
+				return getReservationOptions(departureDate, (String) A, (Station) B);
+			}
+			if(A instanceof Station && B instanceof String) {
+				return getReservationOptions(departureDate, (Station) A, (String) B);
+			}
+			if(A instanceof Station && B instanceof Station) {
+				return getReservationOptions(departureDate, (Station) A, (Station) B);
+			}
+			throw new RuntimeException("getResOps");
+		}
+		
+		//public static boolean foundOnNextDay = false;
+		public static int omitted;
+		
+		public static ArrayList<ReservationBuilder> filterForRoundTrip(LocalDate returnDate, ArrayList<ReservationBuilder> forwardTrips) throws SQLException{
+		//	foundOnNextDay = false;
+			
+			ArrayList<ReservationBuilder> returnTripCompatibleRBs = new ArrayList<ReservationBuilder>();
+			omitted = 0;
+			
+			HashMap<Integer, HashMap<Integer, ArrayList<ReservationBuilder>>> returnOpMap = new HashMap<Integer, HashMap<Integer, ArrayList<ReservationBuilder>>>();
+			
+			for(ReservationBuilder rb : forwardTrips) {
+				Station sB = rb.getDestination().getStation();
+				Station sA = rb.getOrigin().getStation();
+				
+				if(returnOpMap.get(sB.stationID) == null) {
+					returnOpMap.put(sB.stationID, new HashMap<Integer, ArrayList<ReservationBuilder>>());
+				}
+				ArrayList<ReservationBuilder> returnOpsForRB;
+				if(returnOpMap.get(sB.stationID).get(sA.stationID) == null) {
+					returnOpMap.get(sB.stationID).put(sA.stationID, getReservationOptions(returnDate, sB, sA));
+				}
+				returnOpsForRB =  returnOpMap.get(sB.stationID).get(sA.stationID);
+				
+				for(ReservationBuilder returnCandidate : returnOpsForRB) {
+					ScheduleStop ssB = returnCandidate.schedule.scheduleStopForStation(sB);
+					if(ssB.departureTime.isAfter(rb.getDestination().arrivalTime) && ssB.departureTime.toLocalDate().isEqual(returnDate)) {
+						rb.candidateReturnBuilders.add(returnCandidate);
+						System.out.println("FOUND A RETURN TRIP "+returnCandidate.schedule);
+					}
+				}
+				
+				
+				/*
+				TransitLine TL = rb.schedule.getTransitLine();
+				int revTL = (TL.reverseLine == 0 ? 1 : 0);
+				ArrayList<Schedule> revSchedules = TrainProject.TransitLines.get(TL.transitLineName, revTL).getSchedules();
+				for(Schedule sc : revSchedules) {
+					ScheduleStop B = sc.scheduleStopForStation(rb.getDestination().getStation());
+					if(B.departureTime.isAfter(rb.getDestination().arrivalTime) && B.departureTime.toLocalDate().isEqual(returnDate)) {
+						rb.candidateReturnSchedules.add(sc);
+					}
+				}
+				*/
+				
+				if(rb.candidateReturnBuilders.size() > 0) {
+					returnTripCompatibleRBs.add(rb);
+				} else {
+					omitted++;
+				}
+			}
+			return returnTripCompatibleRBs;
+			
+		}
+		
+		public static ArrayList<ReservationBuilder> getReservationOptions(LocalDate departureDate, Object A, Object B, LocalDate returnDate) throws SQLException{
+			ArrayList<ReservationBuilder> forwardTrips = getReservationOptions(departureDate, A, B);
+			return filterForRoundTrip(returnDate, forwardTrips);
+		}
+		
 		
 }
