@@ -5,6 +5,7 @@
 
 <%
 	session.setAttribute("disc", "0f");
+	//ArrayList<Station> stations = TrainProject.Stations.getAsList();
 	ArrayList<Station> stations = TrainProject.Stations.getAsList();
 	
 	ArrayList<Object> options = new ArrayList<Object>();
@@ -87,7 +88,7 @@
 	<br></br>
 	
 	Passenger Discount Type:
-	<input type="radio" name="disc" value="0.00f"/>Adult
+	<input type="radio" name="disc" value="0.00f" checked="checked"/>Adult
 	<input type="radio" name="disc" value="0.25f"/>Child
 	<input type="radio" name="disc" value="0.35f"/>Senior
 	<input type="radio" name="disc" value="0.50f"/>Disabled

@@ -230,7 +230,7 @@ public class TrainProject {
 					+ " roundTrip,"
 					+ " return_transitLineName, return_scheduleDepartureTime, return_reverseLine, return_trainID, return_fare, "
 					+ " dateOfCreation, discount, totalFare,"
-					+ " title, firstName, lastName) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+					+ " title, firstName, lastName, username) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setBoolean(1, false);
 			ps.setInt(2, r.origin_stationID);
@@ -253,13 +253,25 @@ public class TrainProject {
 			ps.setTimestamp(15, Timestamp.valueOf(LocalDateTime.now()));
 			ps.setFloat(16, r.discount);
 			ps.setFloat(17, r.totalFare);
+			
 			ps.setString(18, r.title);
 			ps.setString(19, r.firstName);
 			ps.setString(20, r.lastName);
 			
+			ps.setString(21, r.username);
+			
 			ps.executeUpdate();
 			ReservationTable = null;
 		} 
+		public static void cancel(Reservation r) throws SQLException {
+			
+			String sql = "UPDATE Reservation SET cancelled = (?) WHERE reservationID = (?)";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setBoolean(1, true);
+			ps.setInt(2, r.reservationID);
+			ps.executeUpdate();
+			ReservationTable = null;
+		}
 	}
 	
 	

@@ -30,6 +30,8 @@
 	newRes.firstName = fname;
 	newRes.lastName = lname;
 	newRes.title = title;
+	newRes.username = "user1"; //(String) session.getAttribute("username");
+	
 	
 	TrainProject.Reservations.insert(newRes);
 	
