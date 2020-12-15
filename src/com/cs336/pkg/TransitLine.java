@@ -24,6 +24,7 @@ public class TransitLine implements Comparable<TransitLine>{
 	}
 	
 	public static TransitLine getKey(String transitLineName, int reverseLine) {
+		System.out.println("INPUTTIGN TL "+transitLineName);
 		return new TransitLine(transitLineName, reverseLine, 0f, 0, null);
 	}
 	public static TransitLine getKey(ResultSet weakRS) throws SQLException {

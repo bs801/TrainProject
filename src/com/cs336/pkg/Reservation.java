@@ -10,7 +10,7 @@ public class Reservation {
 	
 	public int reservationID;
 	public int cancelled;
-
+	public String username;
 	
 	
 	public String forward_transitLineName;
@@ -30,6 +30,7 @@ public class Reservation {
 	public int origin_stationID;
 	public int destination_stationID;
 	
+	//ArrayList<Reservation> res = TrainProject.Reservations.getAsList();
 	
 	public Timestamp dateOfCreation;
 	public float discount;
@@ -41,7 +42,8 @@ public class Reservation {
 	
 	public Reservation(
 			int reservationID,
-			int cancelled, 
+			int cancelled,
+			String username,
 				
 			String forward_transitLineName,
 			int forward_reverseLine,
@@ -69,6 +71,8 @@ public class Reservation {
 			String lastName
 			) {
 		this.reservationID = reservationID;
+		this.cancelled = cancelled;
+		this.username = username;
 		
 		this.forward_transitLineName = forward_transitLineName;
 		this.forward_reverseLine = forward_reverseLine;
@@ -93,12 +97,19 @@ public class Reservation {
 		this.title = title;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		
+		/*
+		LocalDate.of(0,0,0).isAfter(other);
+		LocalDate.of(0,0,31).isAfter(other);
+		dateOfCreation.toLocalDateTime().toLocalDate().isAfter(LocalDate.of(0,0,31).isAfter(other))
+		*/
 	}
 	
 	public Reservation(ResultSet rs) throws SQLException {
 		this(
 			rs.getInt("reservationID"),
 			rs.getInt("cancelled"),
+			rs.getString("username"),
 			
 			rs.getString("forward_transitLineName"),
 			rs.getInt("forward_reverseLine"),
@@ -151,5 +162,37 @@ public class Reservation {
 		return getReturnSchedule().dateTimeOfArrival(getOriginStation());
 	}
 	
+	private String getString() throws SQLException {
+		String l1 = getOriginStation()+" "+Formatting.displayTime(timeOfForwardDeparture())+" --> "+getDestinationStation()+" "+Formatting.displayTime(timeOfForwardArrival());
+		
+		if(roundTrip == 1) {
+			String l2 = getDestinationStation()+" "+Formatting.displayTime(timeOfReturnDeparture())+" --> "+getOriginStation()+" "+Formatting.displayTime(timeOfReturnArrival());
+			l1 = "<br></br>";
+		}
+		l1 = l1 + "<br></br>";
+		l1 = "<h3>"+l1+"</h3>";
+		
+		String bn = "Booked on "+Formatting.displayTime(dateOfCreation.toLocalDateTime().toLocalDate()) + "<br></br>";
+		String p1 = "Passenger "+ ((title == null || "".equals(title)) ? "" : title ) + " " + firstName +" "+ lastName;
+		p1 = p1 + "<br></br>";
+		
+		String tf = "Total fare: "+Formatting.getFare(totalFare) + "<br></br>";
+		String ad = "Applied discount: "+Formatting.getDiscount(discount) + "<br></br>";
+		
+		return l1 + p1 + bn + tf + ad;
+		
+	}
 	
+	@Override
+	public String toString() {
+		try {
+			System.out.println("CALLING TO STRIGN");
+			return getString();
+		
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			return "ERROR";
+		}
+	}
 }

@@ -2,6 +2,7 @@ package com.cs336.pkg;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -30,6 +31,9 @@ public class ReservationBuilderService {
 					continue;
 				}
 				if(!(s1.stopID < s2.stopID)) {
+					continue;
+				}
+				if(LocalDateTime.now().isAfter(s1.departureTime)) {
 					continue;
 				}
 				ArrayList<ScheduleStop> scheduleStops = sc.getScheduleStops();

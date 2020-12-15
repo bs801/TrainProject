@@ -29,6 +29,7 @@
 	Reservation newRes = new Reservation(
 			-1,
 			0,
+			null, //username filled in next step
 			rbf.schedule.transitLineName,
 			rbf.schedule.reverseLine,
 			rbf.schedule.scheduleDepartureTime,

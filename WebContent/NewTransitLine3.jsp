@@ -41,7 +41,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	Enter in times in X:YZ format. System will automatically detect AM/PM changes assuming stops are at most 11:59 hours apart. 
+	TRANSIT LINE DURATION MUST BE LESS THAN 12 HOURS. <br></br>
+	SYSTEM AUTOMATICALLY DETECTS AM/PM CHANGES RELATIVE TO DEPARTURE TIME. <br></br><br></br>
+	Enter in times in X:YZ format. Do not enter in AM/PM. 
 	<br></br>
 		<br></br>
 			<br></br>

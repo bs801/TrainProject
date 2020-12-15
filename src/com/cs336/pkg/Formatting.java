@@ -1,5 +1,6 @@
 package com.cs336.pkg;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Locale;
@@ -25,6 +26,14 @@ public class Formatting {
 		int y = t.getYear();
 		return h+":"+mins+" "+XM+" on "+mo+"/"+dd+"/"+y;
 	}
+	public static String displayTime(LocalDate t) {
+		int m = t.getMonthValue();
+		String mo = (m < 10 ? "0"+m : ""+m);
+		int d = t.getDayOfMonth();
+		String dd = (d < 10 ? "0"+d : ""+d);
+		int y = t.getYear();
+		return mo+"/"+dd+"/"+y;
+	}
 	
 	public static String getFare(float f) {
 		int r = (int) f;
@@ -41,5 +50,16 @@ public class Formatting {
 		}
 		return "$"+intversion;
 	}
-	
+	public static String getDiscount(float f) {
+		if(f < 0.01) {
+			return "N/A - Adult";
+		}
+		if(f < 0.26) {
+			return "Children's discount";
+		}
+		if(f < 0.36) {
+			return "Senior's discount";
+		}
+		return "Disability discount";
+	}
 }

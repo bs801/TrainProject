@@ -33,6 +33,8 @@
 	<p>Q&A Forum</p>
 	<form action="forum.jsp" method = "POST">
 	<input type="submit" value="Ask a Question!"/>
+	
+	<input type="text" value=<%=TrainProject.Stations.getAsList().get(0).toString()%> />
 	</form> 
 	
 	
