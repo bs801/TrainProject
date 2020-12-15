@@ -63,7 +63,32 @@ public class Formatting {
 		return "Disability discount";
 	}
 	
-	boolean sameMonth(LocalDate monthyear, LocalDateTime t) {
-		return false;
+	public static boolean sameMonth(LocalDate monthyear, LocalDateTime t) {
+		
+		int last = 28;
+		
+		while(true) {
+			boolean b = false;
+			try{
+				last++;
+				LocalDate.of(monthyear.getYear(), monthyear.getMonthValue(), last);
+			}catch(java.time.DateTimeException e){
+				last--;
+				break;
+			}
+			if(b) {
+				break;
+			}
+		}
+		LocalDate A = LocalDate.of(monthyear.getYear(),  monthyear.getMonthValue(), 1);
+		LocalDate B = LocalDate.of(monthyear.getYear(),  monthyear.getMonthValue(), last);
+		
+		LocalDate X = t.toLocalDate();
+		
+		boolean p1 = X.isBefore(A);
+		boolean p2 = X.isAfter(B);
+		
+		return !p1 && !p2;
+		
 	}
 }
