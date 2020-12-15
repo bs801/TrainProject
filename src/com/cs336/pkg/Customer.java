@@ -14,7 +14,7 @@ import java.sql.SQLException;
  * 
  */
 
-public class User {
+public class Customer {
 	
 	public String username;
 	public String password;
@@ -22,11 +22,11 @@ public class User {
 	public String lastName;
 	public String emailAddress;
 	
-	public User(String username, String password, String firstName, String lastName, String email) {
+	public Customer(String username, String password, String firstName, String lastName, String email) {
 		this.username = username; this.password = password; this.firstName = firstName; this.lastName = lastName; this.emailAddress = emailAddress;
 	}
 	
-	public User(ResultSet rs) throws SQLException {
+	public Customer(ResultSet rs) throws SQLException {
 		this(rs.getString("username"), rs.getString("password"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("emailAddress"));		
 	}
 	

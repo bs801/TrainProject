@@ -94,6 +94,11 @@
 		LocalTime duration = TL.duration.toLocalTime();
 	
 		LocalDateTime t1 = (new Timestamp(cal.getTimeInMillis())).toLocalDateTime(); // January 1st 2020 at 1 PM 
+		
+		if(t1.isBefore(LocalDateTime.now())){
+			errors.add("Schedule must have a departure date/time that is after the present time");
+		}
+		
 		LocalDateTime t2 = t1.plusHours(duration.getHour()).plusMinutes(duration.getMinute()); // Jan 1 2020 3:25
 		
 	    		
@@ -127,10 +132,14 @@
 	} else {
 	
 	// CREATE NEW TRANSIT LINE
-	
+		
 		p.xmIsAM = am;
 		p.XMTime = XMTime;
 		p.incompleteSchedule = new Schedule(null, 0, new Timestamp(cal.getTimeInMillis()), trainID);
+
+		if(p.incompleteSchedule.scheduleDepartureTime.toLocalDateTime().isBefore(LocalDateTime.now())){
+			errors.add("Schedule have a departure date/time that is after the present time");
+		}
 		int hh = h;
 		if(hh > 12){
 			hh = hh-12;
