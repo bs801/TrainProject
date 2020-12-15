@@ -62,4 +62,8 @@ public class Formatting {
 		}
 		return "Disability discount";
 	}
+	
+	boolean sameMonth(LocalDate monthyear, LocalDateTime t) {
+		return false;
+	}
 }
