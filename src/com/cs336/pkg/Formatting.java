@@ -1,8 +1,11 @@
 package com.cs336.pkg;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Locale;
 
 public class Formatting {
@@ -62,6 +65,18 @@ public class Formatting {
 		}
 		return "Disability discount";
 	}
+	public static String getTrainID(int trainID) {
+		if(trainID < 10) {
+			return "000"+trainID;
+		}
+		if(trainID < 100) {
+			return "00"+trainID;
+		}
+		if(trainID < 1000) {
+			return "0"+trainID;
+		}
+		return ""+trainID;
+	}
 	
 	public static boolean sameMonth(LocalDate monthyear, LocalDateTime t) {
 		
@@ -90,5 +105,14 @@ public class Formatting {
 		
 		return !p1 && !p2;
 		
+	}
+	
+	public static ArrayList<String> getTransitLineNames() throws SQLException {
+		ArrayList<TransitLine> tlns = TrainProject.TransitLines.getAsList();
+		HashMap<String, String> map = new HashMap<String, String>();
+		for(TransitLine t : tlns) {
+			map.put(t.transitLineName, t.transitLineName);
+		}
+		return new ArrayList<String>(map.values());
 	}
 }

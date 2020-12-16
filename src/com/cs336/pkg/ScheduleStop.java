@@ -13,6 +13,7 @@ public class ScheduleStop {
 	public ScheduleStop(Schedule schedule, TransitStop t, int stopID, int stationID) {
 	
 		this.arrivalTime = schedule.scheduleDepartureTime.toLocalDateTime().plusHours(t.arrivalTime.toLocalTime().getHour()).plusMinutes(t.arrivalTime.toLocalTime().getMinute());
+		System.out.println("Name: "+t+" arrivalTime "+this.arrivalTime);
 		this.departureTime = schedule.scheduleDepartureTime.toLocalDateTime().plusHours(t.departureTime.toLocalTime().getHour()).plusMinutes(t.departureTime.toLocalTime().getMinute());
 		this.stopID = stopID;
 		this.stationID = stationID;

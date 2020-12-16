@@ -156,6 +156,16 @@ public class TrainProject {
 			}
 			return schedules;
 		}
+		public static ArrayList<Schedule> getFutureSchedules() throws SQLException{
+			ArrayList<Schedule> schedules = getAsList();
+			ArrayList<Schedule> newlist = new ArrayList<Schedule>();
+			for(Schedule sc : schedules) {
+				if(sc.getScheduleStops().get(0).departureTime.isAfter(LocalDateTime.now())) {
+					newlist.add(sc);
+				}
+			}
+			return newlist;
+		}
 		
 		public static Schedule get(TransitLine TL_key, Timestamp scheduleDepartureTime) throws SQLException {
 			return getAll().get(TL_key).get(scheduleDepartureTime);

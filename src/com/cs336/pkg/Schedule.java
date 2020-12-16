@@ -43,6 +43,7 @@ public class Schedule {
 		for(TransitStop t : transitStops) {
 			scheduleStops.add(new ScheduleStop(this, t, t.stopID, t.stationID));
 		}
+		this.ScheduleStopTable = scheduleStops;
 		return scheduleStops;
 	}
 	
@@ -74,6 +75,16 @@ public class Schedule {
 	}
 	public LocalDateTime dateTimeOfDeparture(Station s) throws SQLException {
 		return scheduleStopForStation(s).departureTime;
+	}
+	
+	public String getString() throws SQLException {
+		ArrayList<ScheduleStop> stops = getScheduleStops();
+		System.out.println("Stop "+stops.get(stops.size()-1));
+		String l1 = stops.get(0)+" "+Formatting.displayTime(stops.get(0).departureTime)+" --> "+stops.get(stops.size()-1)+" "+Formatting.displayTime(stops.get(stops.size()-1).arrivalTime);
+		
+		String top = "<h5>"+transitLineName + "</h5>    Train: "+Formatting.getTrainID(trainID);
+		System.out.println("FINI");
+		return top+" <br></br> "+l1+" <br></br>";
 	}
 	
 	/*

@@ -15,6 +15,8 @@ ArrayList<Station> stations = TrainProject.Stations.getAsList();
 
 int id = stations.get(stations.size()-1).stationID;
 %>
+The value is preset to the highest available value.
+<br></br>
 	<form action="" method="POST">
 		StationID: <input type="text" name="stationID" value="<%=id+1%>" /> 
 		<br></br> 
