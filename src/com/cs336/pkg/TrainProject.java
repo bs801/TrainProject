@@ -279,38 +279,38 @@ public class TrainProject {
 	
 	
 	
-	public static class Users {
+	public static class Customers {
 		
-		static HashMap<String, User> UserTable;
+		static HashMap<String, Customer> CustomerTable;
 		
-		public static User get(String username) throws SQLException {
+		public static Customer get(String username) throws SQLException {
 			return getAll().get(username);
 		}
 		
-		public static ArrayList<User> getAsList() throws SQLException{
-			return new ArrayList<User>(getAll().values());
+		public static ArrayList<Customer> getAsList() throws SQLException{
+			return new ArrayList<Customer>(getAll().values());
 		}
-		static HashMap<String, User> getAll() throws SQLException {
+		static HashMap<String, Customer> getAll() throws SQLException {
 			
 			loadApplicationDB();
-			if(UserTable == null) {
-				UserTable = new HashMap<String, User>();
+			if(CustomerTable == null) {
+				CustomerTable = new HashMap<String, Customer>();
 				
 				Statement st = con.createStatement();
-				ResultSet rs = st.executeQuery("select * from User");
+				ResultSet rs = st.executeQuery("select * from Customer");
 								
 				while(rs.next()){
 					
-					User newUser = new User(rs);
-					UserTable.put(newUser.username, newUser);
+					Customer newUser = new Customer(rs);
+					CustomerTable.put(newUser.username, newUser);
 				}	
 			}	
 			
-			return UserTable;
+			return CustomerTable;
 		}
 		
-		public static void insert(User u) throws SQLException {
-			String sql = "INSERT INTO User(username, password, firstName, lastName, emailAddress) VALUES(?, ?, ?, ?, ?)";
+		public static void insert(Customer u) throws SQLException {
+			String sql = "INSERT INTO Customer(username, password, firstName, lastName, emailAddress) VALUES(?, ?, ?, ?, ?)";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, u.username);
 			ps.setString(2, u.password);
@@ -318,7 +318,7 @@ public class TrainProject {
 			ps.setString(4, u.lastName);
 			ps.setString(5, u.emailAddress);
 			ps.executeUpdate();
-			UserTable = null;
+			CustomerTable = null;
 		}
 	}
     public static class Representatives {
