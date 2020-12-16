@@ -3,6 +3,7 @@
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 
+
 <%
 System.out.println("UP FRONT");
 	CSNTLPipeline p = (CSNTLPipeline) session.getAttribute("CSNTLP");
