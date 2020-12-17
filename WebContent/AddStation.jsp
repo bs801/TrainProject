@@ -49,7 +49,10 @@ The station ID is pre-filled to the lowest available station ID
 		<br></br>
 		<input type="Submit" value="Add" /> 
 	</form>
-	List of Stations Already inputed:
+		<br></br>
+			<br></br>
+				<br></br>
+	<h3>List of Stations Already inputed:</h3>
 	<br></br>
 	<%
 	

@@ -17,7 +17,7 @@
 	
 	ArrayList<String> customers = new ArrayList<String>();
 	
-	ArrayList<Reservation> reservations = TrainProject.Reservations.getAsList();
+	ArrayList<Reservation> reservations = TrainProject.Reservations.getUncancelledList();
 	ArrayList<Reservation> customerReservations = new ArrayList<Reservation>();
 	
 	Customer c = null;

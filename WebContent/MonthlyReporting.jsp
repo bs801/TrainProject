@@ -51,12 +51,13 @@ Select Month to View Metrics For:
 		}
 	%>
 
-	
+		<br></br><input type = "submit" name="datesubmit" value = "Select Month/Year"/>
 	<%
 		ArrayList<TrainActivityPacket> taps = null;
+		ArrayList<CustomerActivityPacket> customerRevenues = null;
 		if(MonthReport.validdate){
 			
-			out.println("<h2> Information for the month of "+Formatting.getMonth(MonthReport.MONTHSELECT)+" "+MonthReport.YEARSELECT+"</h3>");
+			out.println("<h1> Information for the month of "+Formatting.getMonth(MonthReport.MONTHSELECT)+" "+MonthReport.YEARSELECT+"</h1>");
 			
 			float sum = 0;
 			int tally = 0;
@@ -65,7 +66,7 @@ Select Month to View Metrics For:
 				sum += r.totalFare;
 				tally++;
 			}
-			out.println("Total Revenue: "+Formatting.getFare(sum)+" over "+tally+" reservations <br></br>");
+			out.println("<h3> Total Revenue: </h3> "+Formatting.getFare(sum)+" over "+tally+" reservations <br></br>");
 			//out.println("(Total Revenue is calculated based on reservation date of creation, one-way or round-trip total fare <br></br>");
 			
 			
@@ -79,7 +80,7 @@ Select Month to View Metrics For:
 					customerMap.get(r.username).add(r.totalFare);
 				}
 			}
-			ArrayList<CustomerRevenuePacket> customerRevenues = new ArrayList<CustomerRevenuePacket>(customerMap.values());
+			customerRevenues = new ArrayList<CustomerRevenuePacket>(customerMap.values());
 			Collections.sort(customerRevenues,
 		            new Comparator<CustomerRevenuePacket>() {
 		                public int compare(CustomerRevenuePacket c1, CustomerRevenuePacket c2)
@@ -95,15 +96,18 @@ Select Month to View Metrics For:
 				Customer c = TrainProject.Customers.get(customerRevenues.get(i).username);
 				CustomerRevenuePacket crp = customerRevenues.get(i);
 				System.out.println("HANDLING CUSTOEMR "+c.username);
-				out.println(c.firstName+" "+c.lastName+" with username "+c.username +" has spent "+Formatting.getFare(crp.Revenue)+" through "+crp.tally+" reservations made in this month <br></br>");
+				out.println("<h3> Best Customer </h3>"+c.firstName+" "+c.lastName+" (with username "+c.username +") has spent "+Formatting.getFare(crp.Revenue)+" through "+crp.tally+" reservations made in this month <br></br>");
 			}
 			
-			
+			out.println("<h3> Most active transit lines </h3>");
 			taps = TrainProject.Reservations.getTrainActivityPackets(MonthReport.my);
 			for(int i=0; i<5; i++){
 				if(taps.get(i) == null){
 					break;
 				}
+		//		if(taps.get(i).resTally == 0){
+		//			break;
+		//		}
 				TrainActivityPacket tap = taps.get(i);
 				out.println("Trainsit Line "+tap.transitLineName+" had "+tap.resTally+" reservations with a departure (forward or return, one-way or round-trip). This is "+tap.tally+" trips when double counting round trip reservations with where both forward/retun trips are made for this route. <br></br>");
 			}
@@ -113,12 +117,13 @@ Select Month to View Metrics For:
 	
 	
 	%>
+	
 
-	<input type = "submit" name="datesubmit" value = "Select Month/Year"/>
 
 	
 		<br></br>
-	<h2> View revenue and reservation report </h2>
+		<% if(MonthReport.validdate){ %>
+	<h2> View revenue and reservation report for a specific customer or transit line</h2>
 	
 	
 
@@ -146,9 +151,11 @@ Select Month to View Metrics For:
 	<br></br>
 	<br></br>
 	
-	
+	<% } %>
 	<%
-	
+		System.out.println(MonthReport.validdate);
+		System.out.println(MonthReport.TLNSELECT);
+		System.out.println(MonthReport.CUSTOMERSELECT);
 		if(MonthReport.validdate){
 			if(MonthReport.TLNSELECT != 0){
 				TrainActivityPacket tap = null;
@@ -159,7 +166,7 @@ Select Month to View Metrics For:
 					}
 				}
 				String fm = "<br></br>";
-				out.println("Monthly report for Transit Line: "+tap.transitLineName+fm);
+				out.println("<h2>Monthly report for Transit Line: "+tap.transitLineName+"</h2>"+fm);
 				out.println("Revenue generated: "+tap.revenue+fm);
 				out.println("Reservations booked: "+tap.resTally+fm);
 				out.println("Trips booked: "+tap.tally+fm);
@@ -172,6 +179,10 @@ Select Month to View Metrics For:
 			}
 			if(MonthReport.CUSTOMERSELECT != 0){
 				
+				out.println("<h2>Monthly report for Transit Line: "+tap.transitLineName+"</h2>"+fm);
+				out.println("Revenue generated: "+tap.revenue+fm);
+				out.println("Reservations booked: "+tap.resTally+fm);
+				out.println("Trips booked: "+tap.tally+fm);
 			}
 		}
 	

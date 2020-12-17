@@ -4,6 +4,8 @@
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 <%@ page import="java.text.SimpleDateFormat"%>
     
+    
+    
 <%
 	String username = "user1"; //(String) session.getAttribute("username");
 	
@@ -52,37 +54,50 @@
 </head>
 <body>
 
-<h2>Reservations in progress: </h2>
+<form action="CustomerLanding.jsp" method="POST">
+<input type="Submit" value="Back to Home"/>
+</form><br></br>
+
+<h1>Reservations in progress: </h1>
 These are reservations which are currently en route (Cannot be cancelled).
 <% 
+if(now.size() == 0){
+	out.println("No reservations are currently in progress<br></br>");
+}
 for(Reservation r : now){
 	out.println(r.toString() + "<br></br>");
 }
 %>
-<h2>Future reservations: </h2>
-These are reservations which are currently en route (Cannot be cancelled).
+<h1>Future reservations: </h1>
+
 <form action="vjCancelReservation.jsp" method="POST" >
 <%
+if(future.size() == 0){
+	out.println("You have no future reservations <br></br>");
+}
 for(Reservation r : future){
-	out.println(r.toString() + "<br></br>");
-	%> <input type="Submit" name=<%=r.reservationID%> value="Cancel" /> <% 
+	out.println(r.toString());
+	%> <input type="Submit" name=<%=r.reservationID%> value="Cancel" /><br></br> <% 
 }
 %>
 </form>
-<h2>Past reservations: </h2>
+<h1>Past reservations: </h1>
 <%
+if(past.size() == 0){
+	out.println("You have no past reservations <br></br>");
+}
 for(Reservation r : past){
 	out.println(r.toString() + "<br></br>");
 }
 %>
-<h2>Cancelled reservations: </h2>
+<h1>Cancelled reservations: </h1>
 <%
+if(now.size() == 0){
+	out.println("You have not cancelled any reservations <br></br>");
+}
 for(Reservation r : cancelled){
 	out.println(r.toString() + "<br></br>");
 }
 %>
-<form action="CustomerLanding.jsp" method="POST">
-<input type="Submit" value="Back to Dashboard"/>
-</form>
 </body>
 </html>

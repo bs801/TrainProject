@@ -189,9 +189,9 @@ public class Reservation {
 		
 		if(roundTrip == 1) {
 			String l2 = getDestinationStation()+" "+Formatting.displayTime(timeOfReturnDeparture())+" --> "+getOriginStation()+" "+Formatting.displayTime(timeOfReturnArrival())+"  (Train "+Formatting.getTrainID(return_trainID)+")";
-			l1 = "<br></br>";
+			l1 = l1+"<br></br>"+l2;
 		}
-		l1 = l1 + "<br></br>";
+		l1 = l1;// + "<br></br>";
 		l1 = "<h3>"+l1+"</h3>";
 		
 		String bn = "Booked on "+Formatting.displayTime(dateOfCreation.toLocalDateTime().toLocalDate()) + "<br></br>";

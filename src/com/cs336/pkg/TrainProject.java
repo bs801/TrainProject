@@ -276,7 +276,7 @@ public class TrainProject {
 			ArrayList<Reservation> usls = getUncancelledList();
 			ArrayList<Reservation> gpfm = new ArrayList<Reservation>();
 			for(Reservation r : usls) {
-				if(Formatting.sameMonth(my, r.dateOfCreation.toLocalDateTime())) {
+				if(Formatting.sameMonth(my, r.forward_scheduleDepartureTime.toLocalDateTime())) { //dateOfCreation
 					gpfm.add(r);
 				}
 			}
