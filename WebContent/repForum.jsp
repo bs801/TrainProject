@@ -83,7 +83,12 @@
 	    			<input name = <%=temp.get(i).questionID %> type = "Submit" value = "Answer this question" />
 	    		<%
 	    	} else{
-	    		for(int j = 0; j <temp.get(i).getAnswers().size(); j++) { %> 
+	    		for(int j = 0; j <temp.get(i).getAnswers().size(); j++) {
+	    				String fm = "<br></br>";
+	    				out.println("Answer from representative "+(Questions.get(i).getAnswers().get(0).username == null ? "(account deleted): " : Questions.get(i).getAnswers().get(0).username+": " +fm) );
+	    			
+	    			%> 
+	    		
 	    			<p><%=temp.get(i).getAnswers().get(0).toString()%></p> <br></br> <%
 	    		}
 	    	} 

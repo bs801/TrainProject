@@ -23,6 +23,8 @@
 		<input type="submit" value="View Schedule Editor"/>
 	</form> 
 	<br></br>
+	
+	
 	<form action="repForum.jsp" method = "POST">
 		<input type="submit" value="View Questions Forum"/>
 	</form>

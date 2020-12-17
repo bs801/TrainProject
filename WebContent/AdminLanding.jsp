@@ -18,10 +18,21 @@
 	<form action="editCustomerRepresentative.jsp" method = "POST">
 		<input type="submit" value="Edit Customer Representatives"/>
 	</form> 
-
-	<p>Sale Report</p>
-	<form action="MonthlySaleReport" method = "POST">
-	<input type="submit" value="Go"/>
+	<br></br>
+	<p>Monthly Report</p>
+	<form action="MonthlyReporting.jsp" method = "POST">
+	<input type="submit" value="Monthly Sales Metrics"/>
+	<br></br>
+	This page can be used to (after selection of a month/year)<br></br>
+	- Show the total revenue<br></br>
+	- List the best customer<br></br>
+	- List the top 5 most active transit lines<br></br>
+	
+	- Show the revenue obtained through a specific customer or transit line<br></br>
+	- Show the reservations made by/for a specific customer or transit line<br></br>
+	
+	(All these metrics are per the month selected)<br></br>
+	<br></br>
 	</form>
 	
 	<p>Produce A List Of Reservation</p>

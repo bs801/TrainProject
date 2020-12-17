@@ -53,8 +53,9 @@ Select Month to View Metrics For:
 
 		<br></br><input type = "submit" name="datesubmit" value = "Select Month/Year"/>
 	<%
+		System.out.println("56");
 		ArrayList<TrainActivityPacket> taps = null;
-		ArrayList<CustomerActivityPacket> customerRevenues = null;
+		ArrayList<CustomerRevenuePacket> customerRevenues = null;
 		if(MonthReport.validdate){
 			
 			out.println("<h1> Information for the month of "+Formatting.getMonth(MonthReport.MONTHSELECT)+" "+MonthReport.YEARSELECT+"</h1>");
@@ -89,19 +90,27 @@ Select Month to View Metrics For:
 		                }
 		            }
 			);
-			for(int i=0; i<1; i++){
-				if(customerRevenues.get(i) == null){
-					break;
+			if(customerRevenues.size() == 0){
+				out.println("<h3> Best Customer </h3> No best customer for this month <br></br>");
+			} else {
+				for(int i=0; i<1; i++){
+					if(customerRevenues.get(i) == null){
+						break;
+					}
+					Customer c = TrainProject.Customers.get(customerRevenues.get(i).username);
+					CustomerRevenuePacket crp = customerRevenues.get(i);
+					System.out.println("HANDLING CUSTOEMR "+c.username);
+					out.println("<h3> Best Customer </h3>"+c.firstName+" "+c.lastName+" (with username "+c.username +") has spent "+Formatting.getFare(crp.Revenue)+" through "+crp.tally+" reservations made in this month <br></br>");
 				}
-				Customer c = TrainProject.Customers.get(customerRevenues.get(i).username);
-				CustomerRevenuePacket crp = customerRevenues.get(i);
-				System.out.println("HANDLING CUSTOEMR "+c.username);
-				out.println("<h3> Best Customer </h3>"+c.firstName+" "+c.lastName+" (with username "+c.username +") has spent "+Formatting.getFare(crp.Revenue)+" through "+crp.tally+" reservations made in this month <br></br>");
 			}
-			
+			System.out.println("102");
 			out.println("<h3> Most active transit lines </h3>");
+		
 			taps = TrainProject.Reservations.getTrainActivityPackets(MonthReport.my);
 			for(int i=0; i<5; i++){
+				if(i == taps.size()){
+					break;
+				}
 				if(taps.get(i) == null){
 					break;
 				}
@@ -111,11 +120,13 @@ Select Month to View Metrics For:
 				TrainActivityPacket tap = taps.get(i);
 				out.println("Trainsit Line "+tap.transitLineName+" had "+tap.resTally+" reservations with a departure (forward or return, one-way or round-trip). This is "+tap.tally+" trips when double counting round trip reservations with where both forward/retun trips are made for this route. <br></br>");
 			}
-			
+			if(taps.size() == 0){
+				out.println("No active transit lines for this month");
+			}
 		}
 	
 	
-	
+	System.out.println("THIS HALF");
 	%>
 	
 
@@ -173,16 +184,40 @@ Select Month to View Metrics For:
 			//	out.println("Trips booked: "+tap.tally+fm);
 			//	out.println("Trainsit Line "+tap.transitLineName+" had "+tap.resTally+" reservations with a departure (forward or return, one-way or round-trip). This is "+tap.tally+" trips when double counting round trip reservations with where both forward/retun trips are made for this route. <br></br>");
 				ArrayList<Reservation> res = TrainProject.Reservations.getReservations(MonthReport.my, MonthReport.TLOptions.get(MonthReport.TLNSELECT));
+				int amt =0;
 				for(Reservation r : res){
+					amt++;
 					out.println(r.toString() + "<br></br>");
+				}
+				if(amt == 0){
+					out.println("No reservations for this transit line during this month");
 				}
 			}
 			if(MonthReport.CUSTOMERSELECT != 0){
 				
-				out.println("<h2>Monthly report for Transit Line: "+tap.transitLineName+"</h2>"+fm);
-				out.println("Revenue generated: "+tap.revenue+fm);
-				out.println("Reservations booked: "+tap.resTally+fm);
-				out.println("Trips booked: "+tap.tally+fm);
+				CustomerRevenuePacket cap = null;
+				for(CustomerRevenuePacket icap : customerRevenues){
+					if(icap.username.equals(MonthReport.TLOptions.get(MonthReport.CUSTOMERSELECT))){
+						cap = icap;
+						break;
+					}
+				}
+				String fm = "<br></br>";
+				out.println("<h2>Monthly report for Customer: "+cap.username+"</h2>"+fm);
+				out.println("Revenue generated: "+cap.Revenue+fm);
+				out.println("Reservations booked: "+cap.tally+fm);
+				
+				ArrayList<Reservation> res = TrainProject.Reservations.getPurchaseForMonth(MonthReport.my);
+				int amt = 0;
+				for(Reservation r : res){
+					if(r.username.equals(cap.username)){
+						amt++;
+						out.println(r.toString() + "<br></br>");
+					}
+				}
+				if(amt == 0){
+					out.println("No reservations for this customer during this month");
+				}
 			}
 		}
 	

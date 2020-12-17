@@ -46,15 +46,16 @@
 	</form><br></br>
 	
 	
-	Previous Question:
+	Forum History:
 	<%
 	if(x!=null){ %>
 		<%
 		for(int i = 0; i < temp.size(); i ++ )
 		{%> 
-	 		<% out.print("No."+(i+1)+ ""); %>
-	 		<h2> <%=temp.get(i).toString()%> </h2>
-	    	<p> <%=temp.get(i).descriptionText%> </p>
+			<br></br>
+	 		<% out.print("<h3> Posted by "+temp.get(i).username+" </h3>"); %>
+	 		<h3> Question: <%=temp.get(i).toString()%> </h3>
+	    	<p> Body: <%=temp.get(i).descriptionText%> </p>
 	    	<div>Posted by: <%=temp.get(i).username%> </div> <br></br> 
 	    	
 	    	<%
@@ -71,14 +72,20 @@
 		<%
 			for(int i = 0; i < Questions.size(); i ++ )
 			{%> 
-				<% out.print("No."+(i+1)+ ""); %>
-	 			<h2> <%=Questions.get(i).toString()%> </h2>
-	    		<p> <%=Questions.get(i).descriptionText%></p>
+				<br></br>
+				<% out.print("<h3> Posted by "+Questions.get(i).username+" </h3>"); %>
+				
+	 			<h3> Question: <%=Questions.get(i).toString()%> </h3>
+	    		Body: <p> <%=Questions.get(i).descriptionText%></p>
 	    		<div>Posted by: <%=Questions.get(i).username%> </div> <br></br> 
 	    		<%
+	    		
 	  			if(Questions.get(i).getAnswers().size() != 0){
-	    			for(int j = 0; j <Questions.get(i).getAnswers().size(); j++) { %> 
-	    				<p>Answers</p>
+	    			for(int j = 0; j <Questions.get(i).getAnswers().size(); j++) { 
+	    				String fm = "<br></br>";
+	    				out.println("Answer from representative "+(Questions.get(i).getAnswers().get(0).username == null ? "(account deleted): " : Questions.get(i).getAnswers().get(0).username+": " +fm) );
+	    			
+	    			%> 
 	    				<p><%=Questions.get(i).getAnswers().get(0).toString()%></p> <br></br> <% 
 	    			}
 	   		 	}

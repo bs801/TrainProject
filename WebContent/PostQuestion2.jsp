@@ -15,6 +15,7 @@
      }
      Question p = new Question(-1,q,user,d);
      TrainProject.Questions.insert(p);
+     response.sendRedirect("PostQuestion.jsp");
  %>
     
 <!DOCTYPE html>
