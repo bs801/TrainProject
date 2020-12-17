@@ -126,6 +126,45 @@ public class Formatting {
 		MIN = min;
 		RXM = XM;
 	}
+	public static String getMonth(int i) {
+		if(i == 1) {
+			return "January";
+		}
+		if(i == 2) {
+			return "February";
+		}
+		if(i == 3) {
+			return "March";
+		}
+		if(i == 4) {
+			return "April";
+		}
+		if(i == 5) {
+			return "May";
+		}
+		if(i == 6) {
+			return "June";
+		}
+		if(i == 7) {
+			return "July";
+		}
+		if(i == 8) {
+			return "August";
+		}
+		if(i == 9) {
+			return "September";
+		}
+		if(i == 10) {
+			return "October";
+		}
+		if(i == 11) {
+			return "November";
+		}
+		if(i == 12) {
+			return "December";
+		}
+		return "";
+	}
 	
 	public static ArrayList<String> getTransitLineNames() throws SQLException {
 		ArrayList<TransitLine> tlns = TrainProject.TransitLines.getAsList();
@@ -135,4 +174,6 @@ public class Formatting {
 		}
 		return new ArrayList<String>(map.values());
 	}
+	
+	
 }

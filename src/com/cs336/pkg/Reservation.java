@@ -140,9 +140,15 @@ public class Reservation {
 		
 	}
 	public Schedule getForwardSchedule() throws SQLException {
+		if(TrainProject.Schedules.get(forward_transitLineName, forward_reverseLine, forward_scheduleDepartureTime) == null) {
+			return new Schedule(forward_transitLineName, forward_reverseLine, forward_scheduleDepartureTime, forward_trainID);
+		}
 		return TrainProject.Schedules.get(forward_transitLineName, forward_reverseLine, forward_scheduleDepartureTime);
 	}
 	public Schedule getReturnSchedule() throws SQLException {
+		if(TrainProject.Schedules.get(return_transitLineName, return_reverseLine, return_scheduleDepartureTime) == null) {
+			return new Schedule(forward_transitLineName, return_reverseLine, return_scheduleDepartureTime, return_trainID);
+		}
 		return TrainProject.Schedules.get(return_transitLineName, return_reverseLine, return_scheduleDepartureTime);
 	}
 	public Station getOriginStation() throws SQLException {
@@ -178,6 +184,7 @@ public class Reservation {
 	}
 	
 	private String getString() throws SQLException {
+		
 		String l1 = getOriginStation()+" "+Formatting.displayTime(timeOfForwardDeparture())+" --> "+getDestinationStation()+" "+Formatting.displayTime(timeOfForwardArrival());
 		
 		if(roundTrip == 1) {

@@ -37,7 +37,7 @@ while(true){
 %>
 The station ID is pre-filled to the lowest available station ID
 <br></br>
-	<form action="AddStation2.jsp" method="POST">
+	<form action="addStation2.jsp" method="POST">
 		Station ID: <input type="text" name="stationID" value="<%=i%>" /> 
 		<br></br> 
 		Name: <input type="text" name="name" placeholder="Name"/> 

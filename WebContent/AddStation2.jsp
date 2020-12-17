@@ -28,13 +28,13 @@ try{
 	}
 	if(errors.size() > 0){
 		session.setAttribute("AS2",errors);
-		response.sendRedirect("AddStation.jsp");
+		response.sendRedirect("addStation.jsp");
 		return;
 	}
 }catch(Exception e){
 	errors.add("Please enter in a station ID that is an integer greater than 0");
 	session.setAttribute("AS2",errors);
-	response.sendRedirect("AddStation.jsp");
+	response.sendRedirect("addStation.jsp");
 	return;
 }
 ArrayList<Station> stations = TrainProject.Stations.getAsList();
@@ -44,7 +44,7 @@ ArrayList<Station> stations = TrainProject.Stations.getAsList();
 		if(s.stationID == v){
 			errors.add("Station ID "+v+" is already taken");
 			session.setAttribute("AS2",errors);
-			response.sendRedirect("AddStation.jsp");
+			response.sendRedirect("addStation.jsp");
 			return;
 		}
 	}
@@ -65,7 +65,7 @@ ArrayList<Station> stations = TrainProject.Stations.getAsList();
 <body>
 
 <br></br>
-<form action="AddStation.jsp" method="POST">
+<form action="addStation.jsp" method="POST">
 <input type="Submit" value="Add a new station"/>
 </form>
 <br></br>

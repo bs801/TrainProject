@@ -59,7 +59,7 @@
 	            new Comparator<ReservationBuilder>() {
 	                public int compare(ReservationBuilder r1, ReservationBuilder r2)
 	                {
-	                    return (r1.getOrigin().departureTime.isBefore(r2.getOrigin().departureTime) ? 1 : -1);
+	                    return (r1.getOrigin().departureTime.isBefore(r2.getOrigin().departureTime) ? -1 : 1);
 	                }
 	            }
 		);
@@ -69,7 +69,7 @@
 	            new Comparator<ReservationBuilder>() {
 	                public int compare(ReservationBuilder r1, ReservationBuilder r2)
 	                {
-	                    return (r1.getDestination().arrivalTime.isBefore(r2.getDestination().arrivalTime) ? 1 : -1);
+	                    return (r1.getDestination().arrivalTime.isBefore(r2.getDestination().arrivalTime) ? -1 : 1);
 	                }
 	            }
 		);
