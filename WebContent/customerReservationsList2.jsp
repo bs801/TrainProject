@@ -64,5 +64,9 @@
 	}
 	
 %>
+
+<form action="customerReservationsList.jsp" method = "POST">
+	<input type="submit" value="Back"/>
+	</form> 
 </body>
 </html>

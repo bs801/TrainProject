@@ -82,7 +82,7 @@ for(Reservation r : cancelled){
 }
 %>
 <form action="CustomerLanding.jsp" method="POST">
-<input type="Submit" value="Home"/>
+<input type="Submit" value="Back to Dashboard"/>
 </form>
 </body>
 </html>

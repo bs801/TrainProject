@@ -34,7 +34,7 @@ out.println(res.get(i));
 <body>
 	
 <form action="CustomerLanding.jsp" method="POST">
-<input type="Submit" value="Home"/>
+<input type="Submit" value="Back to Dashboard"/>
 </form>
 </body>
 </html>
