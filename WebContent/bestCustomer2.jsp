@@ -44,7 +44,7 @@
 	    Float value = entry.getValue();
 	    if(value > max){
 	    	max = value;
-	    	name += ", "+key;
+	    	name += key + "  ";
 	    	
 	    }
 	}	
