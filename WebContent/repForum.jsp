@@ -68,36 +68,39 @@
 	    		<%
 	    	} else{
 	    		for(int j = 0; j <Questions.get(i).getAnswers().size(); j++) { %> 
+	    		<%
+	    			String bm = "<br></br>";
+	    			out.println("Answer from representative "+(Questions.get(i).getAnswers().get(0).username == null ? "(account deleted): " : Questions.get(i).getAnswers().get(0).username+": " +bm) ); %> 
 	    			<p><%=Questions.get(i).getAnswers().get(0).toString()%></p> <br></br> <%
 	    		}
 	    	} 
 		} 
 	}else{ %>
 	<%
-		for(int i = 0; i < temp.size(); i ++ ){%> 
-	 		<br></br>
-	 		<% out.print("<h3> Posted by "+temp.get(i).username+" </h3>"); %>
-	 		<h3> Question: <%=temp.get(i).toString()%> </h3>
-	    	<p> Body: <%=temp.get(i).descriptionText%> </p>
-	    	<div>Posted by: <%=temp.get(i).username%> </div> <br></br> 
-	    	<%
-	    	if(temp.get(i).getAnswers().size() == 0)
-	    	{
-	    		%> 
-	    			<input name = <%=temp.get(i).questionID %> type = "Submit" value = "Answer this question" />
-	    		<%
-	    	} else{
-	    		for(int j = 0; j <temp.get(i).getAnswers().size(); j++) {
-	    				String fm = "<br></br>";
-	    				out.println("Answer from representative "+(Questions.get(i).getAnswers().get(0).username == null ? "(account deleted): " : Questions.get(i).getAnswers().get(0).username+": " +fm) );
-	    			
-	    			%> 
-	    		
-	    			<p><%=temp.get(i).getAnswers().get(0).toString()%></p> <br></br> <%
-	    		}
-	    	} 
-		} 
-	}%>
+	for(int i = 0; i < temp.size(); i ++ ){%> 
+ 		<br></br>
+ 		<% out.print("<h3> Posted by "+temp.get(i).username+" </h3>"); %>
+ 		<h3> Question: <%=temp.get(i).toString()%> </h3>
+    	<p> Body: <%=temp.get(i).descriptionText%> </p>
+    	<div>Posted by: <%=temp.get(i).username%> </div> <br></br> 
+    	<%
+    	if(temp.get(i).getAnswers().size() == 0)
+    	{
+    		%> 
+    			<input name = <%=temp.get(i).questionID %> type = "Submit" value = "Answer this question" />
+    		<%
+    	} else{
+    		for(int j = 0; j <temp.get(i).getAnswers().size(); j++) {
+    				String fm = "<br></br>";
+    				out.println("Answer from representative "+(temp.get(i).getAnswers().get(0).username == null ? "(account deleted): " : temp.get(i).getAnswers().get(0).username+": " +fm) );
+
+    			%> 
+    		
+    			<p><%=temp.get(i).getAnswers().get(0).toString()%></p> <br></br> <%
+    		}
+    	} 
+	} 
+}%>
 </form>
 	
 </body>
