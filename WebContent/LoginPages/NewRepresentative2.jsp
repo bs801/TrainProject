@@ -15,8 +15,8 @@
 	String lastname = request.getParameter("lastname");
     
 	ArrayList<String> errors = new ArrayList<String>();
- 	if(newUsername.length() < 6 || newUsername == null || newUsername.length() > 20){
- 		errors.add("Username must be between 6 to 20 characters");
+ 	if(newUsername.length() < 4 || newUsername == null || newUsername.length() > 20){
+ 		errors.add("Username must be between 4 to 20 characters");
  	}
  	if(newPassword.length() < 8 || newPassword  == null || newPassword.length() > 20){
  		errors.add("Password must be between 8 to 20 characters");

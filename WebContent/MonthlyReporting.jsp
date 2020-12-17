@@ -178,9 +178,9 @@ Select Month to View Metrics For:
 				}
 				String fm = "<br></br>";
 				out.println("<h2>Monthly report for Transit Line: "+tap.transitLineName+"</h2>"+fm);
-				out.println("Revenue generated: "+tap.revenue+fm);
+				out.println("Revenue generated: "+Formatting.getFare(tap.revenue)+fm);
 				out.println("Reservations booked: "+tap.resTally+fm);
-				out.println("Trips booked: "+tap.tally+fm);
+				out.println("Double counting return trips on same transit line: "+tap.tally+fm);
 			//	out.println("Trips booked: "+tap.tally+fm);
 			//	out.println("Trainsit Line "+tap.transitLineName+" had "+tap.resTally+" reservations with a departure (forward or return, one-way or round-trip). This is "+tap.tally+" trips when double counting round trip reservations with where both forward/retun trips are made for this route. <br></br>");
 				ArrayList<Reservation> res = TrainProject.Reservations.getReservations(MonthReport.my, MonthReport.TLOptions.get(MonthReport.TLNSELECT));
@@ -197,7 +197,7 @@ Select Month to View Metrics For:
 				
 				CustomerRevenuePacket cap = null;
 				for(CustomerRevenuePacket icap : customerRevenues){
-					if(icap.username.equals(MonthReport.TLOptions.get(MonthReport.CUSTOMERSELECT))){
+					if(icap.username.equals(MonthReport.COptions.get(MonthReport.CUSTOMERSELECT))){
 						cap = icap;
 						break;
 					}
@@ -220,8 +220,6 @@ Select Month to View Metrics For:
 				}
 			}
 		}
-	
-		
 	%>
 	
 

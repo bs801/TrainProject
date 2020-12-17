@@ -60,10 +60,10 @@ public class ReservationBuilderService {
 			ArrayList<Station> destinations = new ArrayList<Station>();
 			
 			for(Station s : TrainProject.Stations.getAsList()){
-				if(s.city.equals(cityA)){
+				if(s.city.equalsIgnoreCase(cityA)){
 					origins.add(s);
 				}
-				if(s.city.equals(cityB)){
+				if(s.city.equalsIgnoreCase(cityB)){
 					destinations.add(s);
 				}
 			}

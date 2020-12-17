@@ -299,10 +299,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-<form action="CreateSchedule.jsp" method = "POST">
-<input type="submit" value="Exit"/>
+<form action="ScheduleMain.jsp" method = "POST">
+<input type="submit" value="RETURN TO DASHBOARD"/>
 </form>
+<br></br>
+<form action="ScheduleMain.jsp" method = "POST">
+<input type="submit" value="Return to Schedule Editor"/>
+</form>
+
+<br></br>
+
 </body>
 </html>
 
@@ -321,11 +327,11 @@ if(trainTakenMessage != null){
 	for(int i=0; i<transitStops.size(); i++){
 		LocalTime AT = transitStops.get(i).arrivalTime.toLocalTime();
 		LocalDateTime ADT = p.incompleteSchedule.scheduleDepartureTime.toLocalDateTime().plusHours(AT.getHour()).plusMinutes(AT.getMinute());
-		String arrString = ( i==0 ? "ORIGIN" : ADT.toString());
+		String arrString = ( i==0 ? "ORIGIN" : Formatting.displayTime(ADT));
 		
 		LocalTime DT = transitStops.get(i).departureTime.toLocalTime();
 		LocalDateTime DDT = p.incompleteSchedule.scheduleDepartureTime.toLocalDateTime().plusHours(DT.getHour()).plusMinutes(DT.getMinute());
-		String desString = (  i==transitStops.size()-1 ? "DESTINATION" : DDT.toString());
+		String desString = (  i==transitStops.size()-1 ? "DESTINATION" : Formatting.displayTime(DDT));
 		
 		out.println( "Stop "+i+": " +transitStops.get(i).toString() +": "+ arrString + " - " + desString + "<br></br> " );	
 	}
@@ -335,14 +341,14 @@ out.println( "<br></br> " ); out.println( "<br></br> " );
 System.out.println("A");
 out.println("NEW TRANSIT LINE (FORWARD) "+ p.transitLineName+": "+transitStops.get(0)+" -> "+transitStops.get(transitStops.size()-1) + "<br></br> " );
 for(int i=0; i<transitStops.size(); i++){
-	out.println( "Stop "+i+": " +transitStops.get(i).toString() +": "+ transitStops.get(i).arrivalTime + " - " + transitStops.get(i).departureTime + "<br></br> " );	
+	out.println( "Stop "+i+": " +transitStops.get(i).toString() +": "+ Formatting.displayTime(transitStops.get(i).arrivalTime) + " - " + Formatting.displayTime(transitStops.get(i).departureTime) + "<br></br> " );	
 }
 out.println( "<br></br> " ); out.println( "<br></br> " ); 
 
 
 out.println("NEW TRANSIT LINE (REVERSE) "+ p.transitLineName+": "+revStops.get(0)+" -> "+revStops.get(revStops.size()-1) + "<br></br> " );
 for(int i=0; i<revStops.size(); i++){
-	out.println("Stop "+i+": " +revStops.get(i).toString() +": "+ revStops.get(i).arrivalTime + " - " + revStops.get(i).departureTime + "<br></br> " );	
+	out.println("Stop "+i+": " +revStops.get(i).toString() +": "+ Formatting.displayTime(revStops.get(i).arrivalTime) + " - " + Formatting.displayTime(revStops.get(i).departureTime) + "<br></br> " );	
 }
 
 %>

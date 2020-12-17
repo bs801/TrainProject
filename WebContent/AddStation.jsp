@@ -52,7 +52,7 @@ The station ID is pre-filled to the lowest available station ID
 		<br></br>
 			<br></br>
 				<br></br>
-	<h3>List of Stations Already inputed:</h3>
+	<h3>List of Stations Already Added:</h3>
 	<br></br>
 	<%
 	

@@ -194,7 +194,7 @@ public class Reservation {
 		l1 = l1;// + "<br></br>";
 		l1 = "<h3>"+l1+"</h3>";
 		
-		String bn = "Booked on "+Formatting.displayTime(dateOfCreation.toLocalDateTime().toLocalDate()) + "<br></br>";
+		String bn = "Booked on "+Formatting.displayTime(dateOfCreation.toLocalDateTime().toLocalDate()) + ".  Customer username: "+username+".  Reservation ID: "+reservationID+".<br></br>";
 		String p1 = "Passenger "+ ((title == null || "".equals(title)) ? "" : title ) + " " + firstName +" "+ lastName;
 		p1 = p1 + "<br></br>";
 		

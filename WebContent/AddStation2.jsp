@@ -41,8 +41,14 @@ ArrayList<Station> stations = TrainProject.Stations.getAsList();
 
 
 	for(Station s : stations){
-		if(s.stationID == v){
+		if(s.stationID == v ){
 			errors.add("Station ID "+v+" is already taken");
+			session.setAttribute("AS2",errors);
+			response.sendRedirect("AddStation.jsp");
+			return;
+		}
+		if(s.name.equalsIgnoreCase(name) && s.state.equalsIgnoreCase(state) && s.city.equalsIgnoreCase(city)){
+			errors.add("This name/state/city pair has already been added with station ID "+s.stationID);
 			session.setAttribute("AS2",errors);
 			response.sendRedirect("AddStation.jsp");
 			return;

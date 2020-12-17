@@ -7,11 +7,10 @@
     
     
 <%
-	String username = "user1"; //(String) session.getAttribute("username");
+	String username = (String) session.getAttribute("username");
 	
 	ArrayList<Reservation> Res = TrainProject.Reservations.getAsList();
-	
-	System.out.println(Res.get(0).forward_transitLineName);
+
 	
 	
 	ArrayList<Reservation> now = new ArrayList<Reservation>();

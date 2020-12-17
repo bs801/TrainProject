@@ -74,7 +74,7 @@
 		Destination: <%=destination.toString() %>	<br></br>
 		<input type="Submit" value="Next"/>
 	</form>
-
+<br></br>
 	<form action="CreateSchedule.jsp" method = "POST">
 	<input type="submit" value="cancel"/>
 	</form>

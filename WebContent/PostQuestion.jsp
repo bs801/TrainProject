@@ -19,11 +19,18 @@
 <title>Post Questions</title>
 </head>
 <body>
-<p>Type your questions and descriptions below!</p>
+<h2>Post a new question</h2>
 <form action="PostQuestion2.jsp" method="POST">
-	<input type="text" name="question"/> <br></br>
-	<textarea rows="5" type="text" name="description"> </textarea>
+	Question Title: <br></br> <input type="text" name="question"/>  <br></br>
+	Post Body: <br></br> <textarea rows="5" type="text" name="description"> </textarea>
+	 <br></br>
 	<input type="Submit" value="Post question">
+</form>
+ <br></br>
+  <br></br>
+
+<form action="forum.jsp" method="POST">
+	<input type="Submit" value="Cancel">
 </form>
 
 

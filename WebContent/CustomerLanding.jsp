@@ -3,7 +3,7 @@
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 
-
+<% session.setAttribute("username", "user1"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,22 +14,20 @@
 	<h1><font size ="8" color="black" face = "courier" >Home Page</font></h1>
 
 
-	<p>Search For Train Schedule</p>
-	<form action="trainScheduleSearch.jsp" method = "POST">
-	<input type="submit" value="Go"/>
-	</form> 
 	<p>Reserve New Tickets</p>
 	<form action="MakeReservation.jsp" method = "POST">
-	<input type="submit" value="Go"/>
-	</form>
+	<input type="submit" value="Reserve a Trip"/>
+	</form><br></br>
+	
 	<p>View Reservation History / Cancel Reservation</p>
 	<form action="ViewMyReservations.jsp" method = "POST">
-	<input type="submit" value="Go"/>
-	</form>
+	<input type="submit" value="View My Reservations"/>
+	</form><br></br>
+	
 	<p>Q&A Forum</p>
 	<form action="forum.jsp" method = "POST">
 	<input type="submit" value="Ask a Question!"/>
-	</form> 
+	</form> <br></br>
 	<p>Log Out</p>
 	<form action="logout.jsp" method = "POST">
 	<input type="submit" value="Log Out"/>

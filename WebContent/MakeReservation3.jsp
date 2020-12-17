@@ -99,7 +99,8 @@ for(ReservationBuilder rb : validReturnBuilders){
  %> <%=stopList.get(i).getStation()+" - "%> <%
  	}
  %> <%=stopList.get(stopList.size()-1).getStation()%>
-	<br></br>Fare: <%=Formatting.getFare(rb.fare * (1-disc))+(rt.equals("0") ? "": " +"+Formatting.getFare(selectedBuilder.fare))%>
+ 	<% System.out.println(((float)rb.fare) * (1f-disc)+ " " + (1f-disc) + " "+ (float)rb.fare); %>
+	<br></br>Fare: <%=Formatting.getFare(((float)rb.fare) * (1f-disc))+(rt.equals("0") ? "": " +"+Formatting.getFare(selectedBuilder.fare * (1f-disc)))%>
 
 	<br></br><input name=<%=iterator%> type="submit" value="Select"/> 
 	<br></br>

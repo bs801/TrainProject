@@ -56,7 +56,7 @@
 	<p1>Fare $</p1> <input type="text" name="FARE"/>
 	<br></br><input type="submit" name="NewTransitLine" value="Next" />
 </form>
-
+<br></br>
 <form action="CreateSchedule.jsp" method = "POST">
 <input type="submit" value="cancel"/>
 </form>

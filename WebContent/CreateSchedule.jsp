@@ -90,7 +90,7 @@ System.out.println("UP FRONT");
 	<br></br>
 	<input type="submit" value="Continue"/> 
 </form>
-
+<br></br>
 <form action="ScheduleMain.jsp" method="GET">
 	<input type="Submit" name="filter" value="Cancel" /> <br></br>
 </form>

@@ -75,6 +75,10 @@
 	CSNTLPipeline p = (CSNTLPipeline) session.getAttribute("CSNTLP");
 	
 	System.out.println("ERRORS ARE "+errors.size());
+	
+	if((new Timestamp(cal.getTimeInMillis())).toLocalDateTime().isBefore(LocalDateTime.now())){
+		errors.add("Schedule cannot have departure time before the present time");
+	}
 	if(errors.size() > 0){
 		p.errors = errors;
 		response.sendRedirect("CreateSchedule.jsp");
@@ -127,7 +131,7 @@
 		TrainProject.Schedules.insert(newSchedule);
 		
 		System.out.println("Added schedule");
-		out.println("CREATED SCHEDULE "+ newSchedule.transitLineName+" at "+newSchedule.scheduleDepartureTime.toString()  );
+		out.println("CREATED SCHEDULE "+ newSchedule.transitLineName+" at "+newSchedule.scheduleDepartureTime.toString() + "<br></br>");
 		tns = newSchedule;
 	} else {
 	
@@ -161,28 +165,33 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-<form action = "CreateSchedule.jsp" method = "POST">
-<input type = "Submit" value="Exit">
-</form>
-
-</body>
-</html>
-
-
 <%
 out.println("NEW SCHEDULE "+ tns.transitLineName+" at "+tns.scheduleDepartureTime.toString() + "<br></br> " );
 for(int i=0; i<TL.getTransitStops().size(); i++){
 	LocalTime AT = TL.getTransitStops().get(i).arrivalTime.toLocalTime();
 	LocalDateTime ADT = tns.scheduleDepartureTime.toLocalDateTime().plusHours(AT.getHour()).plusMinutes(AT.getMinute());
-	String arrString = ( i==0 ? "ORIGIN" : ADT.toString());
+	String arrString = ( i==0 ? "ORIGIN" : Formatting.displayTime(ADT));
 	
 	LocalTime DT =  TL.getTransitStops().get(i).departureTime.toLocalTime();
 	LocalDateTime DDT = tns.scheduleDepartureTime.toLocalDateTime().plusHours(DT.getHour()).plusMinutes(DT.getMinute());
-	String desString = ( i==TL.getTransitStops().size()-1 ? "DESTINATION" : ADT.toString());
+	String desString = ( i==TL.getTransitStops().size()-1 ? "DESTINATION" : Formatting.displayTime(DDT));
 	
 	out.println( "Stop "+i+": " + TL.getTransitStops().get(i).toString() +": "+ arrString + " - " + desString + "<br></br> " );	
 }
 %>
+<form action = "CreateSchedule.jsp" method = "POST">
+<input type = "Submit" value="Return to Schedule Editor">
+</form>
+<br></br>
+<form action = "RepresentativeLanding.jsp" method = "POST">
+<input type = "Submit" value="Return to Dashboard">
+</form>
+</body>
+</html>
+
+
+
+
+
 
 

@@ -7,13 +7,49 @@
 
 <%
 	//Float disc = 0f;//Float.parseFloat(request.getParameter("disc"));
-	float disc = Float.parseFloat(request.getParameter("disc"));
+	float disc = 0f; 
+	int orig = -1;
+	int dest = -1;
+	String rt = null;
+	String date1 = null; //request.getParameter("date1");
+	String date2= null;
+	if(request.getParameter("disc") == null){
+		disc = Float.parseFloat((String) session.getAttribute("disc"));
+		orig = Integer.parseInt((String) session.getAttribute("orig"));
+		dest = Integer.parseInt((String) session.getAttribute("dest"));
+		rt = (String) session.getAttribute("rt");
+		date1 = (String) session.getAttribute("date1");
+	} else {
+		disc =  Float.parseFloat(request.getParameter("disc"));
+		orig = Integer.parseInt(request.getParameter("objectA"));
+		dest = Integer.parseInt(request.getParameter("objectB"));
+		
+		
+		rt = request.getParameter("rt");
+		date1 = request.getParameter("date1");
+		if(rt.equals("1")){
+			date2 = request.getParameter("date2");
+			session.setAttribute("date2",date2);
+		}
+		
+		session.setAttribute("disc", disc+"");
+		session.setAttribute("orig", orig+"");
+		session.setAttribute("dest", dest+"");
+		session.setAttribute("rt", rt);
+	}
 	session.setAttribute("disc", disc+"");
-	
+	/*
 	//System.out.println(request.getParameter("objectA")+"REEE");
 	//int origin = 23; //Integer.parseInt(request.getParameter("objectA"));  
-	int orig = Integer.parseInt(request.getParameter("objectA"));
+	int orig = -1;
+	if(request.getParameter("orig") == null){
+		orig = (Integer) session.getAttribute("orig");
+	}
+	
+	Integer.parseInt(request.getParameter("objectA"));
 	int dest = Integer.parseInt(request.getParameter("objectB"));
+	
+	)*/
 	//int destination = 17; //Integer.parseInt(request.getParameter("objectB"));
 				
 	//ArrayList<Object> options = Answer.getOps();//
@@ -22,10 +58,10 @@
 	Object objectA = options.get(orig);
 	Object objectB = options.get(dest);
 	
-	System.out.println(objectA+" "+objectB);
+	//System.out.println(objectA+" "+objectB);
 	
 	//String date1 = "2020-06-06";//request.getParameter("date1");
-	String date1 = request.getParameter("date1");
+	
 	LocalDate departureDate = LocalDate.parse(date1);
 	
 	
@@ -33,7 +69,7 @@
 	
 	
 	//String rt = "1";//request.getParameter("rt");
-	String rt = request.getParameter("rt");
+	//String rt = request.getParameter("rt");
 	
 
 	
@@ -43,7 +79,7 @@
 		validReservations = ReservationBuilderService.getReservationOptions(departureDate, objectA, objectB);
 	} else {
 		session.setAttribute("rt", "1");
-		String date2 = request.getParameter("date2");
+		date2 = (String) session.getAttribute("date2");
 		LocalDate returnDate = LocalDate.parse(date2);
 		validReservations = ReservationBuilderService.getReservationOptions(departureDate, objectA, objectB, returnDate);
 		out.println("INFO: "+ReservationBuilderService.omitted+" results were omitted for not having valid round trips");
@@ -128,7 +164,7 @@ for(ReservationBuilder rb : validReservations){
 	TransitLine: <%=rb.schedule.transitLineName %> <br></br>
 	Train: <%=TrainProject.Trains.get(rb.schedule.trainID)%> <br></br> 
 	Route: <% for(int i=0; i<stopList.size()-1; i++){ %> <%=stopList.get(i).getStation()+" - " %> <% } %> <%=stopList.get(stopList.size()-1).getStation() %>
-	<br></br>Fare: <%=Formatting.getFare(rb.fare * (1-disc))+(rt.equals("0") ? "": "  + return ticket price") %>
+	<br></br>Fare: <%=Formatting.getFare(rb.fare * (1f-disc))+(rt.equals("0") ? "": "  + return ticket price") %>
 	
 	
 	<br></br><input name=<%=iterator%> type="submit" value="Select"/> 

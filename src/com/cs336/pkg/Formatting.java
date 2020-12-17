@@ -29,6 +29,22 @@ public class Formatting {
 		int y = t.getYear();
 		return h+":"+mins+" "+XM+" on "+mo+"/"+dd+"/"+y;
 	}
+	public static String displayTime(java.sql.Time t) {
+		LocalDateTime t2 = LocalDateTime.of(2021, 5, 1, t.toLocalTime().getHour(), t.toLocalTime().getMinute());
+		
+		int h = t2.getHour();
+		String XM = "AM";
+		if(h > 12) { 
+			XM = "PM";
+			h = h - 12;
+		}
+		if(h == 0) {
+			h = 12;
+		}
+		int min = t2.getMinute();
+		String mins = (min < 10 ? "0"+min : ""+min);
+		return "+ "+h+":"+mins;
+	}
 	public static String displayTime(LocalDate t) {
 		int m = t.getMonthValue();
 		String mo = (m < 10 ? "0"+m : ""+m);
@@ -80,6 +96,7 @@ public class Formatting {
 		}
 		return ""+trainID;
 	}
+	
 	
 	public static boolean sameMonth(LocalDate monthyear, LocalDateTime t) {
 		

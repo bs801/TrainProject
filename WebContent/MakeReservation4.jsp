@@ -21,10 +21,10 @@
 	}
 		
 	float disc = Float.parseFloat((String) session.getAttribute("disc"));
-	float total = rbf.fare * (1-disc);
-	System.out.println(Formatting.getFare(total)+" "+total+" TOTAL: "+rbf.fare * (1-disc));
+	float total = rbf.fare * (1f-disc);
+	System.out.println(Formatting.getFare(total)+" "+total+" TOTAL: "+rbf.fare * (1f-disc));
 	if(rbf.returnBuilder != null){
-		total = total + (rbf.returnBuilder.fare * (1-disc));
+		total = total + (rbf.returnBuilder.fare * (1f-disc));
 	}
 	System.out.println("PRE RES");
 	Reservation newRes = new Reservation(
@@ -35,7 +35,7 @@
 			rbf.schedule.reverseLine,
 			rbf.schedule.scheduleDepartureTime,
 			rbf.schedule.trainID,
-			rbf.fare * (1-disc),
+			rbf.fare * (1f-disc),
 
 			(rbf.returnBuilder != null ? 1 : 0),
 			
@@ -43,7 +43,7 @@
 			(rbf.returnBuilder != null ? rbf.returnBuilder.schedule.reverseLine : -1),
 			(rbf.returnBuilder != null ? rbf.returnBuilder.schedule.scheduleDepartureTime : null),
 			(rbf.returnBuilder != null ? rbf.returnBuilder.schedule.trainID : -1),
-			(rbf.returnBuilder != null ? rbf.returnBuilder.fare * (1-disc) : -1),
+			(rbf.returnBuilder != null ? rbf.returnBuilder.fare * (1f-disc) : -1),
 			
 			rbf.getOrigin().getStation().stationID,
 			rbf.getDestination().getStation().stationID,
@@ -77,7 +77,7 @@
  %> <%=rbf.reservationStops.get(i).getStation()+" - "%> <%
  	}
  %> <%=rbf.reservationStops.get(rbf.reservationStops.size()-1).getStation()%>
-	<br></br>Fare: <%=Formatting.getFare(rbf.fare * (1-disc))%>
+	<br></br>Fare: <%=Formatting.getFare(rbf.fare * (1f-disc))%>
 	
 	<br></br><%
 			if(rbf.returnBuilder != null){
@@ -91,7 +91,7 @@
  %> <%=rbf.returnBuilder.reservationStops.get(i).getStation()+" - "%> <%
  	}
  %> <%=rbf.returnBuilder.reservationStops.get(rbf.returnBuilder.reservationStops.size()-1).getStation()%>
-		<br></br>Fare: <%=Formatting.getFare(rbf.returnBuilder.fare * (1-disc))%>
+		<br></br>Fare: <%=Formatting.getFare(rbf.returnBuilder.fare * (1f-disc))%>
 		
 	<%}%>
 
