@@ -166,7 +166,7 @@ Select Month to View Metrics For:
 <br></br>
 <br></br>
 <form action="AdminLanding.jsp">
-<input type="submit" value="Cancel"/>
+<input type="submit" value="Back to Dashboard"/>
 </form>
 
 

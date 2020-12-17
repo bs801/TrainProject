@@ -11,14 +11,10 @@
 </head>
 <h1><font size ="7" color="black" face = "courier">ADMIN DASHBOARD</font></h1>
 
-<form action="logout.jsp" method = "POST">
-	<input type="submit" value="Log out"/>
-</form> <br></br>
+
 
 <body>
-
-
-	
+	<p>Edit Information For Customer Representative</p>
 	<form action="editCustomerRepresentative.jsp" method = "POST">
 		<input type="submit" value="Edit Customer Representatives"/>
 	</form> 
