@@ -223,6 +223,22 @@ public class TrainProject {
 			ps.executeUpdate();
 			ScheduleTable = null;
 		}
+		public static void update(Schedule s, Schedule ns) throws SQLException {
+			String sql = "UPDATE Schedule SET transitLineName=(?), reverseLine=(?), scheduleDepartureTime=(?), trainID=(?) WHERE"
+					+ " transitLineName=(?), reverseLine=(?), scheduleDepartureTime=(?), trainID=(?)";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, ns.transitLineName);
+			ps.setBoolean(2, (ns.reverseLine == 1 ? true : false));
+			ps.setTimestamp(3, ns.scheduleDepartureTime);
+			ps.setInt(4, ns.trainID);
+			
+			ps.setString(5, s.transitLineName);
+			ps.setBoolean(6, (s.reverseLine == 1 ? true : false));
+			ps.setTimestamp(7, s.scheduleDepartureTime);
+			ps.setInt(8, s.trainID);
+			ps.executeUpdate();
+			ScheduleTable = null;
+		}
 			
 	}
 	

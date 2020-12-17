@@ -164,6 +164,18 @@ public class Reservation {
 		return getReturnSchedule().dateTimeOfArrival(getOriginStation());
 	}
 	
+	public void updateTrain(Schedule s, Schedule ns) throws SQLException {
+		Schedule fsc = getForwardSchedule();
+		if(s.transitLineName.equals(fsc.transitLineName) && s.reverseLine == fsc.reverseLine && s.scheduleDepartureTime.toLocalDateTime().isEqual(fsc.scheduleDepartureTime.toLocalDateTime()) && s.trainID == fsc.trainID) {
+			this.forward_trainID = ns.trainID;
+		}
+		
+		Schedule rsc = getReturnSchedule();
+		if(s.transitLineName.equals(rsc.transitLineName) && s.reverseLine == rsc.reverseLine && s.scheduleDepartureTime.toLocalDateTime().isEqual(rsc.scheduleDepartureTime.toLocalDateTime()) && s.trainID == rsc.trainID) {
+			this.return_trainID = ns.trainID;
+		}
+	}
+	
 	private String getString() throws SQLException {
 		String l1 = getOriginStation()+" "+Formatting.displayTime(timeOfForwardDeparture())+" --> "+getDestinationStation()+" "+Formatting.displayTime(timeOfForwardArrival());
 		

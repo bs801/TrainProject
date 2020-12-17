@@ -106,6 +106,26 @@ public class Formatting {
 		return !p1 && !p2;
 		
 	}
+	public static int HOUR;
+	public static int MIN;
+	public static String RXM;
+	public static void getTimeValue(LocalDateTime t) {
+		int h = t.getHour();
+		String XM = "AM";
+		if(h > 12) { 
+			XM = "PM";
+			h = h - 12;
+		}
+		if(h == 0) {
+			h = 12;
+		}
+		int min = t.getMinute();
+		String mins = (min < 10 ? "0"+min : ""+min);
+		
+		HOUR = h;
+		MIN = min;
+		RXM = XM;
+	}
 	
 	public static ArrayList<String> getTransitLineNames() throws SQLException {
 		ArrayList<TransitLine> tlns = TrainProject.TransitLines.getAsList();
