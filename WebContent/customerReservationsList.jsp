@@ -13,7 +13,8 @@
 <h1>Customer Reservations Given a Transit Line and Date</h1>
 <%
 
-ArrayList<TransitLine> transitLines = TrainProject.TransitLines.getAsList();
+ArrayList<String> transitLines = Formatting.getTransitLineNames();
+Collections.sort(transitLines);
 
 
 %>
@@ -22,9 +23,9 @@ ArrayList<TransitLine> transitLines = TrainProject.TransitLines.getAsList();
 	Transit Line
 	<select name="TransitLine">
 		<option selected value="0">--None--</option>
-		<%for(TransitLine r : transitLines){
+		<%for(String s : transitLines){
 			
-			%><option value=<%=r.transitLineName %>><%=r.transitLineName%></option>
+			%><option value=<%=s %>><%=s%></option>
 			<%
 			
 		} %>
