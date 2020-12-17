@@ -8,6 +8,13 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
+
+<%
+	session.setAttribute("username", "vatche");	
+	Representative r = TrainProject.Representatives.get((String) session.getAttribute("username"));
+	out.println("Welcome "+r.firstName+" "+r.lastName+". You are logged in as "+r.username);
+%>
+
 <body>
 	<h1><font size ="8" color="black" face = "courier" >Home Page(Customer Rep)</font></h1>
 

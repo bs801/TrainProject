@@ -11,6 +11,16 @@
 </head>
 <body>
 
+<form action="RepresentativeLanding.jsp" method="GET">
+	<input type="Submit" name="filter" value="RETURN TO DASHBOARD" /> <br></br>
+</form>
+
+<h2>Create a New Schedule</h2>
+<form action="CreateSchedule.jsp" method="GET">
+	<input type="Submit" name="filter" value="Create New Schedule" /> <br></br>
+</form>
+<h2>Schedule Filter Options</h2>
+Use these options to filter the list active of schedules below.
 <%
 	boolean nofilter = false;
 	boolean datefilter = false;
