@@ -313,14 +313,14 @@ public class TrainProject {
 				if(r.forward_transitLineName.equals(transitLineName)) {
 					if(Formatting.sameMonth(my, r.forward_scheduleDepartureTime.toLocalDateTime())) {
 						restap = true;
-						tap.tapForward();
+						tap.tapForward(r.forward_fare);
 					}
 				}
 				if(r.roundTrip == 1) {
 				if(r.return_transitLineName.equals(transitLineName)) {
 					if(Formatting.sameMonth(my, r.return_scheduleDepartureTime.toLocalDateTime())) {
 						restap = true;
-						tap.tapReturn();
+						tap.tapReturn(r.return_fare);
 					}
 				}
 				}

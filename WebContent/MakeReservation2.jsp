@@ -120,7 +120,7 @@ int iterator = 0;
 
 
 for(ReservationBuilder rb : validReservations){
-	
+	System.out.println("RESERVATION FARE IS"+rb.fare);
 	ArrayList<ScheduleStop> stopList = rb.reservationStops;
 	%>
 	<h4><%=rb.getOrigin().toString()+" at "+Formatting.displayTime(rb.getOrigin().departureTime)

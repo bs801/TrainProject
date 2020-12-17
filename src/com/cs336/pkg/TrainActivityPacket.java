@@ -7,18 +7,21 @@ public class TrainActivityPacket {
 	public int returnT = 0;
 	
 	public int resTally = 0;
+	public int revenue = 0;
 	
 	public TrainActivityPacket(String transitLineName) {
 		this.transitLineName = transitLineName;
 	}
-	public void tapForward() {
+	public void tapForward(float f) {
+		revenue += f;
 		tally++;
 		forward++;
 	}
 	public void tapResTally() {
 		this.resTally++;
 	}
-	public void tapReturn() {
+	public void tapReturn(float f) {
+		revenue += f;
 		tally++;
 		returnT++;
 	}

@@ -13,7 +13,8 @@ public class ReservationBuilder {
 	
 	public ReservationBuilder(Schedule sc, ArrayList<ScheduleStop> reservationStops) throws SQLException {
 		this.reservationStops = reservationStops; this.schedule = sc;
-		this.fare = (sc.getTransitLine().fare) * (reservationStops.size() / sc.getTransitLine().getTransitStops().size());
+		this.fare = (sc.getTransitLine().fare) * ((float)(reservationStops.size()) / ((float)sc.getTransitLine().getTransitStops().size()));
+	
 	}
 	
 	public ScheduleStop getOrigin() {

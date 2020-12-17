@@ -185,10 +185,10 @@ public class Reservation {
 	
 	private String getString() throws SQLException {
 		
-		String l1 = getOriginStation()+" "+Formatting.displayTime(timeOfForwardDeparture())+" --> "+getDestinationStation()+" "+Formatting.displayTime(timeOfForwardArrival());
+		String l1 = getOriginStation()+" "+Formatting.displayTime(timeOfForwardDeparture())+" --> "+getDestinationStation()+" "+Formatting.displayTime(timeOfForwardArrival())+"  (Train "+Formatting.getTrainID(forward_trainID)+")";
 		
 		if(roundTrip == 1) {
-			String l2 = getDestinationStation()+" "+Formatting.displayTime(timeOfReturnDeparture())+" --> "+getOriginStation()+" "+Formatting.displayTime(timeOfReturnArrival());
+			String l2 = getDestinationStation()+" "+Formatting.displayTime(timeOfReturnDeparture())+" --> "+getOriginStation()+" "+Formatting.displayTime(timeOfReturnArrival())+"  (Train "+Formatting.getTrainID(return_trainID)+")";
 			l1 = "<br></br>";
 		}
 		l1 = l1 + "<br></br>";
@@ -198,10 +198,12 @@ public class Reservation {
 		String p1 = "Passenger "+ ((title == null || "".equals(title)) ? "" : title ) + " " + firstName +" "+ lastName;
 		p1 = p1 + "<br></br>";
 		
+		
+	
 		String tf = "Total fare: "+Formatting.getFare(totalFare) + "<br></br>";
 		String ad = "Applied discount: "+Formatting.getDiscount(discount) + "<br></br>";
 		
-		return l1 + p1 + bn + tf + ad;
+		return l1 + p1 + bn + ad + tf;
 		
 	}
 	

@@ -17,6 +17,13 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+<form action="AdminLanding.jsp">
+<input type="submit" value="BACK TO DASHBOARD"/>
+</form>
+<br></br>
+<br></br>
+
 Select Month to View Metrics For:
 <form action="MonthlyReporting.jsp" method="GET">
 
@@ -110,27 +117,32 @@ Select Month to View Metrics For:
 	<input type = "submit" name="datesubmit" value = "Select Month/Year"/>
 
 	
+		<br></br>
+	<h2> View revenue and reservation report </h2>
 	
-	<h3> View revenue and reservation report </h3>
 	
-	The revenue and reservation report shows both revenue and reservations over a month for either for a selected customer or transit line.
-	
-	<input type="radio" name="torc" value="0" <% out.println(MonthReport.c1); %> /> Do not use
+
+	<input type="radio" name="torc" value="0" <% out.println(MonthReport.c1); %> />Do not use 
 	<br></br>
 	
-	<input type="radio" name="torc" value="1" <% out.println(MonthReport.c2); %> /> For Customer 
+	<input type="radio" name="torc" value="1" <% out.println(MonthReport.c2); %> /> View For Customer
 	<select name="customerindex">
 		<% for(int i=0; i<MonthReport.COptions.size(); i++){ %>
 				<option <%=(MonthReport.CUSTOMERSELECT == i ? "selected" : "") %> value=<%=""+i+""%>><%=MonthReport.COptions.get(i)%></option>
 		<% } %>
-	</select>
+	</select><br></br>
 	
-	<input type="radio" name="torc" value="2" <% out.println(MonthReport.c3); %> /> For Transit Line 
+	<input type="radio" name="torc" value="2" <% out.println(MonthReport.c3); %> /> View For Transit Line 
 	<select name="tlnindex">
 		<% for(int i=0; i<MonthReport.TLOptions.size(); i++){ %>
 				<option <%=(MonthReport.TLNSELECT == i ? "selected" : "") %> value=<%=""+i+""%>><%=MonthReport.TLOptions.get(i)%></option>
 		<% } %>
 	</select>
+	
+	<br></br>
+	The revenue and reservation report shows both revenue and reservations over a month for either for a selected customer or transit line.
+		<br></br>
+		<input type="Submit" name="reportsubmit" value="View Report" />
 	<br></br>
 	<br></br>
 	
@@ -146,7 +158,13 @@ Select Month to View Metrics For:
 						break;
 					}
 				}
-				out.println("Trainsit Line "+tap.transitLineName+" had "+tap.resTally+" reservations with a departure (forward or return, one-way or round-trip). This is "+tap.tally+" trips when double counting round trip reservations with where both forward/retun trips are made for this route. <br></br>");
+				String fm = "<br></br>";
+				out.println("Monthly report for Transit Line: "+tap.transitLineName+fm);
+				out.println("Revenue generated: "+tap.revenue+fm);
+				out.println("Reservations booked: "+tap.resTally+fm);
+				out.println("Trips booked: "+tap.tally+fm);
+			//	out.println("Trips booked: "+tap.tally+fm);
+			//	out.println("Trainsit Line "+tap.transitLineName+" had "+tap.resTally+" reservations with a departure (forward or return, one-way or round-trip). This is "+tap.tally+" trips when double counting round trip reservations with where both forward/retun trips are made for this route. <br></br>");
 				ArrayList<Reservation> res = TrainProject.Reservations.getReservations(MonthReport.my, MonthReport.TLOptions.get(MonthReport.TLNSELECT));
 				for(Reservation r : res){
 					out.println(r.toString() + "<br></br>");
@@ -160,14 +178,12 @@ Select Month to View Metrics For:
 		
 	%>
 	
-	<input type="Submit" name="reportsubmit" value="View Report" />
+
 </form>
 
 <br></br>
 <br></br>
-<form action="AdminLanding.jsp">
-<input type="submit" value="Cancel"/>
-</form>
+
 
 
 

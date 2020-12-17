@@ -22,6 +22,7 @@
 <h2>Schedule Filter Options</h2>
 Use these options to filter the list active of schedules below.
 <%
+	System.out.println("ASDF");
 	boolean nofilter = false;
 	boolean datefilter = false;
 	boolean tlnfilter = false;
@@ -46,7 +47,7 @@ Use these options to filter the list active of schedules below.
                 }
             }
 	);
-	
+	System.out.println("50");
 	if(request.getParameter("filter") != null){
 		if(request.getParameter("df").equals("0")){
 			check1 = "checked";
@@ -77,6 +78,7 @@ Use these options to filter the list active of schedules below.
 				check1 = "checked";
 			}
 		}
+		System.out.println("81");
 		if(request.getParameter("tlnf").equals("0") || request.getParameter("TransitLineName").equals("NO_SELECTION")){
 			check3 = "checked";
 		} else {
@@ -94,6 +96,7 @@ Use these options to filter the list active of schedules below.
 			}
 			schedules = newScheduleList;
 		}
+		System.out.println("99");
 		
 	} else {
 		check1 = "checked";
@@ -101,6 +104,7 @@ Use these options to filter the list active of schedules below.
 		nofilter = true;
 	}
 	session.setAttribute("schedules_edit", schedules);
+	System.out.println("105");
 %>
 
 <form>

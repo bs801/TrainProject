@@ -94,6 +94,10 @@ public class MonthReport {
 			YEARSELECT = ""+my.getYear();
 			//refreshWithNewDate();
 		}
+		if(MonthReport.validdate == false) {
+			errors.add("Please select to use either the Customer or Transit Line report option. Unselect do-not-use");
+			return;
+		}
 		if(r.getParameter("reportsubmit") != null) {
 			if(r.getParameter("torc").equals("0")) {
 				if(!c1.equals("")) {

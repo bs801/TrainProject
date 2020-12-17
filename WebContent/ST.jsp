@@ -5,17 +5,25 @@
 
 <%
 
-	LocalDate my = LocalDate.of(2024, 2, 29);
+	float f = 3.25f;
+	int r = (int) f;
+	String floatversion = f+"";
+	//System.out.println(floatversion);
+	String intversion = r+"";
+//	System.out.println("FLOAT STUFF"+floatversion.substring(intversion.length(), intversion.length()+3));
+	intversion += floatversion.substring(intversion.length(), intversion.length()+2);
+	//System.out.println("intv at this stage "+intversion);
+	
+	try{
+		String ap = floatversion.substring(intversion.length(), intversion.length()+1);
+		intversion += ap;
+	} catch(Exception e){
+		intversion += "0";
+	}
 
-	LocalDateTime x1 =  LocalDateTime.of(2024, 1, 31, 0, 0);
-	LocalDateTime x2 =  LocalDateTime.of(2024, 2, 1, 0, 0);
-	LocalDateTime x3 =  LocalDateTime.of(2024, 2, 29, 0, 0);
-	LocalDateTime x4 =  LocalDateTime.of(2024, 3, 1, 0, 0);
+	System.out.println("$"+intversion);
 
-	out.println(Formatting.sameMonth(my, x1));
-	out.println(Formatting.sameMonth(my, x2));
-	out.println(Formatting.sameMonth(my, x3));
-	out.println(Formatting.sameMonth(my, x4));
+
 %>
 <!DOCTYPE html>
 <html>

@@ -40,15 +40,18 @@ public class Formatting {
 	
 	public static String getFare(float f) {
 		int r = (int) f;
+		System.out.println("INCOMMIGN FLOAT F"+f);
 		String floatversion = f+"";
 		//System.out.println(floatversion);
 		String intversion = r+"";
-		//System.out.println("FLOAT STUFF"+floatversion.substring(intversion.length(), intversion.length()+3));
+//		System.out.println("FLOAT STUFF"+floatversion.substring(intversion.length(), intversion.length()+3));
 		intversion += floatversion.substring(intversion.length(), intversion.length()+2);
 		//System.out.println("intv at this stage "+intversion);
-		if(floatversion.length() > intversion.length() + 2) {
-			intversion += floatversion.substring(intversion.length(), intversion.length()+1);
-		} else {
+		
+		try{
+			String ap = floatversion.substring(intversion.length(), intversion.length()+1);
+			intversion += ap;
+		} catch(Exception e){
 			intversion += "0";
 		}
 		return "$"+intversion;

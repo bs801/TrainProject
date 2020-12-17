@@ -92,6 +92,7 @@
 	<input type="radio" name="disc" value="0.25f"/>Child
 	<input type="radio" name="disc" value="0.35f"/>Senior
 	<input type="radio" name="disc" value="0.50f"/>Disabled
+	<br></br>
 	<input type="submit" value="Continue"/>
 </form>
 <br></br>
