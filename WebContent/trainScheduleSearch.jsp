@@ -41,5 +41,9 @@ Date <input type="date" name="inputDate"/><br/>
 <input type="submit" value="Submit"/>
 </form>
 
+<form action="CustomerLanding.jsp" method="POST">
+<input type="Submit" value="Back to Dashboard"/>
+</form>
+
 </body>
 </html>

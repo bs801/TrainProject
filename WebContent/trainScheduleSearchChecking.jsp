@@ -52,10 +52,6 @@
         return;
     } 
     
-    
-   	
-  
-
 	/* String insert = "INSERT INTO users(username, password)"	+ "VALUES (?, ?)";
 	PreparedStatement ps = con.prepareStatement(insert);
 	ps.setString(1, newUsername);

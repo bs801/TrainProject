@@ -15,5 +15,9 @@
 		<input type="date" name="date">
 		<input type="submit" value="Sort"/>
 	</form>
+	<br></br>
+	<form action="AdminLanding.jsp" method = "POST">
+	<input type="submit" value="Back to Dashboard"/>
+	</form> 
 </body>
 </html>
