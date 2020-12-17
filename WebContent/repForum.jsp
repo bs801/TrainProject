@@ -55,10 +55,12 @@
 	if(x==null){ %>
 		<%
 		for(int i = 0; i < Questions.size(); i ++ ){%> 
-	 		<h2> <%=Questions.get(i).toString()%> </h2>
-	    	<p> <%=Questions.get(i).descriptionText%></p>
-	    
-	    	<div>Posted by: <%=Questions.get(i).username%> </div> <br></br><%
+	 		<br></br>
+			<% out.print("<h3> Posted by "+Questions.get(i).username+" </h3>"); %>	
+	 		<h3> Question: <%=Questions.get(i).toString()%> </h3>
+	    	Body: <p> <%=Questions.get(i).descriptionText%></p>
+	    	<div>Posted by: <%=Questions.get(i).username%> </div> <br></br> 
+	    	<%
 	    	if(Questions.get(i).getAnswers().size() == 0)
 	    	{
 	    		%> 
@@ -73,10 +75,12 @@
 	}else{ %>
 	<%
 		for(int i = 0; i < temp.size(); i ++ ){%> 
-	 		<h2> <%=temp.get(i).toString()%> </h2>
-	    	<p> <%=temp.get(i).descriptionText%></p>
-	    
-	    	<div>Posted by: <%=temp.get(i).username%> </div> <br></br><%
+	 		<br></br>
+	 		<% out.print("<h3> Posted by "+temp.get(i).username+" </h3>"); %>
+	 		<h3> Question: <%=temp.get(i).toString()%> </h3>
+	    	<p> Body: <%=temp.get(i).descriptionText%> </p>
+	    	<div>Posted by: <%=temp.get(i).username%> </div> <br></br> 
+	    	<%
 	    	if(temp.get(i).getAnswers().size() == 0)
 	    	{
 	    		%> 
