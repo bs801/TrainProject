@@ -39,9 +39,9 @@
 </head>
 <body>
 	
-	<h1><font color = "blue" size = "6">All Schedules For A Given Station</font></h1>
+	<h1><font color = "black" size = "6">All Schedules For A Given Station</font></h1>
 	
-	<p><font color="red">Example</font> TransitLineName: Origin -> Destination @ StartingTime  </p>
+	<p><font color="black">Example</font> TransitLineName: Origin -> Destination @ StartingTime  </p>
 	<%
 	for(int j=0; j< temp.size(); j++){
 	%> <%=temp.get(j).toString()%><br></br><%
