@@ -19,6 +19,7 @@
 <form action="CreateSchedule.jsp" method="GET">
 	<input type="Submit" name="filter" value="Create New Schedule" /> <br></br>
 </form>
+<br></br>
 <h2>Schedule Filter Options</h2>
 Use these options to filter the list active of schedules below.
 <%

@@ -10,19 +10,20 @@
 	session.setAttribute("CL2", errors);
 	for(Customer u : TrainProject.Customers.getAsList()){
 		if(u.username.equalsIgnoreCase(username)){
-	if(u.password.equals(password)){
-		session.setAttribute("username", username);
-		response.sendRedirect("../CustomerLanding.jsp");
-		return;
-	} else {
-		
-		errors.add("Incorrect password for "+username);
-		response.sendRedirect("CustomerLogin.jsp");
-		return;
-	}
+			if(u.password.equals(password)){
+				session.setAttribute("username", username);
+				response.sendRedirect("../CustomerLanding.jsp");
+				return;
+			} else {
+				
+				errors.add("Incorrect password for "+username);
+				response.sendRedirect("CustomerLogin.jsp");
+				return;
+			}
 		}
 	}
 	errors.add("No account with username "+username+" was found");
+	session.setAttribute("username", username);
 	response.sendRedirect("CustomerLogin.jsp");
 %>
 <!DOCTYPE html>

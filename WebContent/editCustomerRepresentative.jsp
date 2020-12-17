@@ -26,7 +26,7 @@
 
 
 
-<h1> Drop down box or select element</h1>
+<h2>Select Customer Representative to Edit</h2>
     <form action="editCustomerRepresentative2.jsp" method="POST">
     <%  
     
@@ -37,6 +37,7 @@
   	    <input type="radio" name="command" value=<%=i++%> /> <%=r.username%>
   	    <br></br> 
     <% } %>
+     <br></br> 
      <input type="submit" name="D" value="Delete"/>
      <input type="submit" name="E" value="Edit"/>
     </form>

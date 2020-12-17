@@ -21,6 +21,8 @@ System.out.println("UP FRONT");
 <title>Insert title here</title>
 </head>
 <body>
+<h2>Input information for new schedule</h2>
+
 <form action="CreateSchedule2.jsp" method="GET">
 	Date
 	<select name="month">
@@ -87,6 +89,10 @@ System.out.println("UP FRONT");
 	</select>
 	<br></br>
 	<input type="submit" value="Continue"/> 
+</form>
+
+<form action="ScheduleMain.jsp" method="GET">
+	<input type="Submit" name="filter" value="Cancel" /> <br></br>
 </form>
 </body>
 </html>
