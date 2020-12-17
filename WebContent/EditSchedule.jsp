@@ -22,6 +22,7 @@ if(session.getAttribute("ES2") != null){
 //	session.setAttribute("ScheduleEdit");
  	int i = 0;
  	boolean foundit = false;
+ 	boolean delete = true;
 	for(i=0; i<schedules.size(); i++){
 		if(request.getParameter("E"+i) != null){
 			foundit = true;
@@ -31,6 +32,7 @@ if(session.getAttribute("ES2") != null){
 		if(request.getParameter("D"+i) != null){
 			foundit = true;
 			session.setAttribute("storedDS", "D"+i);
+			delete = true;
 			break;
 		}
 	}
@@ -49,6 +51,12 @@ if(session.getAttribute("ES2") != null){
 		}
 	}
 	Schedule sc = schedules.get(i);
+	if(delete){
+		TrainProject.Schedules.delete(sc);
+		response.sendRedirect("ScheduleMain.jsp");
+		return;
+	}
+	
 	session.setAttribute("editSc", sc);
 	
 	out.println("Editing Schedule");
