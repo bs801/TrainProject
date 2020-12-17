@@ -28,6 +28,7 @@ while(true){
 		}
 	}
 	if(taken){
+		i++;
 		continue;
 	}
 	break;
