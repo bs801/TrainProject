@@ -13,7 +13,7 @@
 	<h1><font size ="8" color="black" face = "courier" >Home Page For Admin</font></h1>
 	
 	<p>Edit Information for Customer Representatives</p>
-	<form action="" method = "POST">
+	<form action="editCustomerRepresentative.jsp" method = "POST">
 	<input type="submit" value="Go"/>
 	</form> 
 	
@@ -23,7 +23,7 @@
 	</form>
 	
 	<p>Produce A List Of Reservation</p>
-	<form action="" method = "POST">
+	<form action="adminReservationsList.jsp" method = "POST">
 	<input type="submit" value="Go"/>
 	</form>
 	
@@ -38,8 +38,13 @@
 	</form>
 	
 	<p>Best 5 most active Transit Line</p>
-	<form action="" method = "POST">
+	<form action="topFiveReservations.jsp" method = "POST">
 	<input type="submit" value="Go"/>
+	</form>
+	
+	<p>Log Out</p>
+	<form action="logout.jsp" method = "POST">
+	<input type="submit" value="Log Out"/>
 	</form>
 	
 </body>

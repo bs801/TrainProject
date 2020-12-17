@@ -22,7 +22,7 @@
 	<input type="submit" value="Go"/>
 	</form>
 	
-	<p>Cancel Reservation ?</p>
+	<p>Edit or Cancel Reservation ?</p>
 	<form action="" method = "POST">
 	<input type="submit" value="Go"/>
 	</form> 
@@ -33,7 +33,7 @@
 	</form>
 	
 	<p>Edit Train Schedule</p>
-	<form action="" method = "POST">
+	<form action="EditSchedule.jsp" method = "POST">
 	<input type="submit" value="Go"/>
 	</form>
 	
@@ -44,12 +44,16 @@
 	
 	<p>Produce A List Of All Customers Who Have Reservations On A Given Transit Line
  	And Date</p>
-	<form action="" method = "POST">
+	<form action="customerReservationsList.jsp" method = "POST">
 	<input type="submit" value="Go"/>
 	</form>
 	<p>Q&A Forum</p>
 	<form action="repforum.jsp" method = "POST">
 	<input type="submit" value="Answer Customers' Questions !"/>
+	</form> 
+	<p>Log Out</p>
+	<form action="logout.jsp" method = "POST">
+	<input type="submit" value="Log Out"/>
 	</form> 
 
 </body>
