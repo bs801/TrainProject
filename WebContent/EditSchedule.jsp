@@ -6,6 +6,7 @@
 <%
 if(session.getAttribute("ES2") != null){
 	out.println((ArrayList<String>) session.getAttribute("ES2")+"<br></br>");
+	session.setAttribute("ES2", null);
 }
 
 %>
@@ -22,7 +23,7 @@ if(session.getAttribute("ES2") != null){
 //	session.setAttribute("ScheduleEdit");
  	int i = 0;
  	boolean foundit = false;
- 	boolean delete = true;
+ 	boolean delete = false;
 	for(i=0; i<schedules.size(); i++){
 		if(request.getParameter("E"+i) != null){
 			foundit = true;
