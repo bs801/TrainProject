@@ -9,14 +9,20 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
+<h1><font size ="7" color="black" face = "courier">ADMIN DASHBOARD</font></h1>
+
+<form action="logout.jsp" method = "POST">
+	<input type="submit" value="Log out"/>
+</form> <br></br>
+
 <body>
-	<h1><font size ="8" color="black" face = "courier" >Home Page For Admin</font></h1>
+
+
 	
-	<p>Edit Information for Customer Representatives</p>
 	<form action="editCustomerRepresentative.jsp" method = "POST">
-	<input type="submit" value="Go"/>
+		<input type="submit" value="Edit Customer Representatives"/>
 	</form> 
-	
+
 	<p>Sale Report</p>
 	<form action="" method = "POST">
 	<input type="submit" value="Go"/>

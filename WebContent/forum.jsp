@@ -49,7 +49,7 @@
 	Search by keyword: <form action="forum.jsp" method="POST">
 	<input type="text" name="keywords"/> 
 	<input type="Submit" value="Search">
-	</form>
+	</form><br></br>
 	
 	
 	Previous Question:
