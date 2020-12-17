@@ -36,6 +36,10 @@
 	
 	<input type="text" value=<%=TrainProject.Stations.getAsList().get(0).toString()%> />
 	</form> 
+	<p>Log Out</p>
+	<form action="logout.jsp" method = "POST">
+	<input type="submit" value="Log Out"/>
+	</form>
 	
 	
 	

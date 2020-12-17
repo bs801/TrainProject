@@ -5,7 +5,6 @@ import java.sql.SQLException;
 
 public class Train implements Comparable<Train>{
 	public int trainID;
-	public String text;
 	
 	public Train(int trainID) {
 		this.trainID = trainID; 
