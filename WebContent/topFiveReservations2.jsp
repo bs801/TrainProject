@@ -74,12 +74,16 @@ for (Map.Entry<String, Integer> l : list) {
 	sortedList.put(l.getKey(), l.getValue()); 
 } 
 
+int max = 0;
 
 for (Map.Entry<String, Integer> sl : sortedList.entrySet()) { // displays the top used transitlines.
 	
-	out.println("Transit Line: " + sl.getKey() + 
-				", Number of Reservations = " + sl.getValue());
-	out.println("<br></br>");
+	if(max < 5){
+		out.println("Transit Line: " + sl.getKey() + 
+					", Number of Reservations = " + sl.getValue());
+		out.println("<br></br>");
+	}
+	max++;
 } 
 
 
