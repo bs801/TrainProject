@@ -31,27 +31,33 @@
 <title> Q&A Forum</title>
 </head>
 <body>
+<form action="CustomerLanding.jsp" method="GET">
+	<input type="Submit" name="filter" value="Back to Home" /> <br></br>
+</form> <br></br><br></br>
+<% /*
 	<div class="topnav">
   	<a class="active" href="http://localhost:8080/TrainProject/CustomerLanding.jsp">Home Page</a>
-	</div>
-	<form action="forum.jsp" method="POST">
-	<input type="text" name="keywords"/> <br></br>
-	<input type="Submit" value="Search Questions">
-	</form>
+	</div>*/
 	
-	<p>Want to post a new Question?</p>
+	%>
+	
+	Post a new question:
 	<form action="PostQuestion.jsp" method = "POST">
-	<input type="submit" value="Post New Questions"/>
+	<input type="submit" value="Create New Post"/>
 	</form> 
 	
-	<p><font size = "6" face = "courier" color ="blue"><b>History of All The Questions</b></font></p>
+	Search by keyword: <form action="forum.jsp" method="POST">
+	<input type="text" name="keywords"/> 
+	<input type="Submit" value="Search">
+	</form>
+	
+	
+	Previous Question:
 	<%
 	if(x!=null){ %>
 		<%
 		for(int i = 0; i < temp.size(); i ++ )
 		{%> 
-			<p><font size = "10" color ="blue">------------------------------------------------ </font> </p>
-	 		<h1><font size = "3" color = "red">Questions </font></h1>
 	 		<% out.print("No."+(i+1)+ ""); %>
 	 		<h2> <%=temp.get(i).toString()%> </h2>
 	    	<p> <%=temp.get(i).descriptionText%> </p>
@@ -61,7 +67,7 @@
 	    	
 	  		if(temp.get(i).getAnswers().size() != 0){
 	    		for(int j = 0; j <temp.get(i).getAnswers().size(); j++) { %> 
-	    			<p><font size = "3" color = "red">Answers</font></p>
+	    			<p>Answers</p>
 	    			<p><%=temp.get(i).getAnswers().get(0).toString()%></p> <br></br> <% 
 	    		}
 	   		 }
@@ -71,8 +77,6 @@
 		<%
 			for(int i = 0; i < Questions.size(); i ++ )
 			{%> 
-				<p><font size = "10" color ="blue">------------------------------------------------ </font></p>
-				<h1><font size = "3" color = "red">Questions </font></h1>
 				<% out.print("No."+(i+1)+ ""); %>
 	 			<h2> <%=Questions.get(i).toString()%> </h2>
 	    		<p> <%=Questions.get(i).descriptionText%></p>
@@ -80,7 +84,7 @@
 	    		<%
 	  			if(Questions.get(i).getAnswers().size() != 0){
 	    			for(int j = 0; j <Questions.get(i).getAnswers().size(); j++) { %> 
-	    				<p><font size = "3" color = "red">Answers</font></p>
+	    				<p>Answers</p>
 	    				<p><%=Questions.get(i).getAnswers().get(0).toString()%></p> <br></br> <% 
 	    			}
 	   		 	}

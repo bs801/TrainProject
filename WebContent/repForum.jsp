@@ -2,6 +2,9 @@
     pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
+
+
+
 <%
 	ArrayList<Question> Questions = TrainProject.Questions.getAsList();
 	ArrayList<Answer> Answers = TrainProject.Answers.getAsList();
@@ -31,17 +34,23 @@
 <title>Q&A Forum</title>
 </head>
 <body>
+
+<form action="RepresentativeLanding.jsp" method="GET">
+	<input type="Submit" name="filter" value="RETURN TO DASHBOARD" /> <br></br>
+</form> <br></br><br></br>
+
+<% /*
 	<div class="topnav">
   	<a class="active" href="http://localhost:8080/TrainProject/RepresentativeLanding.jsp">Home Page</a>
-	</div>
+	</div>*/
+%>
 
+	Search questions by keyword: <form action="repForum.jsp" method="POST">
+		<input type="text" name="keywords"/> 
+		<input type="Submit" value="Search">
+	</form><br></br>
 
-	<form action="repForum.jsp" method="POST">
-	<input type="text" name="keywords"/> <br></br>
-	<input type="Submit" value="Search Questions">
-	</form>
-
-
+	<h2>Customer Questions: </h2>
 	<form name = "qID" action = "answerQuestions.jsp" method = "GET"><%
 	if(x==null){ %>
 		<%

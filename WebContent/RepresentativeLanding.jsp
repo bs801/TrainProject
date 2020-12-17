@@ -9,16 +9,34 @@
 <title>Insert title here</title>
 </head>
 
+<h1><font size ="7" color="black" face = "courier">REPRESENTATIVE DASHBOARD</font></h1>
 <%
 	session.setAttribute("username", "vatche");	
 	Representative r = TrainProject.Representatives.get((String) session.getAttribute("username"));
-	out.println("Welcome "+r.firstName+" "+r.lastName+". You are logged in as "+r.username);
+	out.println("Welcome "+r.firstName+" "+r.lastName+". You are logged in as "+r.username+" <br></br>");
 %>
 
 <body>
-	<h1><font size ="8" color="black" face = "courier" >Home Page(Customer Rep)</font></h1>
+	
+
+	<form action="ScheduleMain.jsp" method = "POST">
+		<input type="submit" value="View Schedule Editor"/>
+	</form> 
+	<br></br>
+	<form action="repForum.jsp" method = "POST">
+		<input type="submit" value="View Questions Forum"/>
+	</form> 
+	
 
 
+</body>
+</html>
+
+
+<%
+	
+/*
+<h1><font size ="8" color="black" face = "courier" >Home Page(Customer Rep)</font></h1>
 	<p>Search For Train Schedule?</p>
 	<form action="trainScheduleSearch.jsp" method = "POST">
 	<input type="submit" value="Go"/>
@@ -62,6 +80,5 @@
 	<form action="logout.jsp" method = "POST">
 	<input type="submit" value="Log Out"/>
 	</form> 
-
-</body>
-</html>
+*/
+%>
