@@ -56,6 +56,8 @@ The station ID is pre-filled to the lowest available station ID
 	<br></br>
 	<%
 	
+	Collections.sort(stations,Station.sortByStationID);
+	
 	for(Station s : stations){
 		out.println("StationID: " + s.stationID + ", ");
 		out.println("Name: " + s.name + ", ");

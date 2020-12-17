@@ -1,6 +1,7 @@
 package com.cs336.pkg;
 
 import java.sql.ResultSet;
+import java.util.Comparator;
 import java.sql.SQLException;
 
 public class Station implements Comparable<Station>{
@@ -36,5 +37,17 @@ public class Station implements Comparable<Station>{
 	@Override
 	public int compareTo(Station st) {
 		return this.name.compareTo(st.name);
-	} 
+	}
+	public static Comparator<Station> sortByStationID = new Comparator<Station>() {
+		
+		@Override
+		public int compare(Station obj1, Station obj2) {
+			
+			//sort in ascending order
+			return obj1.stationID-obj2.stationID;
+			
+			//sort in descending order
+			//return obj2.age-obj1.age;
+		}
+	}; 
 }
