@@ -67,6 +67,17 @@ public class TrainProject {
 			return StationTable;
 		}
 		
+		public static void insert(Station s) throws SQLException {
+			String sql = "INSERT INTO Station VALUES(?, ?, ?, ?)";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, s.stationID);
+			ps.setString(2, s.name);
+			ps.setString(3, s.city);
+			ps.setString(4, s.state);
+			ps.executeUpdate();
+			StationTable = null;
+		}
+		
 		
 	}
 	
