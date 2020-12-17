@@ -49,5 +49,18 @@ The station ID is pre-filled to the lowest available station ID
 		<br></br>
 		<input type="Submit" value="Add" /> 
 	</form>
+	List of Stations Already inputed:
+	<br></br>
+	<%
+	
+	for(Station s : stations){
+		out.println("StationID: " + s.stationID + ", ");
+		out.println("Name: " + s.name + ", ");
+		out.println("City: " + s.city + ", ");
+		out.println("State: " + s.state + "<br></br>");
+	}
+	
+	
+	%>
 </body>
 </html>
