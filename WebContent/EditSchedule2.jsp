@@ -121,7 +121,7 @@ boolean am = true;
 		}
 	}
 	
-	Schedule ns = new Schedule(sce.transitLineName, sce.reverseLine, sce.scheduleDepartureTime, trainID);
+	Schedule ns = new Schedule(sce.transitLineName, sce.reverseLine, Timestamp.valueOf(t1), trainID);
 	
 	if(t1.isEqual(sce.scheduleDepartureTime.toLocalDateTime())){
 		
@@ -136,10 +136,11 @@ boolean am = true;
 			for(Reservation r : reservations){
 				r.updateTrain(sce, ns);
 			}
-			
+			System.out.println("TRIAN CHANGES MAIND");	
 		}
 		
 	} else {
+		System.out.println("UPDATE THAT DB BRUH");
 		TrainProject.Schedules.update(sce, ns);
 	}
 	

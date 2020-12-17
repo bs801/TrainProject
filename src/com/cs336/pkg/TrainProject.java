@@ -223,8 +223,7 @@ public class TrainProject {
 			ScheduleTable = null;
 		}
 		public static void update(Schedule s, Schedule ns) throws SQLException {
-			String sql = "UPDATE Schedule SET transitLineName=(?), reverseLine=(?), scheduleDepartureTime=(?), trainID=(?) WHERE"
-					+ " transitLineName=(?), reverseLine=(?), scheduleDepartureTime=(?), trainID=(?)";
+			String sql = "UPDATE Schedule SET transitLineName=?, reverseLine=?, scheduleDepartureTime=?, trainID=? WHERE transitLineName=? and reverseLine=? and scheduleDepartureTime=? and trainID=?";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, ns.transitLineName);
 			ps.setBoolean(2, (ns.reverseLine == 1 ? true : false));
@@ -236,6 +235,18 @@ public class TrainProject {
 			ps.setTimestamp(7, s.scheduleDepartureTime);
 			ps.setInt(8, s.trainID);
 			ps.executeUpdate();
+			System.out.println("EXECUTED UPDATE");
+			ScheduleTable = null;
+		}
+		public static void delete(Schedule s) throws SQLException {
+			String sql = "DELETE FROM Schedule WHERE transitLineName=? and reverseLine=? and scheduleDepartureTime=? and trainID=?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, s.transitLineName);
+			ps.setBoolean(2, (s.reverseLine == 1 ? true : false));
+			ps.setTimestamp(3, s.scheduleDepartureTime);
+			ps.setInt(4, s.trainID);
+			ps.executeUpdate();
+			System.out.println("EXECUTED UPDATE");
 			ScheduleTable = null;
 		}
 			
@@ -407,10 +418,20 @@ public class TrainProject {
 			RepresentativeTable = null;
 		}
 		public static void delete(Representative r) throws SQLException {
-			System.out.println("Deleted");
+			String sql = "DELETE FROM Representative WHERE username = ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, r.username);
+			ps.executeUpdate();
+			RepresentativeTable = null;
 		}
 		public static void update(Representative r) throws SQLException {
-			System.out.println("Updated");
+			String sql = "UPDATE Representative SET firstName = ? , lastName = ? WHERE username = ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, r.firstName);
+			ps.setString(2, r.lastName);
+			ps.setString(3, r.username);
+			ps.executeUpdate();
+			RepresentativeTable = null;
 		}
 	}
     

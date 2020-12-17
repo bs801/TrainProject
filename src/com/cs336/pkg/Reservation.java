@@ -169,10 +169,11 @@ public class Reservation {
 		if(s.transitLineName.equals(fsc.transitLineName) && s.reverseLine == fsc.reverseLine && s.scheduleDepartureTime.toLocalDateTime().isEqual(fsc.scheduleDepartureTime.toLocalDateTime()) && s.trainID == fsc.trainID) {
 			this.forward_trainID = ns.trainID;
 		}
-		
+		if(roundTrip == 1) {
 		Schedule rsc = getReturnSchedule();
 		if(s.transitLineName.equals(rsc.transitLineName) && s.reverseLine == rsc.reverseLine && s.scheduleDepartureTime.toLocalDateTime().isEqual(rsc.scheduleDepartureTime.toLocalDateTime()) && s.trainID == rsc.trainID) {
 			this.return_trainID = ns.trainID;
+		}
 		}
 	}
 	
