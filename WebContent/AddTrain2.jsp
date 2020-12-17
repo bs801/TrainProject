@@ -41,7 +41,7 @@ ArrayList<Train> train = TrainProject.Trains.getAsList();
 <body>
 
 <br></br>
-<form action="addTrain.jsp" method="POST">
+<form action="AddTrain.jsp" method="POST">
 <input type="Submit" value="Add a new train"/>
 </form>
 <br></br>
