@@ -7,11 +7,11 @@ public class Train implements Comparable<Train>{
 	public int trainID;
 	public String text;
 	
-	public Train(int trainID, String text) {
-		this.trainID = trainID; this.text = text;
+	public Train(int trainID) {
+		this.trainID = trainID; 
 	}
 	public Train(ResultSet rs) throws SQLException {
-		this(rs.getInt("trainID"), rs.getString("information"));
+		this(rs.getInt("trainID"));
 	}
 	
 	@Override

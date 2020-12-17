@@ -13,13 +13,39 @@
 <%
 ArrayList<Train> train = TrainProject.Trains.getAsList();
 
-int id = train.get(train.size()-1).trainID;
+if(session.getAttribute("AT2") != null){
+	out.println((ArrayList<String>) session.getAttribute("AT2")+"<br></br>");
+}
+
+int i = 0;
+while(true){
+	boolean taken = false;
+	for(Train t : train){
+		if(t.trainID == i){
+			taken = true;
+		}
+	}
+	if(taken){
+		continue;
+	}
+	break;
+}
 %>
-	<form action="" method="POST">
-		TrainID: <input type="text" name="trainID" value="<%=id+1%>" /> 
-		<br></br> 
+The lowest available trainID is pre-filled into the form.
+Zeros will automatically be tacked on to IDs with less than 3 digits.
+
+<br></br> 
+<form action="AddTrain2.jsp" method="POST">
+TrainID: <input type="text" name="trainID" value=<%=Formatting.getTrainID(i)%> /> 
 		
-		
-	</form>
+<br></br> 
+<input type="Submit" value="Add train"/>
+</form>
+
+<br></br> 
+	
+<form action="RepresentativeLanding.jsp" method="POST">
+<input type="Submit" value="Cancel"/>
+</form>
 </body>
 </html>

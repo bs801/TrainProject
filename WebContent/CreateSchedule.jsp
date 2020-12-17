@@ -67,7 +67,7 @@ System.out.println("UP FRONT");
 	ArrayList<Train> TrainList = TrainProject.Trains.getAsList();
 	
 	for(int i=0; i<TrainList.size(); i++){ %>
-		<option value=<%=TrainList.get(i).trainID%>><%=TrainList.get(i)%></option>
+		<option value=<%=TrainList.get(i).trainID%>><%=Formatting.getTrainID(TrainList.get(i).trainID)%></option>
 	<% } %>
 	</select>
 	<br></br>

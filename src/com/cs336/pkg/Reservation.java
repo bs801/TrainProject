@@ -136,6 +136,8 @@ public class Reservation {
 			rs.getString("firstName"),
 			rs.getString("lastName")
 		);
+		
+		
 	}
 	public Schedule getForwardSchedule() throws SQLException {
 		return TrainProject.Schedules.get(forward_transitLineName, forward_reverseLine, forward_scheduleDepartureTime);
