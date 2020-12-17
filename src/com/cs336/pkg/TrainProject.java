@@ -260,8 +260,93 @@ public class TrainProject {
 		}
 		public static ArrayList<Reservation> getAsList() throws SQLException {
 			ArrayList<Reservation> sls = new ArrayList<Reservation>(getAll().values());
-		
 			return sls;
+		}
+		public static ArrayList<Reservation> getUncancelledList() throws SQLException {
+			ArrayList<Reservation> sls = getAsList();
+			ArrayList<Reservation> usls = new ArrayList<Reservation>();
+			for(Reservation r : sls) {
+				if(r.cancelled == 0) {
+					usls.add(r);
+				}
+			}
+			return usls;
+		}
+		public static ArrayList<Reservation> getPurchaseForMonth(LocalDate my) throws SQLException {
+			ArrayList<Reservation> usls = getUncancelledList();
+			ArrayList<Reservation> gpfm = new ArrayList<Reservation>();
+			for(Reservation r : usls) {
+				if(Formatting.sameMonth(my, r.dateOfCreation.toLocalDateTime())) {
+					gpfm.add(r);
+				}
+			}
+			return gpfm;
+		}
+		public static ArrayList<Reservation> getReservations(LocalDate my, String transitLineName) throws SQLException {
+			ArrayList<Reservation> usls = getUncancelledList();
+			ArrayList<Reservation> matches = new ArrayList<Reservation>();
+			for(Reservation r : usls) {
+				if(r.forward_transitLineName.equals(transitLineName)) {
+					if(Formatting.sameMonth(my, r.forward_scheduleDepartureTime.toLocalDateTime())) {
+						matches.add(r);
+						continue;
+					}
+				}
+				if(r.roundTrip == 1) {
+				if(r.return_transitLineName.equals(transitLineName)) {
+					if(Formatting.sameMonth(my, r.return_scheduleDepartureTime.toLocalDateTime())) {
+						matches.add(r);
+						continue;
+					}
+				}
+				}
+			}
+			
+			return matches;
+		}
+		public static TrainActivityPacket getActivityForMonth(LocalDate my, String transitLineName) throws SQLException {
+			ArrayList<Reservation> usls = getUncancelledList();
+	
+			TrainActivityPacket tap = new TrainActivityPacket(transitLineName);
+			for(Reservation r : usls) {
+				boolean restap = false;
+				if(r.forward_transitLineName.equals(transitLineName)) {
+					if(Formatting.sameMonth(my, r.forward_scheduleDepartureTime.toLocalDateTime())) {
+						restap = true;
+						tap.tapForward();
+					}
+				}
+				if(r.roundTrip == 1) {
+				if(r.return_transitLineName.equals(transitLineName)) {
+					if(Formatting.sameMonth(my, r.return_scheduleDepartureTime.toLocalDateTime())) {
+						restap = true;
+						tap.tapReturn();
+					}
+				}
+				}
+				if(restap) {
+					tap.tapResTally();
+				}
+			}
+			
+			return tap;
+		}
+		public static ArrayList<TrainActivityPacket> getTrainActivityPackets(LocalDate my) throws SQLException{
+			ArrayList<String> tlns = Formatting.getTransitLineNames();
+			ArrayList<TrainActivityPacket> taps = new ArrayList<TrainActivityPacket>();
+			for(String tln : tlns) {
+				taps.add(getActivityForMonth(my, tln));
+			}
+			Collections.sort(taps,
+		            new Comparator<TrainActivityPacket>() {
+		                public int compare(TrainActivityPacket tap1, TrainActivityPacket tap2)
+		                {
+		                    return (tap1.tally > tap2.tally ? -1 : 1);
+		                }
+		            }
+			);
+			
+			return taps;
 		}
 		public static HashMap<Integer, Reservation> getAll() throws SQLException {
 			loadApplicationDB();

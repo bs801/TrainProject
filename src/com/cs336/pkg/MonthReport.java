@@ -13,6 +13,7 @@ public class MonthReport {
 	
 	public static boolean validdate = false;
 	
+	
 	public static int MONTHSELECT;
 	public static String YEARSELECT;
 	

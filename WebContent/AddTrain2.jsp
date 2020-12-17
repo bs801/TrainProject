@@ -13,7 +13,7 @@ try{
 }catch(Exception e){
 	errors.add("Please enter in a trainID that is a number 0 - 1000");
 	session.setAttribute("AT2",errors);
-	response.sendRedirect("AddTrain.jsp");
+	response.sendRedirect("addTrain.jsp");
 	return;
 }
 ArrayList<Train> train = TrainProject.Trains.getAsList();
@@ -23,7 +23,7 @@ ArrayList<Train> train = TrainProject.Trains.getAsList();
 		if(t.trainID == v){
 			errors.add("TrainID "+v+" is already taken");
 			session.setAttribute("AT2",errors);
-			response.sendRedirect("AddTrain.jsp");
+			response.sendRedirect("addTrain.jsp");
 			return;
 		}
 	}
@@ -41,7 +41,7 @@ ArrayList<Train> train = TrainProject.Trains.getAsList();
 <body>
 
 <br></br>
-<form action="AddTrain.jsp" method="POST">
+<form action="addTrain.jsp" method="POST">
 <input type="Submit" value="Add a new train"/>
 </form>
 <br></br>
