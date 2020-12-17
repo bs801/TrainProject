@@ -4,98 +4,41 @@
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 
 <%
-	session.setAttribute("disc", "0f");
-	//ArrayList<Station> stations = TrainProject.Stations.getAsList();
-	ArrayList<Station> stations = TrainProject.Stations.getAsList();
-	ArrayList<Reservation> Res = TrainProject.Reservations.getAsList();
-	
-	ArrayList<Object> options = new ArrayList<Object>();
-	ArrayList<Object> dispOptions = new ArrayList<Object>();
-	//ArrayList<String> cities = new ArrayList<String>();
-	//session.setAttribute("cities",cities);
-	session.setAttribute("options",options);
-	
-	
-	for(Station s : stations){
-		if(options.contains(s.city)){
-			continue;
-		}
-		options.add(s.city);
-		options.add(s);
-		
-		dispOptions.add(s.city + " - "+s.state);
-		dispOptions.add(s);
+	if(session.getAttribute("MonthlySaleOfMonth/Year") != null){
+		out.println("No Reservation/Sales in selected Month/Year");
 	}
-
-	Collections.sort(options,
-            new Comparator<Object>() {
-                public int compare(Object o1, Object o2)
-                {
-                    return o1.toString().compareTo(o2.toString());
-                }
-            }
-	);
-	Collections.sort(dispOptions,
-            new Comparator<Object>() {
-                public int compare(Object o1, Object o2)
-                {
-                    return o1.toString().compareTo(o2.toString());
-                }
-            }
-	);
-
 %>
-
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Monthly Sales</title>
+<title>Insert title here</title>
 </head>
 <body>
-<h3>Generate Monthly Report</h3>
-<form action="MonthlySalesReport.jsp" method="POST">
-	
-	
-	
-	Month/Station
-	<select name="objectA">
-		<% for(int i=0; i<options.size(); i++){ %>
-			<option value=<%=i%>><%=dispOptions.get(i)%></option>
-		<% } %>
-	</select>
-	<br></br>
-	Destination City/Station
-	<select name="objectB">
-	
-		<% for(int i=0; i<options.size(); i++){ 
-		%>
-			<option value=<%=i%>><%=dispOptions.get(i)%></option>
-		<% } %>
-	</select>
-	<br></br>
-	
-	Departure Date:
-	<input type="date" name="date1">
-	
-	
-	Trip Type:
-	 <input type="radio" name="rt" value="0"/>One-Way 
-	 <input type="radio" name="rt" value="1"/>Round-Trip
-	
 
-	<br></br>Return Date: 
-	<input type="date" name="date2"> (Select if Round-Trip)
-	<br></br>
-	
-	Passenger Discount Type:
-	<input type="radio" name="disc" value="0.00f" checked="checked"/>Adult
-	<input type="radio" name="disc" value="0.25f"/>Child
-	<input type="radio" name="disc" value="0.35f"/>Senior
-	<input type="radio" name="disc" value="0.50f"/>Disabled
-	<input type="submit" value="Continue"/>
+<form action="MonthlySalesReport2.jsp" method="GET">
+	<h1>Month Sales </h1>
+	<p>Select Month/Year</p>
+	<select name="month">
+	    <option selected value="0">--Month--</option>
+	    <option value="1">January</option>
+	    <option value="2">February</option>
+	    <option value="3">March</option>
+	    <option value="4">April</option>
+	    <option value="5">May</option>
+	    <option value="6">June</option>
+	    <option value="7">July</option>
+	    <option value="8">August</option>
+	    <option value="9">September</option>
+	    <option value="10">October</option>
+	    <option value="11">November</option>
+	    <option value="12">December</option>
+	</select> 
+	<input type="text" name="year" placeholder="yyyy">
+	<input type = "submit" value = "Go"/>
 </form>
+
 <br></br>
 <br></br>
 <form action="AdminLanding.jsp">
