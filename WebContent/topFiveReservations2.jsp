@@ -88,5 +88,9 @@ for (Map.Entry<String, Integer> sl : sortedList.entrySet()) { // displays the to
 
 
 %>
+<form action="topFiveReservations.jsp" method = "POST">
+<input type="submit" value="Cancel"/>
+</form>
+
 </body>
 </html>

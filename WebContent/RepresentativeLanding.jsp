@@ -25,7 +25,20 @@
 	<br></br>
 	<form action="repForum.jsp" method = "POST">
 		<input type="submit" value="View Questions Forum"/>
-	</form> 
+	</form>
+	<br></br> 
+	<form action="trainScheduleForAStation.jsp" method = "POST">
+		<input type="submit" value="View A List Of Train Schedules For A Given Station"/>
+	</form>
+	<br></br> 
+	<form action="customerReservationsList.jsp" method = "POST">
+		<input type="submit" value="View A List of Customers on a given transit line"/>
+	</form>
+	<br></br> 
+	<p>Log Out</p>
+	<form action="logout.jsp" method = "POST">
+	<input type="submit" value="Log Out"/>
+	</form>
 	
 
 

@@ -110,6 +110,9 @@ for(ReservationBuilder rb : validReturnBuilders){
 }%>
 </form>
 
+<form action="MakeReservation.jsp" method="POST">
+<input type="Submit" value="Cancel"/>
+</form>
 </body>
 </html>
 

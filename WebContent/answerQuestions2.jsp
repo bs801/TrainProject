@@ -39,8 +39,12 @@
 
 
 <form action="forum.jsp" method="POST">
-	<input type="Submit" value="OK!">
+	<input type="Submit" value="Go Back to Forum"/>
 </form>
+
+<form action="answerQuestions.jsp" method = "POST">
+<input type="submit" value="Ask Another Question"/>
+</form>	
 
 
 

@@ -45,6 +45,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+<form action="MakeReservation.jsp" method = "POST">
+<input type="submit" value="Cancel"/>
+</form>
 
 </body>
 </html>

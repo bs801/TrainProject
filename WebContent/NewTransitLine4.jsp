@@ -300,8 +300,8 @@
 </head>
 <body>
 
-<form>
-<input type = "Submit" value="Exit">
+<form action="CreateSchedule.jsp" method = "POST">
+<input type="submit" value="Exit"/>
 </form>
 </body>
 </html>

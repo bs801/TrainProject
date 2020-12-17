@@ -14,27 +14,21 @@
 	<h1><font size ="8" color="black" face = "courier" >Home Page</font></h1>
 
 
-	<p>Search For Train Schedule?</p>
+	<p>Search For Train Schedule</p>
 	<form action="trainScheduleSearch.jsp" method = "POST">
 	<input type="submit" value="Go"/>
 	</form> 
-	<p>Reserve New Tickets ?</p>
-	<form action="" method = "POST">
+	<p>Reserve New Tickets</p>
+	<form action="MakeReservation.jsp" method = "POST">
 	<input type="submit" value="Go"/>
 	</form>
-	<p>Cancel Reservation ?</p>
-	<form action="" method = "POST">
-	<input type="submit" value="Go"/>
-	</form> 
-	<p>View Purchase History</p>
-	<form action="" method = "POST">
+	<p>View Reservation History / Cancel Reservation</p>
+	<form action="ViewMyReservations.jsp" method = "POST">
 	<input type="submit" value="Go"/>
 	</form>
 	<p>Q&A Forum</p>
 	<form action="forum.jsp" method = "POST">
 	<input type="submit" value="Ask a Question!"/>
-	
-	<input type="text" value=<%=TrainProject.Stations.getAsList().get(0).toString()%> />
 	</form> 
 	<p>Log Out</p>
 	<form action="logout.jsp" method = "POST">

@@ -33,5 +33,8 @@ out.println(res.get(i));
 </head>
 <body>
 	
+<form action="CustomerLanding.jsp" method="POST">
+<input type="Submit" value="Home"/>
+</form>
 </body>
 </html>

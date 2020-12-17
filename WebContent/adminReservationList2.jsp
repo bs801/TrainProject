@@ -40,5 +40,10 @@ if(!name.equals("0")){
 }
 
 %>
+	<form action="adminReservationsList.jsp" method = "POST">
+	<input type="submit" value="Cancel"/>
+	</form>	
+
+
 </body>
 </html>

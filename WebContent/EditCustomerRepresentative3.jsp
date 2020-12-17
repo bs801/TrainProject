@@ -35,6 +35,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+<form action="editCustomerRepresentative.jsp" method="POST">
+<input type="Submit" value="Cancel"/>
+</form>
 
 </body>
 </html>

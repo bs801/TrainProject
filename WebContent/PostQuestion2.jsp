@@ -22,24 +22,19 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>More Question</title>
-<p>Succesful! Do you have more questions?</p>
-
-<button id="myButton" class="float-left submit-button" >Yes</button>
-<script type="text/javascript">
-    document.getElementById("myButton").onclick = function () {
-        location.href = "http://localhost:8080/TrainProject/PostQuestion.jsp";
-    };
-</script>
-<button id="Button" class="float-left submit-button" >No</button>
-<script type="text/javascript">
-    document.getElementById("Button").onclick = function () {
-        location.href = "http://localhost:8080/TrainProject/forum.jsp";
-    };
-</script>
-
-
 </head>
 <body>
+<h1>Successful!</h1>
+<p>Do you have more questions?</p>
+<br></br>
+<form action="PostQuestion.jsp" method = "POST">
+<input type="submit" value="Yes"/>
+</form>
+<p>Go Back to Forum</p>
+<form action="forum.jsp" method = "POST">
+<input type="submit" value="Yes"/>
+</form>
+
 
 </body>
 </html>

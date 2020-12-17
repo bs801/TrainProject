@@ -24,7 +24,7 @@
 	</form> 
 
 	<p>Sale Report</p>
-	<form action="" method = "POST">
+	<form action="MonthlySaleReport" method = "POST">
 	<input type="submit" value="Go"/>
 	</form>
 	
@@ -39,7 +39,7 @@
 	</form>
 	
 	<p>Best Customer</p>
-	<form action="" method = "POST">
+	<form action="bestCustomer.jsp" method = "POST">
 	<input type="submit" value="Go"/>
 	</form>
 	

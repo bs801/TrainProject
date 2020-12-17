@@ -75,6 +75,9 @@
 		<input type="Submit" value="Next"/>
 	</form>
 
+	<form action="CreateSchedule.jsp" method = "POST">
+	<input type="submit" value="cancel"/>
+	</form>
 
 </body>
 </html>

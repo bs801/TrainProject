@@ -9,7 +9,7 @@
 		session.setAttribute("255", null);
 	}
     ArrayList<Question> Questions = TrainProject.Questions.getAsList();
-    out.println(Questions);
+    // out.println(Questions);
 %>	
 	
 <!DOCTYPE html>

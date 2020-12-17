@@ -15,7 +15,7 @@
 <title>All Schedules For A Given Station</title>
 </head>
 <body>
-<h1><font size = "6" color = "blue"> All Schedules For A Given Station  </font></h1>
+<h1><font size ="7" color="black" face = "courier">All Schedules For A Station</font></h1>
 <form action="trainScheduleForAStation2.jsp" method="POST">
 	Station
 	<select name="objectA">

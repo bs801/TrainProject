@@ -33,19 +33,13 @@
 <body>
 <form action="CustomerLanding.jsp" method="GET">
 	<input type="Submit" name="filter" value="Back to Home" /> <br></br>
-</form> <br></br><br></br>
-<% /*
-	<div class="topnav">
-  	<a class="active" href="http://localhost:8080/TrainProject/CustomerLanding.jsp">Home Page</a>
-	</div>*/
-	
-	%>
-	
+</form> <br></br>
+
 	Post a new question:
 	<form action="PostQuestion.jsp" method = "POST">
 	<input type="submit" value="Create New Post"/>
 	</form> 
-	
+	<br></br>
 	Search by keyword: <form action="forum.jsp" method="POST">
 	<input type="text" name="keywords"/> 
 	<input type="Submit" value="Search">

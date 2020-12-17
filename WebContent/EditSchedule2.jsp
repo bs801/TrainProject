@@ -167,5 +167,9 @@ boolean am = true;
 </head>
 <body>
 
+<form action="EditSchedule.jsp" method = "POST">
+<input type="submit" value="Cancel"/>
+</form>
+
 </body>
 </html>

@@ -75,6 +75,9 @@
 	session.setAttribute("newAccount",true);
 	response.sendRedirect("loginSuccessful.jsp"); */
 %>
+<form action="trainScheduleSearch.jsp" method = "POST">
+<input type="submit" value="Cancel"/>
+</form>
 
 </body>
 </html>

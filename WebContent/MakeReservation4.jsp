@@ -110,7 +110,7 @@ Confirm this reservation:
 <input type="Submit" value="Confirm Reservation"/>
 </form>
 <br></br>
-<form action="" method="POST">
+<form action="MakeReservation.jsp" method="POST">
 <input type="Submit" value="Cancel"/>
 </form>
 </body>

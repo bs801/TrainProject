@@ -54,7 +54,9 @@
 	<h1>Result:</h1>
    <% out.println("The Total Sales for "+year + "/ "+ mon + " is "); %>
    
-   
+    <form action="MonthlySalesReport.jsp" method = "POST">
+	<input type="submit" value="Cancel"/>
+	</form>
 
 </body>
 </html>

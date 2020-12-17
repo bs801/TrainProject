@@ -149,6 +149,8 @@
 		return;
 	}
 	
+	
+	
 %>
 
 
@@ -159,9 +161,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form>
+
+<form action = "CreateSchedule.jsp" method = "POST">
 <input type = "Submit" value="Exit">
 </form>
+
 </body>
 </html>
 
@@ -180,3 +184,5 @@ for(int i=0; i<TL.getTransitStops().size(); i++){
 	out.println( "Stop "+i+": " + TL.getTransitStops().get(i).toString() +": "+ arrString + " - " + desString + "<br></br> " );	
 }
 %>
+
+

@@ -66,6 +66,9 @@
 	<%=""+p.destination+extraD+""%>: <input type="text" name=<%="DA"%> placeholder="5:04" /> DESTINATION
 	<br></br><input type="submit" value="Next" />
 	</form>
-	
+
+	<form action="CreateSchedule.jsp" method = "POST">
+	<input type="submit" value="cancel"/>
+	</form>	
 </body>
 </html>
