@@ -155,7 +155,7 @@ boolean am = true;
 		return;
 	}
 	
-	
+	response.sendRedirect("ScheduleMain.jsp");
 	
 	//Schedule newSchedule = new Schedule(TL.transitLineName, TL.reverseLine, new Timestamp(cal.getTimeInMillis()), trainID);
 	//TrainProject.Schedules.insert(newSchedule);

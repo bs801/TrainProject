@@ -4,6 +4,16 @@
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 
 <%
+
+	session.setAttribute("disc", null);
+	session.setAttribute("orig", null);
+	session.setAttribute("dest", null);
+	
+	session.setAttribute("rt", null);
+	session.setAttribute("date1", null);
+	session.setAttribute("date2", null);
+	session.setAttribute("so", null);
+	
 	session.setAttribute("disc", "0f");
 	if(session.getAttribute("none") == null){
 		
