@@ -35,7 +35,7 @@
 	
 	<p>Type your answers below!</p>
 	<form action="answerQuestions2.jsp" method="POST">
-	<textarea rows="5" type="text" name="answerText"> </textarea>
+	<textarea rows="5" type="text" name="answerText"> </textarea> <br></br>
 	<input type="Submit" value="Post answers">
 	</form>
 

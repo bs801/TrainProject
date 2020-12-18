@@ -6,9 +6,10 @@
 <%
 	String a = request.getParameter("objectA");
 	String b = request.getParameter("rt");
-	ArrayList<Schedule> c = TrainProject.Schedules.getAsList();
+	ArrayList<Schedule> c = TrainProject.Schedules.getFutureSchedules();
 	ArrayList<Schedule> temp = new ArrayList<Schedule>();
 	Station s = TrainProject.Stations.getAsList().get(Integer.parseInt(a));
+	//System.out.println("WORKIGN WITH STATION "+s);
 	
 	/*for(int j = 0; j < c.size();j++){
 		if(request.getParameter())
@@ -16,6 +17,7 @@
 	}*/
 	if(b.equals("0")){
 		for(Schedule sc: c){
+		//	System.out.println("WORKIGN WITH "+sc.getScheduleStops().get(0).stationID+" vs"+ s.stationID);
 			if(sc.getScheduleStops().get(0).stationID == s.stationID){
 				temp.add(sc);
 			}
@@ -27,7 +29,7 @@
 			}
 		}
 	}
-
+	//System.out.println(temp.size());
 %>
 
 
@@ -41,18 +43,23 @@
 	
 	<h1><font color = "black" size = "6">All Schedules For A Given Station</font></h1>
 	
-	<p><font color="black">Example</font> TransitLineName: Origin -> Destination @ StartingTime  </p>
+	<p><font color="black">Example</font> TransitLineName: Origin -> Destination @ StartingTime  </p><br></br>
 	<%
 	for(int j=0; j< temp.size(); j++){
 	%> <%=temp.get(j).toString()%><br></br><%
-	}%>
-	<form action = "CustomerLanding.jsp">
-	<input type ="submit" value = "Home Page"/>
-	</form><br></br>
+	}
+	if(temp.size() == 0){
+		out.println("No results found");
+	}
+	%>
+	
+	
 	<form action = "trainScheduleForAStation.jsp">
 	<input type ="submit" value = "Back"/>
 	</form>
-
-
+<br></br>
+<form action = "RepresentativeLanding.jsp">
+	<input type ="submit" value = "Back to Dashboard"/>
+	</form>
 </body>
 </html>

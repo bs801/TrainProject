@@ -12,7 +12,7 @@
 	for(Representative u : TrainProject.Representatives.getAsList()){
 		if(u.username.equalsIgnoreCase(username)){
 			if(u.password.equals(password)){
-				session.setAttribute("username", username);
+				session.setAttribute("username", u.username);
 				session.setAttribute("representative",u);
 				response.sendRedirect("../RepresentativeLanding.jsp");
 				return;

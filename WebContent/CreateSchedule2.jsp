@@ -125,6 +125,12 @@
 					response.sendRedirect("CreateSchedule.jsp");
 					return;
 				}
+				if(sc.transitLineName.equals(TL.transitLineName) && sc.reverseLine == TL.reverseLine && sc.scheduleDepartureTime.toLocalDateTime().isEqual(t1)){
+					errors.add("Another schedule is using this departure time + transit line combination");
+					p.errors = errors;
+					response.sendRedirect("CreateSchedule.jsp");
+					return;
+				}
 			}
 		}
 		Schedule newSchedule = new Schedule(TL.transitLineName, TL.reverseLine, new Timestamp(cal.getTimeInMillis()), trainID);

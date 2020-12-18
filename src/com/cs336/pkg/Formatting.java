@@ -98,6 +98,12 @@ public class Formatting {
 		return ""+trainID;
 	}
 	
+	public static boolean sameDate(LocalDate dc, LocalDateTime t) {
+		if(dc.getYear() == t.getYear() && dc.getMonthValue() == t.getMonthValue() && dc.getDayOfMonth() == t.getDayOfMonth()) {
+			return true;
+		}
+		return false;
+	}
 	
 	public static boolean sameMonth(LocalDate monthyear, LocalDateTime t) {
 		

@@ -6,7 +6,7 @@ public class CustomerRevenuePacket {
 	public int tally = 0;
 	public CustomerRevenuePacket(String u, float f) {
 		this.Revenue = f;
-		tally = 0;
+		tally = 1;
 		this.username = u;
 	}
 	public void add(float f) {

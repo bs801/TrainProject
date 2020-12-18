@@ -91,7 +91,7 @@ Select Month to View Metrics For:
 		            }
 			);
 			if(customerRevenues.size() == 0){
-				out.println("<h3> Best Customer </h3> No best customer for this month <br></br>");
+				out.println("<h2> Best Customer </h2> No best customer for this month <br></br>");
 			} else {
 				for(int i=0; i<1; i++){
 					if(customerRevenues.get(i) == null){
@@ -100,11 +100,11 @@ Select Month to View Metrics For:
 					Customer c = TrainProject.Customers.get(customerRevenues.get(i).username);
 					CustomerRevenuePacket crp = customerRevenues.get(i);
 					System.out.println("HANDLING CUSTOEMR "+c.username);
-					out.println("<h3> Best Customer </h3>"+c.firstName+" "+c.lastName+" (with username "+c.username +") has spent "+Formatting.getFare(crp.Revenue)+" through "+crp.tally+" reservations made in this month <br></br>");
+					out.println("<h2> Best Customer </h2>"+c.firstName+" "+c.lastName+" (with username "+c.username +") has spent "+Formatting.getFare(crp.Revenue)+" through "+crp.tally+" reservations made in this month <br></br>");
 				}
 			}
 			System.out.println("102");
-			out.println("<h3> Most active transit lines </h3>");
+			out.println("<h2> Most active transit lines </h2>");
 		
 			taps = TrainProject.Reservations.getTrainActivityPackets(MonthReport.my);
 			for(int i=0; i<5; i++){
@@ -118,7 +118,7 @@ Select Month to View Metrics For:
 		//			break;
 		//		}
 				TrainActivityPacket tap = taps.get(i);
-				out.println("Trainsit Line "+tap.transitLineName+" had "+tap.resTally+" reservations with a departure (forward or return, one-way or round-trip). This is "+tap.tally+" trips when double counting round trip reservations with where both forward/retun trips are made for this route. <br></br>");
+				out.println("<h3> Transit Line "+tap.transitLineName+"</h3> Total of "+tap.resTally+" reservations (forward or return, one-way or round-trip). <br></br>This is "+tap.tally+" trips when double counting round trip reservations with where both forward/retun trips are made for this route. <br></br>");
 			}
 			if(taps.size() == 0){
 				out.println("No active transit lines for this month");

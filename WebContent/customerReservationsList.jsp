@@ -15,19 +15,21 @@
 
 ArrayList<String> transitLines = Formatting.getTransitLineNames();
 Collections.sort(transitLines);
-
+session.setAttribute("CRL", transitLines);
 
 %>
 <form action="customerReservationsList2.jsp" method="POST">
-
+	
 	Transit Line
 	<select name="TransitLine">
 		<option selected value="0">--None--</option>
-		<%for(String s : transitLines){
+		<%
+		int i = 1;
+		for(String s : transitLines){
 			
-			%><option value=<%=s %>><%=s%></option>
+			%><option value=<%=i%>><%=s%></option>
 			<%
-			
+			i++;
 		} %>
 	</select>
 	<br></br>

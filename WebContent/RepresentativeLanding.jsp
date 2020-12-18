@@ -11,7 +11,7 @@
 
 <h1><font size ="7" color="black" face = "courier">REPRESENTATIVE DASHBOARD</font></h1>
 <%
-	session.setAttribute("username", "vatche");	
+	session.setAttribute("username", "repbohan");	
 	Representative r = TrainProject.Representatives.get((String) session.getAttribute("username"));
 	out.println("Welcome "+r.firstName+" "+r.lastName+". You are logged in as "+r.username+" <br></br>");
 %>
@@ -30,11 +30,11 @@
 	</form>
 	<br></br> 
 	<form action="trainScheduleForAStation.jsp" method = "POST">
-		<input type="submit" value="View A List Of Train Schedules For A Given Station"/>
+		<input type="submit" value="Get List of Schedules Given Origin/Destination Station"/>
 	</form>
 	<br></br> 
 	<form action="customerReservationsList.jsp" method = "POST">
-		<input type="submit" value="View A List of Customers on a given transit line"/>
+		<input type="submit" value="Get List of Customers for TransitLine and Date"/>
 	</form>
 	<br></br> 
 	<p>Log Out</p>

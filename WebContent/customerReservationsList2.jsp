@@ -12,29 +12,42 @@
 <body>
 
 <%
-	String transitLine = request.getParameter("TransitLine");
+	//String transitLine = request.getParameter("TransitLine");
+	int v = Integer.parseInt(request.getParameter("TransitLine"));
+	if(v == 0){
+		response.sendRedirect("customerReservationsList.jsp");
+		return;
+	}
+	String transitLine = ((ArrayList<String>) session.getAttribute("CRL")).get(v-1);
+	
 	String date = request.getParameter("date");
+	LocalDate dc = LocalDate.parse(date);
 	
 	ArrayList<String> customers = new ArrayList<String>();
 	
 	ArrayList<Reservation> reservations = TrainProject.Reservations.getUncancelledList();
+	System.out.println(reservations);
 	ArrayList<Reservation> customerReservations = new ArrayList<Reservation>();
 	
 	Customer c = null;
 	
 	for(Reservation r : reservations){
+
 		if(r.forward_transitLineName.equals(transitLine)){
-			if(r.forward_scheduleDepartureTime.toString().contains(date)){
+			if(Formatting.sameDate(dc, r.forward_scheduleDepartureTime.toLocalDateTime())){
+				System.out.println(dc+" matched "+r.forward_scheduleDepartureTime.toLocalDateTime());
 				//customers.add(r.firstName + " " + r.lastName);
 				customerReservations.add(r);
 				c = TrainProject.Customers.get(r.username);
 				customers.add(r.username + ", " + c.firstName + " " + c.lastName);
-				
+				continue;
+			} else {
+				System.out.println(dc+" no NOo matched "+r.forward_scheduleDepartureTime.toLocalDateTime());
 			}
 		}
 		if(r.return_transitLineName != null){
 			if(r.return_transitLineName.equals(transitLine)){
-				if(r.return_scheduleDepartureTime.toString().contains(date)){
+				if(Formatting.sameDate(dc, r.return_scheduleDepartureTime.toLocalDateTime())){
 					customerReservations.add(r);
 					c = TrainProject.Customers.get(r.username);
 					customers.add(r.username + ", " + c.firstName + " " + c.lastName);
@@ -67,6 +80,10 @@
 
 <form action="customerReservationsList.jsp" method = "POST">
 	<input type="submit" value="Back"/>
+	</form> 
+	<br></br>
+<form action="RepresentativeLanding.jsp" method = "POST">
+	<input type="submit" value="Back to Dashboard"/>
 	</form> 
 </body>
 </html>

@@ -22,7 +22,7 @@ public class Schedule {
 	}
 	public String toString() {
 		try {
-			return getTransitLine().toString() + " @ " + scheduleDepartureTime;
+			return getTransitLine().toString() + " @ " + Formatting.displayTime(scheduleDepartureTime.toLocalDateTime());
 		} catch (SQLException e) {
 			return "ERROR NULL";
 		}

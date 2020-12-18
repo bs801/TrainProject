@@ -185,10 +185,9 @@ public class Reservation {
 	
 	private String getString() throws SQLException {
 		
-		String l1 = getOriginStation()+" "+Formatting.displayTime(timeOfForwardDeparture())+" --> "+getDestinationStation()+" "+Formatting.displayTime(timeOfForwardArrival())+"  (Train "+Formatting.getTrainID(forward_trainID)+")";
-		
+		String l1 = forward_transitLineName+": "+getOriginStation()+" "+Formatting.displayTime(timeOfForwardDeparture())+" --> "+getDestinationStation()+" "+Formatting.displayTime(timeOfForwardArrival())+"  (Train "+Formatting.getTrainID(forward_trainID)+")";
 		if(roundTrip == 1) {
-			String l2 = getDestinationStation()+" "+Formatting.displayTime(timeOfReturnDeparture())+" --> "+getOriginStation()+" "+Formatting.displayTime(timeOfReturnArrival())+"  (Train "+Formatting.getTrainID(return_trainID)+")";
+			String l2 = return_transitLineName+": "+getDestinationStation()+" "+Formatting.displayTime(timeOfReturnDeparture())+" --> "+getOriginStation()+" "+Formatting.displayTime(timeOfReturnArrival())+"  (Train "+Formatting.getTrainID(return_trainID)+")";
 			l1 = l1+"<br></br>"+l2;
 		}
 		l1 = l1;// + "<br></br>";

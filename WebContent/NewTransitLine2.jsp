@@ -20,7 +20,7 @@
 	Float fare = -1f;
 	try{
 		fare = Float.parseFloat(request.getParameter("FARE"));
-		if(fare < 0 || fare > 200){
+		if(fare < 0 || fare > 900){
 			
 			errors.add("Fare must be an between 0 and 200");
 		}

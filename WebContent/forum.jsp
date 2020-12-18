@@ -3,6 +3,7 @@
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 <%  
+	session.setAttribute("username", "vak37");
 	ArrayList<Question> Questions = TrainProject.Questions.getAsList();
 	ArrayList<Answer> Answers = TrainProject.Answers.getAsList();
 	String x = request.getParameter("keywords");
@@ -55,15 +56,15 @@
 			<br></br>
 	 		<% out.print("<h3> Posted by "+temp.get(i).username+" </h3>"); %>
 	 		<h3> Question: <%=temp.get(i).toString()%> </h3>
-	    	<p> Body: <%=temp.get(i).descriptionText%> </p>
-	    	<div>Posted by: <%=temp.get(i).username%> </div> <br></br> 
+	    	<p> Details: <%=temp.get(i).descriptionText%> </p>
+	    
 	    	
 	    	<%
 	    	
 	  		if(temp.get(i).getAnswers().size() != 0){
 	    		for(int j = 0; j <temp.get(i).getAnswers().size(); j++) { %> 
 	    			<p>Answers</p>
-	    			<p><%=temp.get(i).getAnswers().get(0).toString()%></p> <br></br> <% 
+	    			<p><%="Answer from representative: "+temp.get(i).getAnswers().get(0).toString()%></p> <br></br> <% 
 	    		}
 	   		 }
 	    
@@ -76,17 +77,17 @@
 				<% out.print("<h3> Posted by "+Questions.get(i).username+" </h3>"); %>
 				
 	 			<h3> Question: <%=Questions.get(i).toString()%> </h3>
-	    		Body: <p> <%=Questions.get(i).descriptionText%></p>
-	    		<div>Posted by: <%=Questions.get(i).username%> </div> <br></br> 
+	    		Body: <%=Questions.get(i).descriptionText%>
+	
 	    		<%
 	    		
 	  			if(Questions.get(i).getAnswers().size() != 0){
 	    			for(int j = 0; j <Questions.get(i).getAnswers().size(); j++) { 
 	    				String fm = "<br></br>";
-	    				out.println("Answer from representative "+(Questions.get(i).getAnswers().get(0).username == null ? "(account deleted): " : Questions.get(i).getAnswers().get(0).username+": " +fm) );
+	    				out.println(fm+"Answer from representative "+(Questions.get(i).getAnswers().get(0).username == null ? "(account deleted): " : Questions.get(i).getAnswers().get(0).username+": ") );
 	    			
 	    			%> 
-	    				<p><%=Questions.get(i).getAnswers().get(0).toString()%></p> <br></br> <% 
+	    				<%=Questions.get(i).getAnswers().get(0).toString()%> <br></br> <% 
 	    			}
 	   		 	}
 	    	

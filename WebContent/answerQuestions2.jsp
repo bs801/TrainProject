@@ -6,7 +6,7 @@
  <%  
  	
  
- 	session.setAttribute("username","user2"); //we need to delete this part after
+ 	//session.setAttribute("username","user2"); //we need to delete this part after
      String user = (String) session.getAttribute("username");
      String s = request.getParameter("answerText");
      String qid = (String) session.getAttribute("AQ1_qID");
@@ -25,6 +25,7 @@
  	 
      
      TrainProject.Answers.insert(p);
+     response.sendRedirect("repForum.jsp");
  %>
 
 

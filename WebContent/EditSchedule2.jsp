@@ -119,6 +119,11 @@ boolean am = true;
 				return;
 			}
 		}
+		if(sc.transitLineName.equals(sce.transitLineName) && sc.reverseLine == sce.reverseLine && sc.scheduleDepartureTime.toLocalDateTime().isEqual(sce.scheduleDepartureTime.toLocalDateTime())){
+			errors.add("Another schedule is using this departure time + transit line combination");
+			response.sendRedirect("EditSchedule.jsp");
+			return;
+		}
 	}
 	
 	Schedule ns = new Schedule(sce.transitLineName, sce.reverseLine, Timestamp.valueOf(t1), trainID);

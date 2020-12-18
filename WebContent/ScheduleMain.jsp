@@ -51,6 +51,7 @@ Use these options to filter the list active of schedules below.
 	System.out.println("50");
 	int resettln = 0;
 	if(request.getParameter("filter") != null){
+		System.out.println("DF DF DF "+request.getParameter("df"));
 		if("0".equals(request.getParameter("df"))){
 			check1 = "checked";
 		} else {
@@ -101,7 +102,9 @@ Use these options to filter the list active of schedules below.
 			
 		}
 		System.out.println("99");
-		
+		if(!datefilter && !tlnfilter){
+			nofilter = true;
+		}
 	} else {
 		check1 = "checked";
 		check3 = "checked";
@@ -133,7 +136,7 @@ Transit Line Name Filter:<br></br>
 <select name="TransitLineName">
 		<option value="NO_SELECTION">-Pick a transit line name-</option>
 		<% for(int i=0; i<Formatting.getTransitLineNames().size(); i++){ %>
-			<option  <%=(MonthReport.TLNSELECT == i ? "selected" : "") %> value=<%=""+i+""%>><%=Formatting.getTransitLineNames().get(i)%></option>
+			<option  <%=(MonthReport.TLNSELECT == i+1 ? "selected" : "") %> value=<%=""+i+""%>><%=Formatting.getTransitLineNames().get(i)%></option>
 		<% } %>
 	</select> <br></br>
 
@@ -144,6 +147,7 @@ Transit Line Name Filter:<br></br>
 <%//<h2> Schedule Information </h2> %>
 <form action="EditSchedule.jsp" method="POST">
 <%
+
 String starttag = "<h2>";
 String endtag = "</h2>";
 if(nofilter){

@@ -120,6 +120,11 @@
 	            }
 		);
 	}
+	if(validReservations.size() == 0){
+		response.sendRedirect("MakeReservation.jsp");
+		session.setAttribute("none", new Object());
+		return;
+	}
 	session.setAttribute("validReservations", validReservations);
 
 %>

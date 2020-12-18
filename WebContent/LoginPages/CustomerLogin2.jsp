@@ -11,12 +11,12 @@
 	for(Customer u : TrainProject.Customers.getAsList()){
 		if(u.username.equalsIgnoreCase(username)){
 			if(u.password.equals(password)){
-				session.setAttribute("username", username);
+				session.setAttribute("username", u.username);
 				response.sendRedirect("../CustomerLanding.jsp");
 				return;
 			} else {
 				
-				errors.add("Incorrect password for "+username);
+				errors.add("Incorrect password for "+u.username);
 				response.sendRedirect("CustomerLogin.jsp");
 				return;
 			}
