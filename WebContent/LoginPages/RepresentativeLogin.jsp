@@ -11,7 +11,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<h3>Representative Login</h3>
 <% 
 if(session.getAttribute("RL2") != null){
 		ArrayList<String> errors = (ArrayList<String>) session.getAttribute("RL2");

@@ -226,6 +226,8 @@
 	    pstmt.setTime(6, t.departureTime);
 	    pstmt.addBatch();
 	}
+	TrainProject.TransitLines.TransitLineTable = null;
+	TrainProject.TransitStops.TransitStopTable = null;
 	pstmt.executeBatch();
 	System.out.println("AA");
 	
@@ -341,14 +343,14 @@ out.println( "<br></br> " ); out.println( "<br></br> " );
 System.out.println("A");
 out.println("NEW TRANSIT LINE (FORWARD) "+ p.transitLineName+": "+transitStops.get(0)+" -> "+transitStops.get(transitStops.size()-1) + "<br></br> " );
 for(int i=0; i<transitStops.size(); i++){
-	out.println( "Stop "+i+": " +transitStops.get(i).toString() +": "+ Formatting.displayTime(transitStops.get(i).arrivalTime) + " - " + Formatting.displayTime(transitStops.get(i).departureTime) + "<br></br> " );	
+	out.println( "Stop "+i+": " +transitStops.get(i).toString() +": "+ Formatting.displayTime(transitStops.get(i).arrivalTime) + " to " + Formatting.displayTime(transitStops.get(i).departureTime) + "<br></br> " );	
 }
 out.println( "<br></br> " ); out.println( "<br></br> " ); 
 
 
 out.println("NEW TRANSIT LINE (REVERSE) "+ p.transitLineName+": "+revStops.get(0)+" -> "+revStops.get(revStops.size()-1) + "<br></br> " );
 for(int i=0; i<revStops.size(); i++){
-	out.println("Stop "+i+": " +revStops.get(i).toString() +": "+ Formatting.displayTime(revStops.get(i).arrivalTime) + " - " + Formatting.displayTime(revStops.get(i).departureTime) + "<br></br> " );	
+	out.println("Stop "+i+": " +revStops.get(i).toString() +": "+ Formatting.displayTime(revStops.get(i).arrivalTime) + " to " + Formatting.displayTime(revStops.get(i).departureTime) + "<br></br> " );	
 }
 
 %>

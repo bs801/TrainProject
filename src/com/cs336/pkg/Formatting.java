@@ -38,12 +38,13 @@ public class Formatting {
 			XM = "PM";
 			h = h - 12;
 		}
+		/*
 		if(h == 0) {
 			h = 12;
-		}
+		}*/
 		int min = t2.getMinute();
 		String mins = (min < 10 ? "0"+min : ""+min);
-		return "+ "+h+":"+mins;
+		return "+"+h+":"+mins;
 	}
 	public static String displayTime(LocalDate t) {
 		int m = t.getMonthValue();

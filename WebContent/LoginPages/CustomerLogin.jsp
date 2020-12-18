@@ -11,6 +11,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<h3>Customer Login</h3>
 
 <% 
 if(session.getAttribute("CL2") != null){

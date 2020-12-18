@@ -3,7 +3,11 @@
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 
-<% session.setAttribute("username", "user1"); %>
+<% if(session.getAttribute("username") == null) {
+	response.sendRedirect("LoginPages/CustomerLogin.jsp");
+}
+ %>
+
 <!DOCTYPE html>
 <html>
 <head>

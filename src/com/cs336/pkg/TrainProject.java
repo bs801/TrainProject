@@ -88,7 +88,7 @@ public class TrainProject {
 	}
 	
 	public static class TransitLines {
-		static HashMap<String, TransitLine[]> TransitLineTable;
+		public static HashMap<String, TransitLine[]> TransitLineTable;
 		
 		public static TransitLine get(String transitLineName, int reverseLine) throws SQLException {
 			if(getAll().get(transitLineName) == null) {
@@ -126,7 +126,7 @@ public class TrainProject {
 	}
 	
 	public static class TransitStops {
-		static HashMap<TransitLine, HashMap<Integer, TransitStop>> TransitStopTable;
+		public static HashMap<TransitLine, HashMap<Integer, TransitStop>> TransitStopTable;
 		
 		public static TransitStop get(TransitLine TL_key, int stopID) throws SQLException {
 			System.out.println("TL KEY "+TL_key.transitLineName);

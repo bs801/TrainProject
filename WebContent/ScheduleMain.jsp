@@ -49,8 +49,9 @@ Use these options to filter the list active of schedules below.
             }
 	);
 	System.out.println("50");
+	int resettln = 0;
 	if(request.getParameter("filter") != null){
-		if(request.getParameter("df").equals("0")){
+		if("0".equals(request.getParameter("df"))){
 			check1 = "checked";
 		} else {
 			try{
@@ -96,6 +97,8 @@ Use these options to filter the list active of schedules below.
 				tlnfilter = true;
 			}
 			schedules = newScheduleList;
+			check4 = "checked";
+			
 		}
 		System.out.println("99");
 		
@@ -130,7 +133,7 @@ Transit Line Name Filter:<br></br>
 <select name="TransitLineName">
 		<option value="NO_SELECTION">-Pick a transit line name-</option>
 		<% for(int i=0; i<Formatting.getTransitLineNames().size(); i++){ %>
-			<option value=<%=""+i+""%>><%=Formatting.getTransitLineNames().get(i)%></option>
+			<option  <%=(MonthReport.TLNSELECT == i ? "selected" : "") %> value=<%=""+i+""%>><%=Formatting.getTransitLineNames().get(i)%></option>
 		<% } %>
 	</select> <br></br>
 

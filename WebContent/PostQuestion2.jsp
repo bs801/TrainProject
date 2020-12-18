@@ -3,7 +3,7 @@
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
   
- <%  session.setAttribute("username","user1"); //we need to delete this part after
+ <%  //session.setAttribute("username","user1"); //we need to delete this part after
      String user = (String)session.getAttribute("username");
      String q = request.getParameter("question");
      String d = request.getParameter("description");
