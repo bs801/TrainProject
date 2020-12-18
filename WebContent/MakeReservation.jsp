@@ -14,6 +14,13 @@
 	session.setAttribute("date2", null);
 	session.setAttribute("so", null);
 	
+	session.setAttribute("mr4", null);
+	session.setAttribute("options", null);
+	session.setAttribute("none", null);
+	
+	session.setAttribute("selectedBuilder", null);
+	session.setAttribute("validReservations", null);
+	session.setAttribute("validReservationBuilders", null);
 	session.setAttribute("disc", "0f");
 	if(session.getAttribute("none") == null){
 		
