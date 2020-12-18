@@ -4,7 +4,12 @@
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 
 <%
-
+if(session.getAttribute("none") == null){
+	
+} else {
+	out.println("No reservations found, or none with a valid return on the selected return date. <br></br>");
+	session.setAttribute("none", null);
+}
 	session.setAttribute("disc", null);
 	session.setAttribute("orig", null);
 	session.setAttribute("dest", null);
@@ -22,12 +27,7 @@
 	session.setAttribute("validReservations", null);
 	session.setAttribute("validReservationBuilders", null);
 	session.setAttribute("disc", "0f");
-	if(session.getAttribute("none") == null){
-		
-	} else {
-		out.println("No reservations found, or none with a valid return on the selected return date. <br></br>");
-		session.setAttribute("none", null);
-	}
+	
 	//ArrayList<Station> stations = TrainProject.Stations.getAsList();
 	ArrayList<Station> stations = TrainProject.Stations.getAsList();
 	

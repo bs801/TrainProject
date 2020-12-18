@@ -3,7 +3,7 @@
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 <%  
-	session.setAttribute("username", "vak37");
+
 	ArrayList<Question> Questions = TrainProject.Questions.getAsList();
 	ArrayList<Answer> Answers = TrainProject.Answers.getAsList();
 	String x = request.getParameter("keywords");

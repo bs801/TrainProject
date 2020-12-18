@@ -47,9 +47,7 @@
 				<input type="Submit" value="Update Representative Information"/> <br></br>
 			</form> 
 			<br></br>
-			<form action="editCustomerRepresentative.jsp" method="POST">
-				<input type="Submit" value="Cancel"/>
-			</form>
+		
 			
 			<%
 			

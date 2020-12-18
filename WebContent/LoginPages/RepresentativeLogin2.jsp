@@ -17,7 +17,6 @@
 				response.sendRedirect("../RepresentativeLanding.jsp");
 				return;
 			} else {
-				
 				errors.add("Incorrect password for "+username);
 				response.sendRedirect("RepresentativeLogin.jsp");
 				return;

@@ -50,6 +50,11 @@ The station ID is pre-filled to the lowest available station ID
 		<input type="Submit" value="Add" /> 
 	</form>
 		<br></br>
+		<br></br>
+			<form action="RepresentativeLanding.jsp" method="POST">
+
+			<input type="Submit" value="Cancel" /> 
+		</form>
 			<br></br>
 				<br></br>
 	<h3>List of Stations Already Added:</h3>

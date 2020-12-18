@@ -12,7 +12,6 @@
 <h1><font size ="7" color="black" face = "courier">ADMIN DASHBOARD</font></h1>
 
 
-
 <body>
 	<p>Edit Information For Customer Representative</p>
 	<form action="editCustomerRepresentative.jsp" method = "POST">
@@ -35,25 +34,6 @@
 	<br></br>
 	</form>
 	
-	<p>Produce A List Of Reservation</p>
-	<form action="adminReservationsList.jsp" method = "POST">
-	<input type="submit" value="Go"/>
-	</form>
-	
-	<p>Produce A List Of Revenue</p>
-	<form action="" method = "POST">
-	<input type="submit" value="Go"/>
-	</form>
-	
-	<p>Best Customer</p>
-	<form action="bestCustomer.jsp" method = "POST">
-	<input type="submit" value="Go"/>
-	</form>
-	
-	<p>Best 5 most active Transit Line</p>
-	<form action="topFiveReservations.jsp" method = "POST">
-	<input type="submit" value="Go"/>
-	</form>
 	
 	<p>Log Out</p>
 	<form action="logout.jsp" method = "POST">

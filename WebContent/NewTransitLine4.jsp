@@ -301,7 +301,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="ScheduleMain.jsp" method = "POST">
+<form action="RepresentativeLanding.jsp" method = "POST">
 <input type="submit" value="RETURN TO DASHBOARD"/>
 </form>
 <br></br>

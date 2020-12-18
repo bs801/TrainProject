@@ -31,7 +31,7 @@
 			date2 = request.getParameter("date2");
 			session.setAttribute("date2",date2);
 		}
-		
+		session.setAttribute("date1",date1);
 		session.setAttribute("disc", disc+"");
 		session.setAttribute("orig", orig+"");
 		session.setAttribute("dest", dest+"");

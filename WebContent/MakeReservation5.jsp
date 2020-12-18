@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 
 <%
+session.setAttribute("none", null);
 	Reservation newRes = (Reservation) session.getAttribute("mr4");
 		
 	String title = request.getParameter("Title");

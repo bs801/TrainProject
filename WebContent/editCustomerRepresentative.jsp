@@ -41,5 +41,10 @@
      <input type="submit" name="D" value="Delete"/>
      <input type="submit" name="E" value="Edit"/>
     </form>
+    <br></br> 
+    <form action="AdminLanding.jsp" method="POST">
+<input type="Submit" value="Back to Admin Page"/>
+</form>
 </body>
 </html>
+
