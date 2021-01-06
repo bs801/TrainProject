@@ -1,5 +1,7 @@
 # TrainProject
 
+This is a class group project for the course Database Management. Five members are invovled in this project.
+
 LINK: http://ec2-18-222-225-175.us-east-2.compute.amazonaws.com:8080/TrainProject/
 
 Amazon EC2:
